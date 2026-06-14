@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chemical Website MVP Mind Map</title>
+  <style>
+    :root {
+      --bg: #eef3f6;
+      --paper: #fbfdff;
+      --ink: #17304a;
+      --muted: #637383;
+      --line: #c7d7e4;
+      --blue: #236c8e;
+      --green: #287861;
+      --orange: #c96737;
+      --violet: #7463a6;
+      --teal: #247d88;
+      --slate: #4d6578;
+      --gold: #b8842e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(rgba(35, 108, 142, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35, 108, 142, 0.06) 1px, transparent 1px),
+        var(--bg);
+      background-size: 26px 26px;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    }
+
+    .canvas {
+      width: min(1580px, calc(100vw - 28px));
+      margin: 14px auto;
+      padding: 24px 28px 24px;
+      background: var(--paper);
+      border: 1px solid #d7e3ed;
+      box-shadow: 0 22px 55px rgba(23, 48, 74, 0.12);
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      gap: 8px 14px;
+      padding: 12px 14px;
+      background: #f3f7fa;
+      border: 1px solid #d8e4ed;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      color: #fff;
+      background: linear-gradient(135deg, #17304a, #236c8e);
+      border-radius: 8px;
+      box-shadow: 0 12px 26px rgba(23, 48, 74, 0.16);
+    }
+
+    .summary strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .summary span {
+      display: block;
+      margin-top: 3px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+    }
+
+    .summary p {
+      margin: 0;
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .map {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px 24px;
+      align-items: stretch;
+    }
+
+    .cluster {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 13px 14px 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--blue);
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(23, 48, 74, 0.07);
+    }
+
+    .cluster h3 {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 0 0 10px;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .cluster h3 span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .cluster.products {
+      border-top-color: var(--green);
+    }
+
+    .cluster.trust {
+      border-top-color: var(--orange);
+    }
+
+    .cluster.content {
+      border-top-color: var(--violet);
+    }
+
+    .cluster.contact {
+      border-top-color: var(--teal);
+    }
+
+    .cluster.phase2 {
+      border-top-color: var(--gold);
+    }
+
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .module {
+      min-height: 50px;
+      padding: 8px 9px;
+      background: #f7fafc;
+      border: 1px solid #dce8f0;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .module span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .wide {
+      grid-column: span 3;
+    }
+
+    .page-pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: 8px;
+      padding: 5px 8px;
+      color: #fff;
+      background: var(--slate);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .note {
+      padding: 10px 12px;
+      background: #f4f8fb;
+      border: 1px solid #dce8f0;
+      border-radius: 6px;
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px) {
+      .canvas {
+        width: calc(100vw - 20px);
+        padding: 20px;
+      }
+
+      header,
+      .notes {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        display: block;
+      }
+
+      .legend {
+        width: fit-content;
+        margin-top: 16px;
+      }
+
+      .summary {
+        display: block;
+      }
+
+      .summary p {
+        margin-top: 8px;
+        text-align: left;
+      }
+
+      .map {
+        display: block;
+      }
+
+      .cluster {
+        margin-bottom: 16px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .canvas {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <header>
+      <div>
+        <h1>化工公司官网 MVP 思维导图</h1>
+        <div class="subtitle">Chemical Website MVP Mind Map: pages, modules, trust signals, and phase-two AI support</div>
+      </div>
+      <div class="legend" aria-label="Legend">
+        <div class="legend-item"><i class="dot" style="background: var(--blue)"></i>获客入口 (Acquisition)</div>
+        <div class="legend-item"><i class="dot" style="background: var(--green)"></i>产品体系 (Products)</div>
+        <div class="legend-item"><i class="dot" style="background: var(--orange)"></i>信任背书 (Trust)</div>
+        <div class="legend-item"><i class="dot" style="background: var(--violet)"></i>内容资料 (Content)</div>
+        <div class="legend-item"><i class="dot" style="background: var(--teal)"></i>联系转化 (Contact)</div>
+        <div class="legend-item"><i class="dot" style="background: var(--gold)"></i>二期功能 (Phase 2)</div>
+      </div>
+    </header>
+
+    <section class="summary" aria-label="Website MVP summary">
+      <div>
+        <strong>官网 MVP (Website MVP)</strong>
+        <span>默认英文，可切换中文 (English by default, Chinese switch available)</span>
+      </div>
+      <p>第一版聚焦产品介绍、公司优势和人工联系；不展示报价，不做在线交易。</p>
+    </section>
+
+    <section class="map" aria-label="Website MVP mind map">
+      <article class="cluster home">
+        <div class="page-pill">首页 (Home)</div>
+        <h3>获客第一屏 <span>Acquisition entry</span></h3>
+        <div class="modules">
+          <div class="module">公司定位<span>Company positioning</span></div>
+          <div class="module">主推产品类别<span>Featured categories</span></div>
+          <div class="module">核心优势摘要<span>Key advantage summary</span></div>
+          <div class="module">行业应用入口<span>Application entry points</span></div>
+          <div class="module">供应商对比入口<span>Comparison preview</span></div>
+          <div class="module">联系按钮<span>Contact CTA</span></div>
+        </div>
+      </article>
+
+      <article class="cluster products">
+        <div class="page-pill">产品页 (Products)</div>
+        <h3>产品体系 <span>Product system</span></h3>
+        <div class="modules">
+          <div class="module">产品分类页<span>Category listing page</span></div>
+          <div class="module">产品详情页<span>Product detail page</span></div>
+          <div class="module">化学品类别<span>Chemical categories</span></div>
+          <div class="module">产品名称 / CAS<span>Name / CAS No.</span></div>
+          <div class="module">规格 / 纯度 / 等级<span>Specs / purity / grade</span></div>
+          <div class="module">包装方式<span>Packaging options</span></div>
+          <div class="module">COA / TDS / SDS<span>Documents</span></div>
+          <div class="module">相关产品推荐<span>Related products</span></div>
+          <div class="module">产品竞品对比<span>Product competitor comparison</span></div>
+          <div class="module wide">未列产品咨询 / 定制寻源<span>Unlisted product inquiry / sourcing support</span></div>
+        </div>
+      </article>
+
+      <article class="cluster trust">
+        <div class="page-pill">Why Us</div>
+        <h3>信任背书 <span>Trust building</span></h3>
+        <div class="modules">
+          <div class="module">质量控制<span>Quality control</span></div>
+          <div class="module">稳定供应<span>Stable supply</span></div>
+          <div class="module">出口经验<span>Export experience</span></div>
+          <div class="module">包装与物流<span>Packaging and logistics</span></div>
+          <div class="module">文件支持<span>Document support</span></div>
+          <div class="module">合作流程<span>Cooperation process</span></div>
+          <div class="module wide">整体服务优势<span>Overall service advantages</span></div>
+        </div>
+      </article>
+
+      <article class="cluster content">
+        <div class="page-pill">内容页 (Content Pages)</div>
+        <h3>公司与资料 <span>Company and resources</span></h3>
+        <div class="modules">
+          <div class="module">关于我们<span>About</span></div>
+          <div class="module">应用行业页<span>Applications</span></div>
+          <div class="module">公司介绍<span>Company introduction</span></div>
+          <div class="module">工厂 / 仓库信息<span>Factory / warehouse info</span></div>
+        </div>
+      </article>
+
+      <article class="cluster contact">
+        <div class="page-pill">联系我们 (Contact)</div>
+        <h3>联系转化 <span>Inquiry conversion</span></h3>
+        <div class="modules">
+          <div class="module">联系表单<span>Contact form</span></div>
+          <div class="module">邮箱<span>Email</span></div>
+          <div class="module">WhatsApp / 电话<span>WhatsApp / phone</span></div>
+        </div>
+      </article>
+
+      <article class="cluster phase2">
+        <div class="page-pill">二期 (Phase 2)</div>
+        <h3>AI 客服预留 <span>AI assistant reserve</span></h3>
+        <div class="modules">
+          <div class="module">产品问答<span>Product Q&amp;A</span></div>
+          <div class="module">线索记录<span>Lead capture</span></div>
+          <div class="module">询盘摘要<span>Inquiry summary</span></div>
+          <div class="module">人工介入提醒<span>Human handoff alert</span></div>
+          <div class="module">后台线索列表<span>Lead dashboard</span></div>
+          <div class="module">敏感问题转人工<span>Sensitive topic handoff</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="notes" aria-label="MVP boundaries">
+      <div class="note"><strong>MVP 默认范围 (MVP scope)</strong>产品介绍、优势展示、资料说明、人工联系和双语内容。</div>
+      <div class="note"><strong>暂不包含 (Excluded now)</strong>公开报价、在线下单、支付、会员系统和复杂后台。</div>
+      <div class="note"><strong>讨论重点 (Discussion focus)</strong>首批产品清单、三大优势、可公开文件、联系方式和图片素材。</div>
+    </section>
+  </main>
+</body>
+</html>
