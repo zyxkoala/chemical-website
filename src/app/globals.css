@@ -68,3 +68,48 @@ body {
 * {
   -webkit-font-smoothing: antialiased;
 }
+
+.legal-body {
+  @apply text-body text-gray-body leading-relaxed;
+}
+.legal-body h2 {
+  @apply text-card-title text-navy-deep mt-10 mb-3;
+}
+.legal-body h3 {
+  @apply text-why-title text-navy-deep mt-6 mb-2;
+}
+.legal-body p {
+  @apply mb-4;
+}
+.legal-body ul,
+.legal-body ol {
+  @apply mb-4 pl-6;
+}
+.legal-body ul {
+  @apply list-disc;
+}
+.legal-body ol {
+  @apply list-decimal;
+}
+.legal-body li {
+  @apply mb-1;
+}
+.legal-body a {
+  @apply text-gold underline hover:no-underline;
+}
+.legal-body strong {
+  @apply text-navy-deep font-semibold;
+}
+.legal-body blockquote {
+  @apply border-l-4 border-gold pl-4 py-2 my-6 bg-gold/5 text-navy-deep italic;
+}
+.legal-body table {
+  @apply w-full border-collapse my-6 text-body;
+}
+.legal-body th,
+.legal-body td {
+  @apply border border-border-light px-4 py-2 text-left;
+}
+.legal-body th {
+  @apply bg-gray-light/40 text-navy-deep font-semibold;
+}
