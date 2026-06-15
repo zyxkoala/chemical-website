@@ -1,0 +1,193 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "whyUs": "Why Us",
+    "about": "About",
+    "applications": "Applications",
+    "contact": "Contact"
+  },
+  "common": {
+    "zhFallbackBanner": "中文版正在更新，部分内容暂以英文显示。"
+  },
+  "button": {
+    "explore": "Explore Products",
+    "contactTeam": "Contact Our Team",
+    "emailNow": "Email Now",
+    "callNow": "Call Now",
+    "openWhatsApp": "Open WhatsApp",
+    "viewMap": "View on Map",
+    "viewDetail": "View Detail",
+    "emailOurTeam": "Email Our Team",
+    "backHome": "Back to Home",
+    "reload": "Reload"
+  },
+  "home": {
+    "hero": {
+      "title": "Reliable Chemical Supply for Global Industries",
+      "subtitle": "AOWATT Global Materials connects buyers worldwide with verified chemical products, transparent documentation, and responsive export support."
+    },
+    "categories": {
+      "heading": "Product Categories"
+    },
+    "whyUs": {
+      "heading": "Why Work With Us",
+      "qualityTitle": "Quality Documents",
+      "qualityBody": "Every shipment is backed by COA, TDS and SDS — issued by the manufacturer and verifiable on request.",
+      "packagingTitle": "Export Packaging",
+      "packagingBody": "Pallet, drum, IBC and bulk-bag options sized for international logistics and port handling.",
+      "supportTitle": "Responsive Support",
+      "supportBody": "A direct contact team that handles enquiries, documentation, and post-shipment support without intermediaries."
+    },
+    "applications": {
+      "heading": "Applications"
+    }
+  },
+  "products": {
+    "pageHero": {
+      "eyebrow": "Catalog",
+      "title": "Products",
+      "subtitle": "Browse our chemical product range. Contact us for current pricing, full documentation, and packaging options."
+    },
+    "categoriesHeading": "Browse by Category",
+    "featuredHeading": "Featured Products",
+    "search": {
+      "placeholder": "Search by name, CAS number, or category",
+      "empty": "No products match. Try a different keyword or contact our team."
+    },
+    "inquiryCTA": {
+      "title": "Need a product not listed?",
+      "copy": "Tell us your specification and target volume — our team will reply with availability and pricing.",
+      "button": "Contact Our Team"
+    }
+  },
+  "productDetail": {
+    "breadcrumbHome": "Home",
+    "breadcrumbProducts": "Products",
+    "specsHeading": "Specifications",
+    "inquiryHeading": "Request a quotation",
+    "inquiryCopy": "Send your target volume, packaging preference, and destination port. We will reply with current pricing and lead time.",
+    "relatedHeading": "Related Products"
+  },
+  "contact": {
+    "pageHero": {
+      "eyebrow": "Get in touch",
+      "title": "Contact Us",
+      "subtitle": "Talk directly to our export team — we reply during Australian business hours."
+    },
+    "intro": "Reach us by email, phone, WhatsApp, or visit our Melbourne office.",
+    "email": {
+      "label": "Email",
+      "help": "Best for product enquiries with specifications and volume."
+    },
+    "phone": {
+      "label": "Phone",
+      "help": "AEST business hours, Monday to Friday."
+    },
+    "whatsapp": {
+      "label": "WhatsApp",
+      "help": "Fastest channel for international buyers."
+    },
+    "address": {
+      "label": "Address",
+      "help": "Office visits by appointment."
+    },
+    "unlistedCTA": {
+      "title": "Need a product not listed?",
+      "copy": "Tell us what you are sourcing and we will check availability with our manufacturer network.",
+      "button": "Email Our Team"
+    },
+    "guidanceHeading": "How we can help",
+    "guidance": {
+      "requirementsTitle": "Product requirements",
+      "requirementsCopy": "Specification, purity, packaging, and destination — we shape a quotation around your needs.",
+      "documentsTitle": "Document requests",
+      "documentsCopy": "COA, TDS, and SDS available on request for any listed product.",
+      "logisticsTitle": "Packaging and logistics",
+      "logisticsCopy": "Drum, IBC, and bulk-bag options coordinated with your forwarder."
+    }
+  },
+  "whyUs": {
+    "pageHero": {
+      "eyebrow": "Why work with us",
+      "title": "Why Work With Us",
+      "subtitle": "Three commitments that shape every shipment."
+    },
+    "advantagesHeading": "Core Advantages",
+    "processHeading": "Cooperation Process",
+    "process": {
+      "step1": "Inquiry",
+      "step2": "Requirement Review",
+      "step3": "Document Confirmation",
+      "step4": "Packaging & Logistics",
+      "step5": "After-sales Support"
+    },
+    "supportCTA": {
+      "title": "Need B2B sourcing support?",
+      "copy": "Send us your specification and we will respond with documentation and lead time.",
+      "button": "Contact Our Team"
+    }
+  },
+  "about": {
+    "pageHero": {
+      "eyebrow": "About AOWATT",
+      "title": "About AOWATT",
+      "subtitle": "Connecting materials worldwide with quality, reliability and integrity."
+    },
+    "overviewHeading": "Company Overview",
+    "overviewBody": "AOWATT Global Materials supplies industrial and specialty chemicals to buyers worldwide. We work directly with manufacturers, hold export documentation to international standards, and route shipments through verified logistics partners.",
+    "categoriesBandHeading": "Categories We Serve",
+    "valuesHeading": "Our Values",
+    "values": {
+      "qualityTitle": "Quality",
+      "qualityCopy": "Documented specifications, manufacturer-issued COA on every shipment.",
+      "reliabilityTitle": "Reliability",
+      "reliabilityCopy": "Honest lead times, transparent packaging options, predictable communication.",
+      "integrityTitle": "Integrity",
+      "integrityCopy": "We will tell you when we are not the right fit. We will not overstate availability or capability."
+    }
+  },
+  "applications": {
+    "pageHero": {
+      "eyebrow": "Industries",
+      "title": "Industry Applications",
+      "subtitle": "Six sectors we currently supply."
+    },
+    "items": {
+      "miningTitle": "Mining",
+      "miningCopy": "Reagents and process chemicals for mineral extraction and beneficiation.",
+      "agricultureTitle": "Agriculture",
+      "agricultureCopy": "Inputs for crop nutrition, soil treatment, and post-harvest handling.",
+      "manufacturingTitle": "Manufacturing",
+      "manufacturingCopy": "Bulk acids, alkalis, and process chemicals for industrial production.",
+      "waterTitle": "Water Treatment",
+      "waterCopy": "Disinfectants, coagulants, and pH adjusters for municipal and industrial water systems.",
+      "coatingsTitle": "Coatings & Adhesives",
+      "coatingsCopy": "Solvents and additives for paint, ink, and adhesive formulation.",
+      "logisticsTitle": "Logistics & Packaging",
+      "logisticsCopy": "Materials for industrial packaging, preservation, and dust suppression."
+    },
+    "cta": {
+      "title": "Don't see your industry?",
+      "copy": "Tell us your application — we likely supply something close.",
+      "button": "Contact Our Team"
+    }
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "disclaimerTitle": "Disclaimer"
+  },
+  "footer": {
+    "productsHeading": "Products",
+    "contactHeading": "Contact",
+    "copyright": "© {year} AOWATT Global Materials",
+    "privacyLink": "Privacy",
+    "disclaimerLink": "Disclaimer"
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundCopy": "The page you are looking for has been moved or does not exist.",
+    "errorTitle": "Something went wrong",
+    "errorCopy": "An unexpected error occurred. Try reloading the page or contact us if it persists."
+  }
+}

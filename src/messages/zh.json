@@ -1,0 +1,119 @@
+{
+  "nav": { "home": "首页", "products": "产品", "whyUs": "我们的优势", "about": "关于我们", "applications": "应用", "contact": "联系" },
+  "common": { "zhFallbackBanner": "中文版正在更新，部分内容暂以英文显示。" },
+  "button": {
+    "explore": "浏览产品", "contactTeam": "联系我们", "emailNow": "立即邮件", "callNow": "立即致电",
+    "openWhatsApp": "打开 WhatsApp", "viewMap": "查看地图", "viewDetail": "查看详情",
+    "emailOurTeam": "邮件联系我们", "backHome": "返回首页", "reload": "重新加载"
+  },
+  "home": {
+    "hero": {
+      "title": "为全球工业提供可靠的化学品供应",
+      "subtitle": "AOWATT Global Materials 为全球买家提供经过核验的化学品、透明的文档与响应式的出口支持。"
+    },
+    "categories": { "heading": "产品分类" },
+    "whyUs": {
+      "heading": "为何选择我们",
+      "qualityTitle": "品质文档",
+      "qualityBody": "每一批次均提供制造商签发的 COA、TDS 与 SDS，可按需核验。",
+      "packagingTitle": "出口包装",
+      "packagingBody": "提供托盘、桶装、IBC 与吨袋等多种规格，匹配国际物流与港口操作。",
+      "supportTitle": "响应式支持",
+      "supportBody": "由专属团队直接处理询价、文档与售后，无中间环节。"
+    },
+    "applications": { "heading": "应用领域" }
+  },
+  "products": {
+    "pageHero": {
+      "eyebrow": "产品目录",
+      "title": "产品",
+      "subtitle": "浏览我们的化学品产品系列。如需当前价格、完整文档与包装方案，请与我们联系。"
+    },
+    "categoriesHeading": "按分类浏览",
+    "featuredHeading": "精选产品",
+    "search": {
+      "placeholder": "按名称、CAS 编号或分类搜索",
+      "empty": "未找到匹配产品。请尝试其他关键词或联系我们的团队。"
+    },
+    "inquiryCTA": {
+      "title": "未列出的产品？",
+      "copy": "告诉我们您的规格与目标采购量，我们的团队将回复可用性与价格。",
+      "button": "联系我们"
+    }
+  },
+  "productDetail": {
+    "breadcrumbHome": "首页",
+    "breadcrumbProducts": "产品",
+    "specsHeading": "规格",
+    "inquiryHeading": "请求报价",
+    "inquiryCopy": "请提供目标采购量、包装偏好与目的港，我们将回复当前价格与交期。",
+    "relatedHeading": "相关产品"
+  },
+  "contact": {
+    "pageHero": {
+      "eyebrow": "联系我们",
+      "title": "联系我们",
+      "subtitle": "直接对话出口团队 — 我们在澳大利亚工作时间内回复。"
+    },
+    "intro": "可通过邮件、电话、WhatsApp 联系我们，或预约访问墨尔本办公室。",
+    "email": { "label": "邮箱", "help": "适合附带规格与采购量的产品询盘。" },
+    "phone": { "label": "电话", "help": "AEST 工作时间，周一至周五。" },
+    "whatsapp": { "label": "WhatsApp", "help": "国际买家最快的沟通渠道。" },
+    "address": { "label": "地址", "help": "如需到访请提前预约。" },
+    "unlistedCTA": {
+      "title": "未列出的产品？",
+      "copy": "告诉我们您正在采购的产品，我们将与制造商网络确认可用性。",
+      "button": "邮件联系我们"
+    },
+    "guidanceHeading": "我们如何提供帮助",
+    "guidance": {
+      "requirementsTitle": "产品需求",
+      "requirementsCopy": "规格、纯度、包装、目的地 — 我们根据您的需求提供报价。",
+      "documentsTitle": "文档索取",
+      "documentsCopy": "任意产品均可按需提供 COA、TDS、SDS。",
+      "logisticsTitle": "包装与物流",
+      "logisticsCopy": "桶装、IBC、吨袋多种规格，与您的货代协同。"
+    }
+  },
+  "whyUs": {
+    "pageHero": { "eyebrow": "[PLACEHOLDER ZH] Why work with us", "title": "[PLACEHOLDER ZH] Why Work With Us", "subtitle": "[PLACEHOLDER ZH] Three commitments that shape every shipment." },
+    "advantagesHeading": "[PLACEHOLDER ZH] Core Advantages",
+    "processHeading": "[PLACEHOLDER ZH] Cooperation Process",
+    "process": { "step1": "[PLACEHOLDER ZH] Inquiry", "step2": "[PLACEHOLDER ZH] Requirement Review", "step3": "[PLACEHOLDER ZH] Document Confirmation", "step4": "[PLACEHOLDER ZH] Packaging & Logistics", "step5": "[PLACEHOLDER ZH] After-sales Support" },
+    "supportCTA": { "title": "[PLACEHOLDER ZH] Need B2B sourcing support?", "copy": "[PLACEHOLDER ZH] Send us your specification...", "button": "[PLACEHOLDER ZH] Contact Our Team" }
+  },
+  "about": {
+    "pageHero": { "eyebrow": "[PLACEHOLDER ZH] About AOWATT", "title": "[PLACEHOLDER ZH] About AOWATT", "subtitle": "[PLACEHOLDER ZH] Connecting materials..." },
+    "overviewHeading": "[PLACEHOLDER ZH] Company Overview",
+    "overviewBody": "[PLACEHOLDER ZH] AOWATT Global Materials supplies...",
+    "categoriesBandHeading": "[PLACEHOLDER ZH] Categories We Serve",
+    "valuesHeading": "[PLACEHOLDER ZH] Our Values",
+    "values": { "qualityTitle": "[PLACEHOLDER ZH] Quality", "qualityCopy": "[PLACEHOLDER ZH] ...", "reliabilityTitle": "[PLACEHOLDER ZH] Reliability", "reliabilityCopy": "[PLACEHOLDER ZH] ...", "integrityTitle": "[PLACEHOLDER ZH] Integrity", "integrityCopy": "[PLACEHOLDER ZH] ..." }
+  },
+  "applications": {
+    "pageHero": { "eyebrow": "[PLACEHOLDER ZH] Industries", "title": "[PLACEHOLDER ZH] Industry Applications", "subtitle": "[PLACEHOLDER ZH] Six sectors we currently supply." },
+    "items": {
+      "miningTitle": "[PLACEHOLDER ZH] Mining", "miningCopy": "[PLACEHOLDER ZH] ...",
+      "agricultureTitle": "[PLACEHOLDER ZH] Agriculture", "agricultureCopy": "[PLACEHOLDER ZH] ...",
+      "manufacturingTitle": "[PLACEHOLDER ZH] Manufacturing", "manufacturingCopy": "[PLACEHOLDER ZH] ...",
+      "waterTitle": "[PLACEHOLDER ZH] Water Treatment", "waterCopy": "[PLACEHOLDER ZH] ...",
+      "coatingsTitle": "[PLACEHOLDER ZH] Coatings & Adhesives", "coatingsCopy": "[PLACEHOLDER ZH] ...",
+      "logisticsTitle": "[PLACEHOLDER ZH] Logistics & Packaging", "logisticsCopy": "[PLACEHOLDER ZH] ..."
+    },
+    "cta": { "title": "[PLACEHOLDER ZH] Don't see your industry?", "copy": "[PLACEHOLDER ZH] ...", "button": "[PLACEHOLDER ZH] Contact Our Team" }
+  },
+  "legal": { "privacyTitle": "隐私政策", "disclaimerTitle": "免责声明" },
+  "footer": {
+    "productsHeading": "产品",
+    "contactHeading": "联系",
+    "copyright": "© {year} AOWATT Global Materials",
+    "privacyLink": "隐私政策",
+    "disclaimerLink": "免责声明"
+  },
+  "errors": {
+    "notFoundTitle": "页面不存在",
+    "notFoundCopy": "您访问的页面已被移动或不存在。",
+    "errorTitle": "出现错误",
+    "errorCopy": "发生意外错误。请重新加载页面，或与我们联系。"
+  }
+}
