@@ -1,11 +1,24 @@
+import type { Metadata } from 'next';
 import { features } from '@/config/features';
 import { notFound } from 'next/navigation';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageHero } from '@/components/ui/PageHero';
 import { ApplicationCard } from '@/components/applications/ApplicationCard';
 import { ApplicationsCTA } from '@/components/applications/ApplicationsCTA';
+import { buildMetadata } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
 import type { PlaceholderVariant } from '@/types/product';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'applications.pageHero' });
+  return buildMetadata({
+    title: `${t('title')} — AOWATT`,
+    description: t('subtitle'),
+    path: '/applications',
+    locale: locale as Locale,
+  });
+}
 
 type Item = {
   variant: PlaceholderVariant;

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageHero } from '@/components/ui/PageHero';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -5,7 +6,19 @@ import { ContactCard } from '@/components/contact/ContactCard';
 import { UnlistedProductCTA } from '@/components/contact/UnlistedProductCTA';
 import { GuidanceCard } from '@/components/contact/GuidanceCard';
 import { site } from '@/content/site';
+import { buildMetadata } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'contact.pageHero' });
+  return buildMetadata({
+    title: `${t('title')} — AOWATT`,
+    description: t('subtitle'),
+    path: '/contact',
+    locale: locale as Locale,
+  });
+}
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

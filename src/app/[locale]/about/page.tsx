@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { features } from '@/config/features';
 import { notFound } from 'next/navigation';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
@@ -6,7 +7,19 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { OverviewSection } from '@/components/about/OverviewSection';
 import { CategoriesWeServeBand } from '@/components/about/CategoriesWeServeBand';
 import { ValueCard } from '@/components/about/ValueCard';
+import { buildMetadata } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'about.pageHero' });
+  return buildMetadata({
+    title: `${t('title')} — AOWATT`,
+    description: t('subtitle'),
+    path: '/about',
+    locale: locale as Locale,
+  });
+}
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   if (!features.about) notFound();
