@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+body {
+  @apply text-navy-deep bg-white antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
