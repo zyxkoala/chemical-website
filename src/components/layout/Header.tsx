@@ -6,7 +6,7 @@ import { enabledMainNavItems } from '@/config/features';
 import type { Locale } from '@/types/locale';
 
 export function Header({ locale, currentPath }: { locale: Locale; currentPath: string }) {
-  const t = useTranslations('nav');
+  const t = useTranslations();
   const navItems = enabledMainNavItems();
 
   return (

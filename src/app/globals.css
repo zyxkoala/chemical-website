@@ -1,5 +1,65 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-navy: #010912;
+  --color-navy-deep: #091C1C;
+  --color-navy-strip: #000D0D;
+  --color-gold: #F09F14;
+  --color-blue-primary: #053B7D;
+  --color-gray-body: #5C667A;
+  --color-gray-light: #D1E0F0;
+  --color-border-light: #DBE0EB;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --text-hero: 56px;
+  --text-hero--line-height: 68px;
+  --text-hero--font-weight: 700;
+
+  --text-page-title: 52px;
+  --text-page-title--line-height: 62px;
+  --text-page-title--font-weight: 700;
+
+  --text-section: 34px;
+  --text-section--line-height: 42px;
+  --text-section--font-weight: 700;
+
+  --text-card-title: 19px;
+  --text-card-title--line-height: 25px;
+  --text-card-title--font-weight: 600;
+
+  --text-why-title: 17px;
+  --text-why-title--line-height: 24px;
+  --text-why-title--font-weight: 600;
+
+  --text-subtitle: 19px;
+  --text-subtitle--line-height: 30px;
+
+  --text-body: 15px;
+  --text-body--line-height: 23px;
+
+  --text-nav: 15px;
+  --text-nav--line-height: 20px;
+  --text-nav--font-weight: 600;
+
+  --text-footer-link: 15px;
+  --text-footer-link--line-height: 26px;
+
+  --text-legal: 13px;
+  --text-legal--line-height: 18px;
+
+  --container-page-max: 1440px;
+
+  --spacing-section-px: 80px;
+  --spacing-header-px: 78px;
+
+  --height-header-h: 126px;
+  --height-button: 48px;
+
+  --radius-card: 7px;
+  --radius-button: 4px;
+}
+
 body {
   @apply text-navy-deep bg-white antialiased;
   font-feature-settings: 'cv11', 'ss01';
