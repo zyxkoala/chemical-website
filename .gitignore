@@ -27,3 +27,10 @@ pnpm-debug.log*
 
 # Vercel
 .vercel
+
+# Playwright MCP (run-time artifacts: snapshots, screenshots, console logs)
+.playwright-mcp/
+
+# Local serve / dev logs
+*.log
+.serve.log
