@@ -1,8 +1,8 @@
-> 草稿模板 — 上线前由 [PLACEHOLDER 法律顾问] 审核确认。
+> 草稿模板 — 上线前由法律顾问审核确认。
 
 ## 1. 关于我们
 
-AOWATT Global Materials（[PLACEHOLDER 公司全称]，ABN [PLACEHOLDER]）运营本网站 aowatt.com.au。本隐私政策说明我们如何处理通过本网站收集的信息。
+AOWATT Global Materials 运营本网站 aowatt.com.au。本隐私政策说明我们如何处理通过本网站收集的信息。
 
 ## 2. 收集范围
 

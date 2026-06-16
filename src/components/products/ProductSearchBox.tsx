@@ -54,7 +54,7 @@ export function ProductSearchBox({ allProducts }: Props) {
 
   return (
     <div>
-      <div className="max-w-2xl mx-auto mb-8">
+      <div className="max-w-[1280px] mx-auto mb-8">
         <input
           type="search"
           value={query}
@@ -78,7 +78,7 @@ export function ProductSearchBox({ allProducts }: Props) {
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filtered.map(p => (
-            <ProductCard key={p.slug} product={p} source="products_featured" />
+            <ProductCard key={p.slug} product={p} source="products_featured" variant="compact" />
           ))}
         </div>
       )}

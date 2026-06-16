@@ -118,7 +118,7 @@ export const products: Product[] = [
     relatedProductSlugs: ['caustic-soda-flakes-99', 'hydrochloric-acid-31', 'citric-acid'],
     image: 'product-default',
     featured: true,
-    published: true,
+    published: false,  // V0.1: Hide until product data confirmed
     placeholder: true,
     sortOrder: 3,
   },
@@ -137,7 +137,7 @@ export const products: Product[] = [
     relatedProductSlugs: ['caustic-soda-flakes-99', 'hydrochloric-acid-31', 'citric-acid'],
     image: 'product-default',
     featured: true,
-    published: true,
+    published: false,  // V0.1: Hide until product data confirmed
     placeholder: true,
     sortOrder: 4,
   },
@@ -157,7 +157,7 @@ export const products: Product[] = [
     relatedProductSlugs: ['caustic-soda-flakes-99', 'hydrochloric-acid-31', 'sodium-hypochlorite'],
     image: 'product-default',
     featured: true,
-    published: true,
+    published: false,  // V0.1: Hide until product data confirmed
     placeholder: true,
     sortOrder: 5,
   },
@@ -176,7 +176,7 @@ export const products: Product[] = [
     relatedProductSlugs: ['caustic-soda-flakes-99', 'hydrochloric-acid-31', 'sodium-hypochlorite'],
     image: 'product-default',
     featured: true,
-    published: true,
+    published: false,  // V0.1: Hide until product data confirmed
     placeholder: true,
     sortOrder: 6,
   },

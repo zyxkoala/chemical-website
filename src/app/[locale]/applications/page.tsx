@@ -10,6 +10,8 @@ import type { Locale } from '@/types/locale';
 import type { PlaceholderVariant } from '@/types/product';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  if (!features.applications) notFound();
+
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'applications.pageHero' });
   return buildMetadata({

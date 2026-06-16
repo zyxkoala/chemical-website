@@ -11,6 +11,8 @@ import { buildMetadata } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  if (!features.about) notFound();
+
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'about.pageHero' });
   return buildMetadata({

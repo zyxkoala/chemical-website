@@ -1,8 +1,8 @@
-> Draft template — to be reviewed and confirmed by [PLACEHOLDER legal counsel] before launch.
+> Draft template — to be reviewed and confirmed by legal counsel before launch.
 
 ## 1. Who We Are
 
-AOWATT Global Materials ([PLACEHOLDER company full legal name], ABN [PLACEHOLDER]) operates this website at aowatt.com.au. This Privacy Policy explains how we handle information collected through the site.
+AOWATT Global Materials operates this website at aowatt.com.au. This Privacy Policy explains how we handle information collected through the site.
 
 ## 2. What We Collect
 

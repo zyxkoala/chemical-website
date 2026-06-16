@@ -14,10 +14,11 @@ for (const f of files) {
 }
 
 if (hits.length > 0) {
-  console.log(`Found ${hits.length} placeholder(s):\n`);
+  console.error(`Found ${hits.length} placeholder(s):\n`);
   for (const h of hits) {
-    console.log(`  ${h.file}:${h.line}  ${h.text}`);
+    console.error(`  ${h.file}:${h.line}  ${h.text}`);
   }
+  process.exit(1);
 }
 
 process.exit(0);

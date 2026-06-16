@@ -1,8 +1,8 @@
-> Draft template — to be reviewed and confirmed by [PLACEHOLDER legal counsel] before launch.
+> Draft template — to be reviewed and confirmed by legal counsel before launch.
 
 ## 1. Information Only
 
-The product information, specifications, technical data, and application examples on this website ([PLACEHOLDER company full legal name], ABN [PLACEHOLDER]) are provided for **informational purposes only**. They are typical values published by manufacturers and may vary between batches. Nothing on this website constitutes a warranty, representation, or guarantee, whether express or implied.
+The product information, specifications, technical data, and application examples on this website are provided for **informational purposes only**. They are typical values published by manufacturers and may vary between batches. Nothing on this website constitutes a warranty, representation, or guarantee, whether express or implied.
 
 ## 2. Qualified Personnel
 

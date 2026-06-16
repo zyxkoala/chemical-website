@@ -21,7 +21,7 @@ export function Header({ locale }: { locale: Locale }) {
 
   return (
     <header className="bg-navy text-white h-header-h sticky top-0 z-50">
-      <div className="max-w-page-max mx-auto px-header-px h-full flex items-center">
+      <div className="max-w-page-max mx-auto px-6 md:px-header-px h-full flex items-center">
         <Link href={`/${locale}`} className="flex-shrink-0 flex items-center h-full">
           <Image
             src="/logos/aowatt-header.png"

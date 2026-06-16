@@ -28,16 +28,16 @@ export function PageHero({
   const resolvedLabel = ctaLabel ?? tButton('contactTeam');
 
   return (
-    <section className="bg-navy text-white py-16">
-      <div className="max-w-page-max mx-auto px-section-px grid lg:grid-cols-2 gap-12 items-center">
+    <section className="bg-navy text-white py-12">
+      <div className="max-w-page-max mx-auto px-section-px grid lg:grid-cols-2 gap-8 items-center">
         <div>
           {eyebrow && (
-            <p className="text-gold uppercase text-[13px] font-semibold tracking-wide mb-4">
+            <p className="text-gold uppercase text-[13px] font-semibold tracking-wide mb-3">
               {eyebrow}
             </p>
           )}
-          <h1 className="text-page-title mb-6">{title}</h1>
-          {subtitle && <p className="text-subtitle text-gray-light mb-8">{subtitle}</p>}
+          <h1 className="text-page-title mb-4">{title}</h1>
+          {subtitle && <p className="text-subtitle text-gray-light mb-6">{subtitle}</p>}
           <Button variant="secondary" href={resolvedHref}>
             {resolvedLabel}
           </Button>
