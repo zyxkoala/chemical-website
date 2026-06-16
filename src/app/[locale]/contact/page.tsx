@@ -78,6 +78,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         subtitle={t('pageHero.subtitle')}
         ctaLabel={tButton('emailNow')}
         ctaHref={`mailto:${site.email}`}
+        backgroundImage="/images/contact-hero.jpg"
       />
 
       <section className="py-16 bg-white">

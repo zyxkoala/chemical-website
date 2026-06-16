@@ -35,6 +35,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         eyebrow={t('pageHero.eyebrow')}
         title={t('pageHero.title')}
         subtitle={t('pageHero.subtitle')}
+        backgroundImage="/images/products-hero.jpg"
       />
 
       <section className="py-16 bg-white">
