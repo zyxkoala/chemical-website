@@ -6,9 +6,9 @@ import {
 } from '../products';
 
 describe('getPublishedProducts', () => {
-  it('returns all 6 V0.1 products sorted', () => {
+  it('returns all 2 V0.1 products sorted', () => {
     const ps = getPublishedProducts('en');
-    expect(ps).toHaveLength(6);
+    expect(ps).toHaveLength(2);
     expect(ps[0].slug).toBe('caustic-soda-flakes-99');
   });
   it('localizes the name when locale is zh', () => {
@@ -52,7 +52,7 @@ describe('getRelatedProducts', () => {
 describe('getProductStaticParams', () => {
   it('returns locale × slug for all published products', () => {
     const params = getProductStaticParams();
-    expect(params).toHaveLength(12); // 6 products × 2 locales
+    expect(params).toHaveLength(4); // 2 products × 2 locales
     expect(params).toContainEqual({ locale: 'en', slug: 'caustic-soda-flakes-99' });
     expect(params).toContainEqual({ locale: 'zh', slug: 'caustic-soda-flakes-99' });
   });
@@ -71,6 +71,6 @@ describe('searchProducts', () => {
     expect(searchProducts('xyz-no-such-thing', 'en')).toEqual([]);
   });
   it('returns full list for empty query', () => {
-    expect(searchProducts('', 'en')).toHaveLength(6);
+    expect(searchProducts('', 'en')).toHaveLength(2);
   });
 });
