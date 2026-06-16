@@ -19,11 +19,11 @@ export function Footer({ locale }: { locale: Locale }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <Image
-              src="/logos/aowatt-footer.png"
+              src="/logos/aowatt-logo-cropped.png"
               alt={site.name}
-              width={260}
-              height={260}
-              className="mb-4 w-[220px] md:w-[260px] h-auto object-contain"
+              width={720}
+              height={470}
+              className="mb-4 w-[260px] md:w-[320px] h-auto object-contain"
             />
             <p className="text-[15px] text-gray-light leading-6">
               {locale === 'en' ? site.tagline.en : site.tagline.zh}

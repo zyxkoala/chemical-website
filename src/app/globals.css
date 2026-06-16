@@ -38,8 +38,8 @@
   --text-body: 15px;
   --text-body--line-height: 23px;
 
-  --text-nav: 15px;
-  --text-nav--line-height: 20px;
+  --text-nav: 17px;
+  --text-nav--line-height: 22px;
   --text-nav--font-weight: 600;
 
   --text-footer-link: 15px;
@@ -53,7 +53,7 @@
   --spacing-section-px: 80px;
   --spacing-header-px: 78px;
 
-  --height-header-h: 126px;
+  --height-header-h: 82px;
   --height-button: 48px;
 
   --radius-card: 7px;
@@ -64,6 +64,7 @@
   :root {
     --spacing-section-px: 32px;
     --spacing-header-px: 24px;
+    --height-header-h: 78px;
   }
 }
 
@@ -71,6 +72,7 @@
   :root {
     --spacing-section-px: 20px;
     --spacing-header-px: 16px;
+    --height-header-h: 74px;
     --text-hero: 36px;
     --text-hero--line-height: 44px;
     --text-page-title: 32px;

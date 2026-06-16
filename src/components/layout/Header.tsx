@@ -24,18 +24,18 @@ export function Header({ locale }: { locale: Locale }) {
       <div className="max-w-page-max mx-auto px-6 md:px-header-px h-full flex items-center">
         <Link href={`/${locale}`} className="flex-shrink-0 flex items-center h-full">
           <Image
-            src="/logos/aowatt-header.png"
+            src="/logos/aowatt-logo-cropped.png"
             alt="AOWATT Global Materials"
-            width={120}
-            height={120}
+            width={720}
+            height={470}
             priority
-            className="h-[80px] sm:h-[100px] md:h-[112px] w-auto object-contain"
+            className="h-[70px] sm:h-[72px] md:h-[76px] w-auto object-contain"
           />
         </Link>
 
-        <div className="hidden md:block w-px h-16 bg-white/20 mx-8" />
+        <div className="hidden md:block w-px h-10 bg-white/20 mx-6" />
 
-        <nav className="flex-1 flex items-center gap-3 sm:gap-6 md:gap-8 ml-2 md:ml-0">
+        <nav className="flex-1 flex items-center h-full gap-3 sm:gap-5 md:gap-7 ml-2 md:ml-0">
           {navItems.map(item => {
             const isActive = item.href === '/'
               ? currentPath === '/'
@@ -44,10 +44,10 @@ export function Header({ locale }: { locale: Locale }) {
               <Link
                 key={item.key}
                 href={`/${locale}${item.href}`}
-                className={`text-nav transition-colors hover:text-white relative ${isActive ? 'text-white' : 'text-gray-light'}`}
+                className={`text-nav h-full px-1 flex items-center transition-colors hover:text-white relative ${isActive ? 'text-white' : 'text-gray-light'}`}
               >
                 {t(item.labelKey as any)}
-                {isActive && <span className="absolute -bottom-10 left-0 right-0 h-[3px] bg-gold" />}
+                {isActive && <span className="absolute bottom-0 left-1 right-1 h-[3px] bg-gold" />}
               </Link>
             );
           })}
