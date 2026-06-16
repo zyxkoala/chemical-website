@@ -31,6 +31,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
   return (
     <>
       <PageHero
+        locale={locale as Locale}
         eyebrow={t('pageHero.eyebrow')}
         title={t('pageHero.title')}
         subtitle={t('pageHero.subtitle')}

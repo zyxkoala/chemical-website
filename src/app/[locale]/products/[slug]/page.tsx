@@ -63,6 +63,7 @@ export default async function ProductDetailPage({
   return (
     <>
       <PageHero
+        locale={locale as Locale}
         eyebrow={category?.name}
         title={product.name}
         subtitle={product.summary}

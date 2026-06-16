@@ -15,7 +15,7 @@ export function UnlistedProductCTA() {
           <TrackedLink
             href={`mailto:${site.email}`}
             page="contact"
-            className="inline-flex items-center justify-center gap-2 rounded-button h-button px-[26px] text-[15px] font-semibold bg-white text-navy-deep border border-gold hover:bg-gold/5 transition-colors flex-shrink-0"
+            className="inline-flex items-center justify-center gap-2 rounded-button h-button px-[26px] text-[15px] font-semibold bg-white text-navy-deep border border-gold hover:bg-gold hover:text-navy-deep hover:border-gold transition-colors flex-shrink-0"
           >
             {t('button')}
             <span aria-hidden="true">→</span>

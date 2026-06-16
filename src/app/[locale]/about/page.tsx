@@ -39,6 +39,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   return (
     <>
       <PageHero
+        locale={locale as Locale}
         eyebrow={t('pageHero.eyebrow')}
         title={t('pageHero.title')}
         subtitle={t('pageHero.subtitle')}

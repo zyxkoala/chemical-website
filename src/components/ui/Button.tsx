@@ -13,7 +13,7 @@ export function Button({ variant = 'primary', href, children, className = '', on
   const baseClass = 'inline-flex items-center justify-center gap-2 rounded-button h-button px-[26px] text-[15px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2';
   const variantClass = variant === 'primary'
     ? 'bg-blue-primary text-white hover:bg-blue-primary/90'
-    : 'bg-white text-navy-deep border border-gold hover:bg-gold/5';
+    : 'bg-white text-navy-deep border border-gold hover:bg-gold hover:text-navy-deep hover:border-gold';
   const classes = `${baseClass} ${variantClass} ${className}`;
 
   const content = (

@@ -17,7 +17,7 @@ export function LegalPage({ locale, title, docName }: Props) {
 
   return (
     <>
-      <PageHero title={title} />
+      <PageHero locale={locale} title={title} />
       <article className="py-16 bg-white">
         <div className="max-w-[800px] mx-auto px-6 legal-body">
           <div dangerouslySetInnerHTML={{ __html: html }} />

@@ -24,11 +24,10 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
-  const currentPath = '/';
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Header locale={locale as Locale} currentPath={currentPath} />
+      <Header locale={locale as Locale} />
       <main className="min-h-screen">{children}</main>
       <Footer locale={locale as Locale} />
       <AnalyticsProvider />

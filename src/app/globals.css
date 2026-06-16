@@ -60,6 +60,28 @@
   --radius-button: 4px;
 }
 
+@media (max-width: 1023px) {
+  :root {
+    --spacing-section-px: 32px;
+    --spacing-header-px: 24px;
+  }
+}
+
+@media (max-width: 639px) {
+  :root {
+    --spacing-section-px: 20px;
+    --spacing-header-px: 16px;
+    --text-hero: 36px;
+    --text-hero--line-height: 44px;
+    --text-page-title: 32px;
+    --text-page-title--line-height: 40px;
+    --text-section: 26px;
+    --text-section--line-height: 34px;
+    --text-subtitle: 17px;
+    --text-subtitle--line-height: 26px;
+  }
+}
+
 body {
   @apply text-navy-deep bg-white antialiased;
   font-feature-settings: 'cv11', 'ss01';

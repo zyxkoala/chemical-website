@@ -26,7 +26,7 @@ export function ContactCard({ icon, label, value, help, href, buttonLabel, page 
         <TrackedLink
           href={href}
           page={page}
-          className="inline-flex items-center justify-center gap-2 rounded-button h-button px-[26px] text-[15px] font-semibold bg-white text-navy-deep border border-gold hover:bg-gold/5 transition-colors"
+          className="inline-flex items-center justify-center gap-2 rounded-button h-button px-[26px] text-[15px] font-semibold bg-white text-navy-deep border border-gold hover:bg-gold hover:text-navy-deep hover:border-gold transition-colors"
         >
           {buttonLabel}
           <span aria-hidden="true">→</span>

@@ -15,15 +15,15 @@ export function Footer({ locale }: { locale: Locale }) {
 
   return (
     <footer className="bg-navy text-white">
-      <div className="max-w-page-max mx-auto px-[80px] pt-[56px] pb-[48px]">
-        <div className="grid grid-cols-3 gap-6">
+      <div className="max-w-page-max mx-auto px-section-px pt-[56px] pb-[48px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <Image
               src="/logos/aowatt-footer.png"
               alt={site.name}
-              width={364}
-              height={180}
-              className="mb-4"
+              width={260}
+              height={260}
+              className="mb-4 w-[220px] md:w-[260px] h-auto object-contain"
             />
             <p className="text-[15px] text-gray-light leading-6">
               {locale === 'en' ? site.tagline.en : site.tagline.zh}
@@ -89,7 +89,7 @@ export function Footer({ locale }: { locale: Locale }) {
       </div>
 
       <div className="bg-navy-strip border-t border-gold">
-        <div className="max-w-page-max mx-auto px-[80px] py-[15px] flex justify-between items-center">
+        <div className="max-w-page-max mx-auto px-section-px py-[15px] flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-start sm:items-center">
           <p className="text-legal text-gray-body">
             {t('copyright', { year: currentYear })}
           </p>
