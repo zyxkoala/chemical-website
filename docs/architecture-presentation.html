@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AOWATT Global Materials · 官网建设方案 V0.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1B3C;--navy-2:#1a2a52;--gold:#D4A24E;--gold-2:#E6B86A;--ink:#0F1B3C;--muted:#5b6b85;--line:#e3e8f0;--bg:#f7f9fc;--paper:#fff;--green:#2f9e7e;--red:#c95c4a}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a1227;font-family:"Noto Sans SC","Inter",system-ui,sans-serif;color:var(--ink)}
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;display:none;overflow:hidden;background:var(--paper)}
+.slide.active{display:flex;flex-direction:column}
+.slide-inner{flex:1;display:flex;flex-direction:column;padding:64px 96px 80px;position:relative}
+h1,h2,h3,h4{font-family:"Inter","Noto Sans SC",sans-serif;font-weight:700;letter-spacing:-.01em;color:var(--navy)}
+h1{font-size:54px;line-height:1.1}
+h2{font-size:40px;line-height:1.15;margin-bottom:8px}
+h3{font-size:24px;line-height:1.3}
+h4{font-size:18px;line-height:1.4}
+p{line-height:1.65;color:var(--ink);font-size:18px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.subtitle{color:var(--muted);font-size:20px;line-height:1.55;margin-top:14px;max-width:920px}
+.gold{color:var(--gold)}.navy{color:var(--navy)}.muted{color:var(--muted)}
+.divider{width:64px;height:3px;background:var(--gold);border-radius:2px;margin:18px 0 28px}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:100;transition:width .25s ease}
+.pager{position:fixed;top:18px;right:28px;font-family:"Inter",monospace;font-size:13px;color:var(--muted);z-index:100;letter-spacing:.05em}
+.brand{position:fixed;bottom:18px;right:28px;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.3em;color:var(--muted);z-index:100;text-transform:uppercase}
+.help{position:fixed;bottom:18px;left:28px;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.1em;color:#aab3c5;z-index:100}
+/* Cover */
+.cover{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 60%,#243a6e 100%);color:#fff;justify-content:center;align-items:flex-start}
+.cover .slide-inner{justify-content:center}
+.cover h1{color:#fff;font-size:72px;letter-spacing:-.02em}
+.cover .eyebrow{color:var(--gold);font-size:14px}
+.cover .meta{margin-top:48px;display:flex;gap:48px;color:#cfd6e8;font-size:15px;letter-spacing:.08em}
+.cover .meta b{color:var(--gold);display:block;font-size:13px;letter-spacing:.18em;margin-bottom:4px}
+.cover .ribbon{position:absolute;top:64px;right:96px;border:1px solid rgba(212,162,78,.4);padding:10px 18px;font-size:12px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase}
+.logo-mark{display:inline-flex;align-items:center;gap:14px;margin-bottom:36px}
+.logo-mark .mark{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#a47a2c);display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:900;font-size:22px;font-family:"Inter"}
+.logo-mark .name{font-family:"Inter";font-weight:700;font-size:18px;letter-spacing:.3em;color:#fff}
+.logo-mark .name small{display:block;font-weight:400;font-size:11px;letter-spacing:.4em;color:var(--gold);margin-top:4px}
+/* Common */
+.row{display:flex;gap:24px}
+.grid{display:grid;gap:20px}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:22px 24px}
+.card h3{font-size:20px;color:var(--navy);margin-bottom:10px}
+.card p{font-size:15px;color:var(--muted);line-height:1.6}
+.card .icon{width:44px;height:44px;border-radius:10px;background:rgba(212,162,78,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;border:1px solid rgba(212,162,78,.3)}
+.tag{display:inline-block;padding:4px 10px;font-size:11px;font-weight:600;border-radius:4px;letter-spacing:.06em}
+.tag-v1{background:rgba(47,158,126,.12);color:var(--green);border:1px solid rgba(47,158,126,.3)}
+.tag-v2{background:rgba(212,162,78,.12);color:#a47a2c;border:1px solid rgba(212,162,78,.3)}
+.tag-v3{background:rgba(91,107,133,.12);color:var(--muted);border:1px solid rgba(91,107,133,.3)}
+.kv{display:flex;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.kv:last-child{border-bottom:0}
+.kv .k{font-weight:600;color:var(--navy);min-width:140px;font-size:14px}
+.kv .v{color:var(--muted);font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--navy);background:var(--bg);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+td{color:var(--ink)}
+.center{text-align:center}
+.big-num{font-size:64px;font-weight:800;color:var(--gold);font-family:"Inter";line-height:1;letter-spacing:-.02em}
+.big-num small{display:block;font-size:14px;color:var(--muted);font-weight:500;letter-spacing:.1em;margin-top:8px;text-transform:uppercase}
+ul.clean{list-style:none}
+ul.clean li{padding:8px 0 8px 26px;position:relative;font-size:16px;color:var(--ink);line-height:1.55}
+ul.clean li::before{content:"";position:absolute;left:0;top:16px;width:8px;height:8px;background:var(--gold);border-radius:50%}
+ul.check li::before{content:"✓";color:var(--green);background:transparent;font-weight:700;font-size:16px;top:8px}
+ul.cross li::before{content:"×";color:var(--red);background:transparent;font-weight:700;font-size:18px;top:6px}
+.flow{display:flex;align-items:stretch;gap:0;margin-top:24px}
+.flow-step{flex:1;background:var(--bg);border:1px solid var(--line);padding:18px;position:relative;text-align:center}
+.flow-step:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold);background:#fff;width:24px;height:24px;line-height:24px;text-align:center;z-index:2}
+.flow-step .n{font-family:"Inter";font-weight:800;color:var(--gold);font-size:13px;letter-spacing:.15em}
+.flow-step .t{font-weight:600;color:var(--navy);margin-top:6px;font-size:14px}
+@media print{body{overflow:visible}.slide{display:flex!important;page-break-after:always;height:100vh}.progress,.pager,.brand,.help{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="pager"><span id="curPage">1</span> / <span id="totalPage">18</span></div>
+<div class="brand">AOWATT · 官网方案</div>
+<div class="help">← → 翻页 · F 全屏 · ESC 退出</div>
+<div class="deck" id="deck">
+<!--SLIDES-->
+
+<!-- 1. 封面 -->
+<section class="slide cover">
+<div class="ribbon">V0.1 方案</div>
+<div class="slide-inner">
+<div class="logo-mark">
+<div class="mark">A</div>
+<div class="name">AOWATT<small>GLOBAL MATERIALS</small></div>
+</div>
+<div class="eyebrow">官网建设方案 · Website Roadmap</div>
+<h1>从零搭建出海化工<br>B2B 官网</h1>
+<p style="color:#cfd6e8;font-size:22px;margin-top:24px;max-width:720px;line-height:1.5">让海外采购商通过 Google 找到我们，看懂产品，主动联系。一份分阶段、可演进、低成本的产品蓝图。</p>
+<div class="meta">
+<div><b>项目</b>AOWATT 官网 V0.1</div>
+<div><b>交付</b>5–7 周</div>
+<div><b>日期</b>2026 / 06</div>
+</div>
+</div>
+</section>
+
+<!-- 2. 我们要解决的问题 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">问题定义</div>
+<h2>海外采购商为什么找不到 AOWATT</h2>
+<div class="divider"></div>
+<p class="subtitle">没有官网，等于在海外市场"不存在"。化工 B2B 客户的采购路径从 Google 搜索开始，没有可信的线上身份就无法进入他们的供应商候选名单。</p>
+<div class="grid g-3" style="margin-top:42px">
+<div class="card"><div class="icon">🔍</div><h3>搜不到</h3><p>采购商在 Google 搜 "Caustic Soda Australia supplier"，没有官网就排不进结果。</p></div>
+<div class="card"><div class="icon">🤝</div><h3>不信任</h3><p>第一次合作前，采购商一定会查公司官网。没有官网或网站简陋，他们直接转下一家。</p></div>
+<div class="card"><div class="icon">📨</div><h3>难联系</h3><p>采购商习惯写正式邮件询盘，没有清晰的 Email / WhatsApp 入口，转化率几乎为零。</p></div>
+</div>
+<p style="margin-top:36px;font-size:18px;color:var(--navy);font-weight:600">官网不是宣传材料，是 B2B 销售漏斗的<span class="gold">第一道入口</span>。</p>
+</div>
+</section>
+
+<!-- 3. 网站建成后能做什么 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">价值主张</div>
+<h2>官网上线后，你能得到什么</h2>
+<div class="divider"></div>
+<div class="grid g-2" style="margin-top:24px;gap:18px">
+<div class="card"><div class="icon">🌐</div><h3>专业线上身份</h3><p>双语（英文 + 中文）官网，覆盖澳洲与中国市场，向客户传递可靠化工供应商形象。</p></div>
+<div class="card"><div class="icon">📦</div><h3>结构化产品展示</h3><p>6 大产品分类、可搜索的产品库、规格 / 包装 / 应用 / 文档一应俱全。</p></div>
+<div class="card"><div class="icon">📞</div><h3>清晰的联系入口</h3><p>邮箱、电话、WhatsApp 一键直达，每次点击都被记录，转化路径可量化。</p></div>
+<div class="card"><div class="icon">📊</div><h3>访问数据可见</h3><p>每天有多少人来、看了什么产品、从哪个国家来、点了哪个联系按钮 — 全部可看。</p></div>
+<div class="card"><div class="icon">🔧</div><h3>灵活可调整</h3><p>页面想隐藏 / 想启用，改一个开关即可，无需重新开发。</p></div>
+<div class="card"><div class="icon">💰</div><h3>极低运营成本</h3><p>每月 ¥0 - 70（折合 $0 - 10），免运维、免服务器、免数据库。</p></div>
+</div>
+</div>
+</section>
+
+<!-- 4. 页面预览 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">网站结构</div>
+<h2>9 个页面，分阶段上线</h2>
+<div class="divider"></div>
+<p class="subtitle">设计稿已经完成 7 个核心页面。我们采用"代码先全部写好、用开关控制是否展示"的方式，让上线节奏最快、调整最灵活。</p>
+<div class="grid g-3" style="margin-top:28px;gap:14px">
+<div class="card"><span class="tag tag-v1">V0.1</span><h3 style="margin-top:10px">首页 Home</h3><p>公司定位 · 产品分类入口 · 优势摘要 · 应用入口</p></div>
+<div class="card"><span class="tag tag-v1">V0.1</span><h3 style="margin-top:10px">产品列表 Products</h3><p>6 大分类 · 推荐产品 · 站内搜索 · 按 CAS / 名称查找</p></div>
+<div class="card"><span class="tag tag-v1">V0.1</span><h3 style="margin-top:10px">产品详情 Product Detail</h3><p>规格表 · CAS · 包装 · 应用 · 联系按钮 · 相关产品</p></div>
+<div class="card"><span class="tag tag-v1">V0.1</span><h3 style="margin-top:10px">联系页 Contact</h3><p>邮箱 / 电话 / WhatsApp / 地址 · 一键直达</p></div>
+<div class="card" style="opacity:.92"><span class="tag tag-v2">V0.2</span><h3 style="margin-top:10px">为什么选我们 Why Us</h3><p>三大优势 · 5 步合作流程 · 信任建立</p></div>
+<div class="card" style="opacity:.92"><span class="tag tag-v2">V0.2</span><h3 style="margin-top:10px">关于我们 About</h3><p>公司介绍 · 价值观 · 团队</p></div>
+<div class="card" style="opacity:.92"><span class="tag tag-v2">V0.2</span><h3 style="margin-top:10px">应用行业 Applications</h3><p>6 大行业入口 · 每个行业的解决方案</p></div>
+<div class="card" style="opacity:.92"><span class="tag tag-v2">V0.2</span><h3 style="margin-top:10px">资源中心 Resources</h3><p>SDS / TDS / COA 下载 · 公司宣传册 · FAQ</p></div>
+<div class="card" style="opacity:.92"><span class="tag tag-v3">附</span><h3 style="margin-top:10px">隐私 / 免责</h3><p>合规必备 · 页脚链接 · 不进主导航</p></div>
+</div>
+</div>
+</section>
+
+<!-- 5. 双语策略 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">国际化</div>
+<h2>英文为主，中文同步</h2>
+<div class="divider"></div>
+<p class="subtitle">主要面向海外市场，但也兼顾国内合作方与采购同事。每个页面都有独立的英文 URL 和中文 URL，让 Google 能正确索引两种语言的内容。</p>
+<div class="grid g-2" style="margin-top:36px;gap:24px">
+<div class="card" style="background:linear-gradient(135deg,#0F1B3C,#243a6e);color:#fff;border:0">
+<div style="font-family:Inter;font-size:13px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px">/EN · 英文版</div>
+<h3 style="color:#fff;margin-bottom:14px">Reliable Chemical Supply for Global Industries</h3>
+<p style="color:#cfd6e8;font-size:15px">面向澳洲、东南亚、南美等英语采购商。Google 主索引语言，决定 SEO 流量上限。</p>
+</div>
+<div class="card" style="background:linear-gradient(135deg,#a47a2c,#D4A24E);color:#fff;border:0">
+<div style="font-family:Inter;font-size:13px;letter-spacing:.3em;color:#fff8e7;margin-bottom:14px">/ZH · 中文版</div>
+<h3 style="color:#fff;margin-bottom:14px">面向全球工业的可靠化工原料供应</h3>
+<p style="color:#fff;opacity:.9;font-size:15px">面向国内合作方、采购伙伴、同行 BD。中文版逐步翻译，未译部分自动 fallback 英文。</p>
+</div>
+</div>
+<div style="margin-top:32px;background:var(--bg);border-left:3px solid var(--gold);padding:16px 20px">
+<p style="font-size:15px;color:var(--ink)"><b>关键决策:</b> 不是同一个页面切换语言，而是两套独立 URL（如 <code>/en/products</code> 与 <code>/zh/products</code>），Google 能同时索引两种语言，SEO 收益最大化。</p>
+</div>
+</div>
+</section>
+
+<!-- 6. 联系策略 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">转化路径</div>
+<h2>不做询盘表单，让客户直接联系</h2>
+<div class="divider"></div>
+<p class="subtitle">海外 B2B 化工采购商习惯写正式邮件，而不是填网页表单。我们把这条路径做到极简，同时把每次点击都记录下来，方便后续优化。</p>
+<div class="grid g-3" style="margin-top:36px;gap:18px">
+<div class="card center"><div style="font-size:42px;margin-bottom:12px">📧</div><h3>邮件</h3><p style="margin:8px 0 4px;color:var(--gold);font-weight:600">info@aowatt.com.au</p><p>点击即打开邮件客户端，主题、正文可自动填充产品名。</p></div>
+<div class="card center"><div style="font-size:42px;margin-bottom:12px">📱</div><h3>WhatsApp</h3><p style="margin:8px 0 4px;color:var(--gold);font-weight:600">+61 451 875 076</p><p>手机点击直接进入聊天，海外采购商最常用的即时入口。</p></div>
+<div class="card center"><div style="font-size:42px;margin-bottom:12px">☎</div><h3>电话</h3><p style="margin:8px 0 4px;color:var(--gold);font-weight:600">+61 451 875 076</p><p>手机端一键拨号，急单或重要客户直接通话。</p></div>
+</div>
+<div style="margin-top:32px;display:flex;gap:14px">
+<div style="flex:1;background:rgba(47,158,126,.08);border:1px solid rgba(47,158,126,.3);padding:18px;border-radius:8px"><b style="color:var(--green)">✓ 优势</b><p style="margin-top:8px;font-size:14px">无垃圾邮件、无服务器、零成本；海外采购习惯邮件；上线即可用。</p></div>
+<div style="flex:1;background:rgba(212,162,78,.08);border:1px solid rgba(212,162,78,.3);padding:18px;border-radius:8px"><b style="color:#a47a2c">📊 度量</b><p style="margin-top:8px;font-size:14px">每个按钮的点击都被记录：哪个产品页最容易引出邮件、哪个国家访客点击多。</p></div>
+</div>
+</div>
+</section>
+
+<!-- 7. 你能看到什么数据 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">数据驱动</div>
+<h2>你能从这个网站看到什么</h2>
+<div class="divider"></div>
+<p class="subtitle">用三个免费工具组合，覆盖"流量 + 行为 + 搜索"三个维度。每天打开 Dashboard 就能掌握业务情况。</p>
+<table style="margin-top:28px">
+<thead><tr><th>能看到的内容</th><th>来自哪个工具</th><th>为什么有用</th></tr></thead>
+<tbody>
+<tr><td>每天有多少人访问</td><td>Cloudflare Analytics</td><td>了解 SEO 投入产出，判断营销效果</td></tr>
+<tr><td>访客来自哪些国家</td><td>Cloudflare Analytics</td><td>验证目标市场假设，发现意外机会</td></tr>
+<tr><td>哪些产品页最受欢迎</td><td>Cloudflare Analytics</td><td>调整首页推荐产品，向热门倾斜</td></tr>
+<tr><td><b>哪个产品的联系按钮被点了多少次</b></td><td>Vercel Analytics</td><td>定位转化漏斗瓶颈，优化产品页文案</td></tr>
+<tr><td>访客在站内搜了什么 CAS / 名称</td><td>Vercel Analytics</td><td>发现需求空白，扩充产品库的依据</td></tr>
+<tr><td>采购商用什么 Google 关键词搜到你</td><td>Search Console</td><td>SEO 优化的金矿，调整页面 metadata</td></tr>
+<tr><td>页面在 Google 搜索结果的排名</td><td>Search Console</td><td>跟踪 SEO 进度，对标竞品</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- 8. 三大数据工具 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">分析工具</div>
+<h2>三个免费工具，互补无短板</h2>
+<div class="divider"></div>
+<div class="grid g-3" style="margin-top:32px;gap:20px">
+<div class="card" style="border-top:4px solid #f48120">
+<h3 style="font-size:18px">Cloudflare Web Analytics</h3>
+<p style="margin-top:10px"><b>角色:</b> 流量层</p>
+<ul class="clean" style="margin-top:8px"><li>访问量 / UV</li><li>来源国家 / 设备</li><li>页面停留时长</li><li>性能指标</li></ul>
+<p style="margin-top:14px;color:var(--green);font-weight:600;font-size:14px">完全免费 · 无 Cookie</p>
+</div>
+<div class="card" style="border-top:4px solid #000">
+<h3 style="font-size:18px">Vercel Web Analytics</h3>
+<p style="margin-top:10px"><b>角色:</b> 行为层</p>
+<ul class="clean" style="margin-top:8px"><li>产品卡点击次数</li><li>联系按钮点击</li><li>站内搜索词</li><li>语言切换偏好</li></ul>
+<p style="margin-top:14px;color:var(--green);font-weight:600;font-size:14px">免费 5万事件 / 月 · 无 Cookie</p>
+</div>
+<div class="card" style="border-top:4px solid #4285f4">
+<h3 style="font-size:18px">Google Search Console</h3>
+<p style="margin-top:10px"><b>角色:</b> 搜索层</p>
+<ul class="clean" style="margin-top:8px"><li>采购商搜索的关键词</li><li>点击率与排名</li><li>页面索引状态</li><li>移动端可用性</li></ul>
+<p style="margin-top:14px;color:var(--green);font-weight:600;font-size:14px">完全免费 · Google 官方</p>
+</div>
+</div>
+<div style="margin-top:32px;background:var(--bg);border-left:3px solid var(--gold);padding:16px 20px">
+<p style="font-size:15px;color:var(--ink)">三个工具数据互不重叠，组合起来就是一份完整的 B2B 营销报表。<b>每周一次 Review</b>就能掌握业务节奏。</p>
+</div>
+</div>
+</section>
+
+<!-- 9. 关键事件埋点 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">行为追踪</div>
+<h2>7 个关键动作，每个都被记录</h2>
+<div class="divider"></div>
+<p class="subtitle">访客在网站上的每一个有价值动作都会被记录下来，让你看到"漏斗"的每一层。</p>
+<table style="margin-top:24px">
+<thead><tr><th>动作</th><th>触发位置</th><th>从中能学到什么</th></tr></thead>
+<tbody>
+<tr><td><b>产品卡点击</b></td><td>首页 / 产品列表</td><td>哪些产品最吸引点击，应该重点推</td></tr>
+<tr><td><b>邮件按钮点击</b></td><td>所有页面 / 产品详情</td><td>哪个产品页最容易引出询盘</td></tr>
+<tr><td><b>WhatsApp 点击</b></td><td>所有页面 / 产品详情</td><td>移动端访客的转化倾向</td></tr>
+<tr><td><b>电话点击</b></td><td>所有页面</td><td>急单 / 高意向客户特征</td></tr>
+<tr><td><b>站内搜索</b></td><td>产品列表页搜索框</td><td>访客真正想找什么 · 产品库需要补什么</td></tr>
+<tr><td><b>语言切换</b></td><td>顶部语言选项</td><td>中英文访客比例，调整翻译优先级</td></tr>
+<tr><td><b>资料下载</b></td><td>产品详情页 PDF（V0.2）</td><td>哪些技术文档最受关注</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- 10. 页面开关 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">灵活可调</div>
+<h2>页面想开就开，想关就关</h2>
+<div class="divider"></div>
+<p class="subtitle">网站上每个页面都有一个"开关"。想下线一个页面、想新启用一个页面，改一个开关就好，不需要改代码、不需要重新设计。</p>
+<div style="margin-top:28px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:32px">
+<div class="grid g-2" style="gap:20px">
+<div>
+<h3 style="margin-bottom:18px">V0.1 上线时（举例）</h3>
+<table>
+<tr><td>首页</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>产品页</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>产品详情</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>联系页</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>Why Us</td><td><span class="tag tag-v3">隐藏</span></td></tr>
+<tr><td>About</td><td><span class="tag tag-v3">隐藏</span></td></tr>
+<tr><td>Applications</td><td><span class="tag tag-v3">隐藏</span></td></tr>
+</table>
+</div>
+<div>
+<h3 style="margin-bottom:18px">V0.2 升级后</h3>
+<table>
+<tr><td>首页</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>产品页</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>产品详情</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>联系页</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>Why Us</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>About</td><td><span class="tag tag-v1">显示</span></td></tr>
+<tr><td>Applications</td><td><span class="tag tag-v1">显示</span></td></tr>
+</table>
+</div>
+</div>
+</div>
+<p style="margin-top:24px;text-align:center;font-size:17px;color:var(--navy);font-weight:600">三个步骤切换页面: <span class="gold">改开关</span> → <span class="gold">点确认</span> → <span class="gold">网站自动更新</span></p>
+</div>
+</section>
+
+<!-- 11. 占位策略 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">不卡进度</div>
+<h2>内容还没准备好？先用"占位"撑起来</h2>
+<div class="divider"></div>
+<p class="subtitle">我们不等所有产品资料、产品图、文案都齐了再上线。先用占位内容把页面框架立起来，正式材料准备好后逐步替换 — 替换内容不需要改代码。</p>
+<div class="grid g-3" style="margin-top:32px;gap:18px">
+<div class="card"><div class="icon">🧱</div><h3>骨架先上</h3><p>所有页面框架按设计稿 1:1 实现。先有 5-7 周可见的成果，业务可以开始跑。</p></div>
+<div class="card"><div class="icon">🔄</div><h3>替换不改代码</h3><p>产品名、图片、文案都集中在内容文件中。替换素材就像填空，10 分钟换一个产品。</p></div>
+<div class="card"><div class="icon">⚠️</div><h3>未替换会提醒</h3><p>所有占位内容打了"[PLACEHOLDER]"标记，构建时自动扫描，避免上线遗漏。</p></div>
+</div>
+<div style="margin-top:32px;background:rgba(201,92,74,.08);border:1px solid rgba(201,92,74,.3);border-radius:8px;padding:18px 22px">
+<p style="font-size:15px;color:var(--ink)"><b style="color:var(--red)">⚠ 重要提醒:</b> 设计稿里的"20+ Countries / 15+ Years / 100% Customer Focus"是设计师的占位数字。作为初创公司，<b>上线前必须替换为真实可披露数据</b>，否则有合规与诚信风险。</p>
+</div>
+</div>
+</section>
+
+<!-- 12. V0.1 Roadmap -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">第一阶段</div>
+<h2><span style="background:rgba(47,158,126,.12);color:var(--green);padding:4px 14px;border-radius:6px;font-size:32px;margin-right:14px">V0.1</span>上线版 · 5–7 周</h2>
+<div class="divider"></div>
+<p class="subtitle">最小可用集合。建立公司线上身份，让海外采购商能搜到、看到、写邮件给你。</p>
+<div class="grid g-2" style="margin-top:28px;gap:24px">
+<div>
+<h3 style="margin-bottom:14px;color:var(--green)">✓ 这一期会做</h3>
+<ul class="clean check">
+<li>首页 / 产品列表 / 产品详情 / 联系页 4 个核心页</li>
+<li>双语支持（英文 + 中文，中文逐步翻译）</li>
+<li>6 大产品分类入口、产品搜索（按 CAS / 名称）</li>
+<li>1-2 个完整产品作示例（如 Caustic Soda Flakes / Hydrochloric Acid）</li>
+<li>邮箱 / 电话 / WhatsApp 联系入口 + 点击埋点</li>
+<li>三套数据分析（Cloudflare + Vercel + Search Console）</li>
+<li>页面开关机制（其他 3 页代码写好但默认隐藏）</li>
+<li>隐私政策 + 化工免责声明（页脚链接）</li>
+</ul>
+</div>
+<div>
+<h3 style="margin-bottom:14px;color:var(--red)">× 这一期不做</h3>
+<ul class="clean cross">
+<li>询盘表单（直接展示邮箱即可，化简）</li>
+<li>Why Us / About / Applications 独立页（V0.2 启用）</li>
+<li>资料下载中心（V0.2）</li>
+<li>FAQ 页面（V0.2）</li>
+<li>管理后台（V0.3）</li>
+<li>AI 客服（V0.3）</li>
+<li>客户案例 / 资质证书展示（待真实素材）</li>
+<li>在线报价 / 在线下单（永远不做，B2B 化工不适合）</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 13. V0.2 Roadmap -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">第二阶段</div>
+<h2><span style="background:rgba(212,162,78,.12);color:#a47a2c;padding:4px 14px;border-radius:6px;font-size:32px;margin-right:14px">V0.2</span>内容扩展版 · V0.1 后 2–4 周</h2>
+<div class="divider"></div>
+<p class="subtitle">看了 V0.1 的真实流量数据后，决定补什么、放大什么。这一期主要是"启用页面 + 扩充内容"，几乎不需要新代码。</p>
+<div class="grid g-2" style="margin-top:28px;gap:24px">
+<div>
+<h3 style="margin-bottom:14px;color:#a47a2c">✓ 启用 / 新增</h3>
+<ul class="clean check">
+<li><b>Why Us 页</b> — 三大优势 + 5 步合作流程</li>
+<li><b>About 页</b> — 公司介绍 + 真实数据替换</li>
+<li><b>Applications 页</b> — 6 大行业应用方案</li>
+<li><b>Resources 页</b> — SDS / TDS / COA 下载、公司宣传册</li>
+<li><b>FAQ 区域</b> — 8-12 个高频问题</li>
+<li><b>产品库扩展</b>: 从 1-2 个示例 → 30-50 个真实产品</li>
+<li><b>中文版补全</b>: 完成所有页面翻译</li>
+</ul>
+</div>
+<div>
+<h3 style="margin-bottom:14px;color:#a47a2c">🟡 视数据决定</h3>
+<ul class="clean">
+<li><b>询盘表单</b> — 如果 V0.1 数据显示邮件转化率偏低（&lt;2%），加表单；如果转化够好，继续不做</li>
+<li><b>更多产品分类</b> — 看搜索数据决定要不要拆分新分类</li>
+<li><b>SEO 着陆页</b> — 用 Search Console 关键词数据，针对热门词建专题页</li>
+</ul>
+<h3 style="margin:20px 0 14px;color:var(--muted)">仍不做</h3>
+<ul class="clean cross"><li>管理后台</li><li>AI 客服</li><li>会员 / 在线交易</li></ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 14. V0.3 Roadmap -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">第三阶段</div>
+<h2><span style="background:rgba(91,107,133,.12);color:var(--muted);padding:4px 14px;border-radius:6px;font-size:32px;margin-right:14px">V0.3</span>智能化版 · V0.2 后 1–3 个月</h2>
+<div class="divider"></div>
+<p class="subtitle">业务跑起来后，如果产品数超过 50 个、运营人员需要自助维护，引入数据库 + 后台。AI 客服作为可选模块，等知识库准备好再上。</p>
+<div class="grid g-2" style="margin-top:28px;gap:24px">
+<div class="card">
+<h3 style="color:var(--navy)">📊 管理后台</h3>
+<ul class="clean" style="margin-top:10px">
+<li>产品自助维护（增删改、上下架、排序）</li>
+<li>分类管理 / 首页推荐管理</li>
+<li>SDS / TDS / COA 文件上传</li>
+<li>询盘记录与状态跟踪（如 V0.2 启用了表单）</li>
+<li>邮件营销集成（newsletter / 新品通知）</li>
+</ul>
+</div>
+<div class="card">
+<h3 style="color:var(--navy)">🤖 AI 客服（可选）</h3>
+<ul class="clean" style="margin-top:10px">
+<li>右下角浮动聊天入口</li>
+<li>基于产品资料 + FAQ 回答常见问题</li>
+<li>自动收集采购商信息（公司、邮箱、产品兴趣）</li>
+<li><b style="color:var(--red)">价格、合规、运输问题强制转人工</b></li>
+<li>降低销售重复沟通成本</li>
+</ul>
+</div>
+</div>
+<div style="margin-top:28px;background:var(--bg);border-left:3px solid var(--gold);padding:14px 20px">
+<p style="font-size:15px;color:var(--ink)">V0.3 引入数据库后，前台页面<b>不需要重写</b> — 这是从 V0.1 开始就预留的架构能力。</p>
+</div>
+</div>
+</section>
+
+<!-- 15. 时间线 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">交付节奏</div>
+<h2>从启动到上线，分四步走</h2>
+<div class="divider"></div>
+<div style="margin-top:24px">
+<div class="flow">
+<div class="flow-step"><div class="n">第 1 周</div><div class="t">需求确认</div><p style="margin-top:6px;font-size:12px;color:var(--muted)">品牌色、产品分类、文案确认</p></div>
+<div class="flow-step"><div class="n">第 2-4 周</div><div class="t">代码开发</div><p style="margin-top:6px;font-size:12px;color:var(--muted)">骨架 + 双语 + 数据分析</p></div>
+<div class="flow-step"><div class="n">第 5 周</div><div class="t">内容填充</div><p style="margin-top:6px;font-size:12px;color:var(--muted)">示例产品、占位替换</p></div>
+<div class="flow-step"><div class="n">第 6 周</div><div class="t">联调测试</div><p style="margin-top:6px;font-size:12px;color:var(--muted)">Lighthouse / 移动端 / 双语</p></div>
+<div class="flow-step"><div class="n">第 7 周</div><div class="t">上线</div><p style="margin-top:6px;font-size:12px;color:var(--muted)">域名 / 部署 / 数据接入</p></div>
+</div>
+</div>
+<div class="grid g-3" style="margin-top:42px;gap:18px">
+<div class="card center"><div class="big-num">7<small>周 V0.1 上线</small></div></div>
+<div class="card center"><div class="big-num">+4<small>周后 V0.2 内容扩展</small></div></div>
+<div class="card center"><div class="big-num">+3<small>月后 V0.3 后台 / AI</small></div></div>
+</div>
+</div>
+</section>
+
+<!-- 16. 成本预算 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">投入与产出</div>
+<h2>每月开支：几十块人民币</h2>
+<div class="divider"></div>
+<p class="subtitle">网站基础设施全部走免费档，只有域名是固定年费。如果业务规模扩大，再按需升级，最多每月几百块。</p>
+<table style="margin-top:28px">
+<thead><tr><th>项目</th><th>用途</th><th>V0.1 费用</th><th>V0.2 费用</th><th>V0.3 费用</th></tr></thead>
+<tbody>
+<tr><td>Vercel 部署</td><td>网站托管</td><td><b style="color:var(--green)">免费</b></td><td><b style="color:var(--green)">免费</b></td><td>$20/月</td></tr>
+<tr><td>Cloudflare</td><td>DNS / CDN / Analytics</td><td><b style="color:var(--green)">免费</b></td><td><b style="color:var(--green)">免费</b></td><td><b style="color:var(--green)">免费</b></td></tr>
+<tr><td>Vercel Analytics</td><td>行为追踪</td><td><b style="color:var(--green)">免费</b></td><td><b style="color:var(--green)">免费</b></td><td>$10/月</td></tr>
+<tr><td>Sentry 错误监控</td><td>线上故障告警</td><td><b style="color:var(--green)">免费</b></td><td><b style="color:var(--green)">免费</b></td><td><b style="color:var(--green)">免费</b></td></tr>
+<tr><td>域名 aowatt.com.au</td><td>已购买</td><td>~¥150/年</td><td>~¥150/年</td><td>~¥150/年</td></tr>
+<tr><td>Supabase 数据库</td><td>后台数据</td><td>—</td><td>—</td><td><b style="color:var(--green)">免费</b></td></tr>
+<tr><td>OpenAI API</td><td>AI 客服</td><td>—</td><td>—</td><td>~$30/月</td></tr>
+<tr style="background:var(--bg)"><td><b>每月总计</b></td><td></td><td><b style="color:var(--green)">¥0–10</b></td><td><b style="color:var(--green)">¥0–10</b></td><td><b>¥350–500</b></td></tr>
+</tbody>
+</table>
+<p style="margin-top:24px;font-size:15px;color:var(--muted)"><b>对比传统方案:</b> 如果用 WordPress + 服务器 + 数据库，每月最少 ¥300+；用 Wix / Shopify 类托管，每月 ¥200+ 且 SEO 受限。我们的方案前期免费、后期按需付费。</p>
+</div>
+</section>
+
+<!-- 17. 风险与依赖 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">风险提示</div>
+<h2>项目按时上线最依赖什么</h2>
+<div class="divider"></div>
+<p class="subtitle">技术不是瓶颈，<b>内容素材准备进度才是</b>。需要在第 1 周内完成以下决策与材料，否则会拖慢整体节奏。</p>
+<div class="grid g-2" style="margin-top:28px;gap:20px">
+<div class="card" style="border-left:4px solid var(--red)">
+<h3>🔴 高风险项（必须立即决策）</h3>
+<ul class="clean" style="margin-top:10px">
+<li>"20+ Countries / 15+ Years"等占位数据 — <b>必须替换为真实可披露数字</b></li>
+<li>首批要展示的产品分类与代表产品（即使先列 5-10 个也行）</li>
+<li>Why Us 三大优势的具体素材（不能只是空洞的"高质量"）</li>
+<li>哪些 SDS / TDS 可以公开下载、哪些联系后再提供</li>
+</ul>
+</div>
+<div class="card" style="border-left:4px solid var(--gold)">
+<h3>🟡 中风险项（第 1-2 周完成）</h3>
+<ul class="clean" style="margin-top:10px">
+<li>品牌色、字体规范文档（可从设计稿提取）</li>
+<li>20-30 个核心 SEO 关键词（中英各半）</li>
+<li>隐私政策 + 化工免责声明文案</li>
+<li>公司可公开的工厂 / 仓库 / 产品图片（暂用占位）</li>
+</ul>
+</div>
+<div class="card" style="border-left:4px solid var(--green)">
+<h3>🟢 低风险项（已就绪）</h3>
+<ul class="clean" style="margin-top:10px">
+<li>公司英文名、域名、邮箱、电话、地址 ✓</li>
+<li>Logo 最终版 ✓</li>
+<li>设计稿（7 个页面） ✓</li>
+<li>整体技术方案与 Roadmap ✓</li>
+</ul>
+</div>
+<div class="card" style="border-left:4px solid var(--muted)">
+<h3>⚪ 可延后</h3>
+<ul class="clean" style="margin-top:10px">
+<li>客户案例 / 推荐信</li>
+<li>资质证书（ISO 等，没有就先不写）</li>
+<li>团队照片</li>
+<li>视频内容</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 18. 下一步 -->
+<section class="slide cover" style="background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 50%,#1f335c 100%)">
+<div class="ribbon" style="border-color:rgba(212,162,78,.6)">立即决策</div>
+<div class="slide-inner">
+<div class="eyebrow" style="color:var(--gold)">Next Steps</div>
+<h1 style="color:#fff;font-size:60px">本周需要<br>对齐的事项</h1>
+<div class="divider" style="background:var(--gold);margin-top:28px"></div>
+<div style="margin-top:24px;display:flex;gap:36px">
+<div style="flex:1">
+<h3 style="color:var(--gold);font-size:18px;letter-spacing:.05em">本周完成</h3>
+<ul class="clean" style="margin-top:14px">
+<li style="color:#cfd6e8">本方案是否最终批准</li>
+<li style="color:#cfd6e8">设计稿占位数据替换决策</li>
+<li style="color:#cfd6e8">首批展示产品分类与名单</li>
+<li style="color:#cfd6e8">明确项目对接联系人</li>
+</ul>
+</div>
+<div style="flex:1">
+<h3 style="color:var(--gold);font-size:18px;letter-spacing:.05em">第 2 周完成</h3>
+<ul class="clean" style="margin-top:14px">
+<li style="color:#cfd6e8">3 大优势的具体素材</li>
+<li style="color:#cfd6e8">SEO 关键词清单（中英）</li>
+<li style="color:#cfd6e8">法律文案草稿（隐私 / 免责）</li>
+<li style="color:#cfd6e8">公司图片素材集</li>
+</ul>
+</div>
+</div>
+<div style="margin-top:54px;border-top:1px solid rgba(212,162,78,.3);padding-top:28px;display:flex;justify-content:space-between;align-items:flex-end">
+<div>
+<div style="font-family:Inter;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:8px">START DATE</div>
+<div style="color:#fff;font-size:28px;font-family:Inter;font-weight:700">2026 / 06 / 22</div>
+<div style="color:#8a98b8;font-size:13px;margin-top:6px">预计第 7 周完成 V0.1 上线</div>
+</div>
+<div style="text-align:right">
+<div style="font-family:Inter;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:8px">CONTACT</div>
+<div style="color:#fff;font-size:18px;font-family:Inter">info@aowatt.com.au</div>
+<div style="color:#8a98b8;font-size:13px;margin-top:4px">+61 451 875 076</div>
+</div>
+</div>
+</div>
+</section>
+
+<!--END_BLOCK_5-->
+<!--END_BLOCK_4-->
+<!--END_BLOCK_3-->
+<!--END_BLOCK_2-->
+<!--END_BLOCK_1-->
+</div>
+<script>
+const slides=document.querySelectorAll('.slide');let i=0;const total=slides.length;document.getElementById('totalPage').textContent=total;
+function show(n){i=Math.max(0,Math.min(total-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));document.getElementById('curPage').textContent=i+1;document.getElementById('progress').style.width=((i+1)/total*100)+'%'}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')show(i+1);else if(e.key==='ArrowLeft'||e.key==='PageUp')show(i-1);else if(e.key==='Home')show(0);else if(e.key==='End')show(total-1);else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}});
+document.addEventListener('click',e=>{if(e.target.closest('a,button'))return;const r=e.clientX/window.innerWidth;show(r>0.5?i+1:i-1)});
+show(0);
+</script>
+</body>
+</html>

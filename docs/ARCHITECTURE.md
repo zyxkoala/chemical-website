@@ -1,391 +1,473 @@
-# 化工官网架构设计
+# AOWATT 官网架构实施方案
 
-## 1. 架构目标
+## 1. 架构结论
 
-本项目采用分阶段架构：
+V0.1 采用 **Next.js App Router + TypeScript + Tailwind CSS + Vercel** 的纯静态官网方案。目标是在 5-7 周内上线一个双语、SEO 友好、可维护的化工 B2B 官网骨架，先建立线上可信身份，再逐步替换真实产品和品牌内容。
 
-- 一期优先快速上线、静态生成、SEO 友好、低维护成本。
-- 产品内容从第一天开始结构化，避免写死在页面中。
-- 页面、组件、数据模型为二期后台和 AI 客服预留扩展空间。
-- 二期引入 Supabase 后，尽量只替换数据来源，不重写前台页面。
+V0.1 明确不做：
 
-总体原则：
+- 询盘表单
+- `/api/inquiry` API Route
+- Resend 或其他邮件发送服务
+- Cloudflare Turnstile 或其他反垃圾机制
+- Supabase、数据库、管理后台
+- AI 客服
+- 在线报价、下单、支付、会员系统
 
-- 前台页面只关心展示。
-- 产品数据通过统一的数据访问层读取。
-- 产品详情、首页推荐、相关产品、对比模块都来自同一份产品数据。
-- 联系表单和 AI 客服属于转化链路，后续统一进入询盘系统。
+V0.1 只展示邮箱、电话、WhatsApp、地址等人工联系方式。用户点击后由自己的邮件、电话或 WhatsApp 客户端继续沟通。
 
 ## 2. 总体架构
 
 ```mermaid
 flowchart TD
-  Visitor["Website Visitor"] --> Pages["Next.js Public Pages"]
-  Pages --> ContentLayer["Content Access Layer"]
-  ContentLayer --> LocalContent["Phase 1: Local Structured Content"]
-  ContentLayer -. Phase 2 .-> Supabase["Supabase Database & Storage"]
+  Visitor["Visitor / Buyer"] --> Cloudflare["Cloudflare DNS / CDN"]
+  Cloudflare --> Vercel["Vercel Static Deployment"]
+  Vercel --> NextPages["Next.js Static Pages"]
+  NextPages --> ContentLayer["Content Access Layer"]
+  ContentLayer --> LocalContent["Local Structured Content"]
+  NextPages --> PublicAssets["public/products + public/docs"]
 
-  Pages --> InquiryForm["Contact / Inquiry Form"]
-  InquiryForm --> EmailService["Phase 1: Email / Form Service"]
-  InquiryForm -. Phase 2 .-> InquiryDB["Supabase Inquiries"]
+  NextPages --> ContactLinks["mailto / tel / WhatsApp"]
+  NextPages --> CFAnalytics["Cloudflare Web Analytics"]
+  NextPages --> VercelAnalytics["Vercel Web Analytics Events"]
+  NextPages --> SearchConsole["Google Search Console"]
+  NextPages --> Sentry["Sentry Error Monitoring"]
 
-  Visitor -. Phase 2 .-> AIWidget["AI Customer Service Widget"]
-  AIWidget --> APIRoutes["Next.js API Routes"]
-  APIRoutes --> OpenAI["OpenAI API"]
-  APIRoutes --> Supabase
-
-  Admin["Admin User"] -. Phase 2 .-> AdminPanel["Next.js Admin Panel"]
-  AdminPanel --> Supabase
+  ContentLayer -. V0.3 .-> Supabase["Supabase Database / Storage"]
+  NextPages -. V0.3 .-> Admin["Admin Panel"]
+  NextPages -. V0.3.x .-> AIWidget["AI Customer Service"]
 ```
 
-## 3. 推荐目录结构
+核心原则：
 
-未来迁移到 Next.js 后，建议目录如下：
+- 页面只负责展示，不直接写死产品。
+- 产品、分类、站点信息通过数据访问层读取。
+- V0.1 全部可静态生成，部署在 Vercel。
+- 页面显隐通过集中配置控制，禁用页面不进导航、footer、sitemap，直接访问返回 404。
+- 二期或三期切换数据源时优先改数据访问层，不重写前台页面。
+
+## 3. 推荐目录结构
 
 ```txt
 src/
   app/
     layout.tsx
     page.tsx
-    products/
-      page.tsx
-      [slug]/
-        page.tsx
-    why-us/
-      page.tsx
-    about/
-      page.tsx
-    contact/
-      page.tsx
-    api/
-      inquiry/
-        route.ts
-      ai-chat/
-        route.ts
-    admin/
+    [locale]/
+      layout.tsx
       page.tsx
       products/
         page.tsx
+        [slug]/
+          page.tsx
+      why-us/
+        page.tsx
+      about/
+        page.tsx
+      applications/
+        page.tsx
+      resources/
+        page.tsx
+      contact/
+        page.tsx
+      privacy/
+        page.tsx
+      disclaimer/
+        page.tsx
+      not-found.tsx
+      error.tsx
+    robots.ts
+    sitemap.ts
   components/
     layout/
       Header.tsx
       Footer.tsx
       LanguageSwitcher.tsx
+    analytics/
+      AnalyticsProvider.tsx
+      TrackedLink.tsx
     home/
-      Hero.tsx
-      FeaturedProducts.tsx
-      ApplicationGrid.tsx
     products/
-      ProductCard.tsx
-      ProductTable.tsx
-      ProductDetail.tsx
-      ProductComparison.tsx
-      RelatedProducts.tsx
     contact/
-      InquiryForm.tsx
-    ai/
-      ChatWidget.tsx
+  config/
+    features.ts
   content/
-    products.ts
     categories.ts
+    products.ts
     site.ts
+    placeholders/
   lib/
-    products.ts
+    analytics.ts
     categories.ts
-    seo.ts
     i18n.ts
-    supabase.ts
+    products.ts
+    seo.ts
+  messages/
+    en.json
+    zh.json
   types/
     product.ts
-    inquiry.ts
+public/
+  products/
+    {slug}/
+      main.jpg
+      hero.jpg
+  docs/
+    {slug}-tds.pdf
+    {slug}-sds.pdf
 ```
 
-一期可以先不实现 `admin`、`api/ai-chat`、`supabase.ts`，但保留架构边界。
+V0.1 不创建 `api/inquiry`、`api/ai-chat`、`admin`、`supabase.ts`。这些属于后续阶段。
 
-## 4. 页面路由设计
+## 4. 页面路由与阶段
 
-| 页面 | 路由 | 生成方式 | 数据来源 |
+所有公开页面使用路由级双语：
+
+| 页面 | 路由 | V0.1 状态 | 说明 |
 | --- | --- | --- | --- |
-| 首页 | `/` | 静态生成 | 站点信息、推荐产品、行业应用 |
-| 产品列表 | `/products` | 静态生成 | 全部已发布产品、分类 |
-| 产品详情 | `/products/[slug]` | 静态生成 | 单个产品、相关产品、对比信息 |
-| Why Us | `/why-us` | 静态生成 | 静态内容 |
-| About | `/about` | 静态生成 | 静态内容 |
-| Contact | `/contact` | 静态生成 + 表单提交 | 联系信息、询盘表单 |
-| 管理后台二期 | `/admin` | 登录后访问 | Supabase |
+| Root redirect | `/` | 启用 | 默认跳转到 `/en` |
+| Home | `/[locale]` | 启用 | Hero、产品分类、Why Us 摘要、Applications 摘要(V0.1 不做 Featured Products,产品 ≥ 6 后再评估) |
+| Products | `/[locale]/products` | 启用 | 产品列表、分类入口、Fuse.js 客户端搜索 |
+| Product Detail | `/[locale]/products/[slug]` | 启用 | Key specs、人工联系 CTA、相关产品(V0.1 不渲染文档下载,文档信息走人工索取) |
+| Contact | `/[locale]/contact` | 启用 | 只展示 email、phone、WhatsApp、address，不做表单 |
+| Privacy Policy | `/[locale]/privacy` | 启用 | footer 链接，不进主导航 |
+| Disclaimer | `/[locale]/disclaimer` | 启用 | footer 链接，不进主导航 |
+| Why Us | `/[locale]/why-us` | V0.1 禁用，V0.2 启用 | 代码可先写好，导航和 sitemap 隐藏 |
+| About | `/[locale]/about` | V0.1 禁用，V0.2 启用 | 不展示公司年限/客户数等无法披露的数字，用服务品类范围与能力声明替代 |
+| Applications | `/[locale]/applications` | V0.1 禁用，V0.2 启用 | 首页可保留摘要 section |
+| Resources | `/[locale]/resources` | V0.2 新增 | PDF 下载中心、FAQ |
 
-产品详情页使用 `slug` 作为稳定 URL，例如：
+禁用页面必须满足：
 
-```txt
-/products/sodium-carbonate
-/products/industrial-solvent-a
-/products/water-treatment-polymer
-```
+- Header、Footer 不显示入口。
+- `sitemap.ts` 不输出 URL。
+- 直接访问时调用 `notFound()`。
+- 重新启用后再提交 sitemap 给 Google Search Console。
 
-## 5. 产品数据模型
+## 5. 页面特性开关
 
-一期产品数据建议从 `src/content/products.ts` 读取。
+`src/config/features.ts` 作为页面显隐唯一来源。
 
 ```ts
+export type PageKey =
+  | "home"
+  | "products"
+  | "productDetail"
+  | "contact"
+  | "privacy"
+  | "disclaimer"
+  | "whyUs"
+  | "about"
+  | "applications"
+  | "resources";
+
+export const features: Record<PageKey, boolean> = {
+  home: true,
+  products: true,
+  productDetail: true,
+  contact: true,
+  privacy: true,
+  disclaimer: true,
+  whyUs: false,
+  about: false,
+  applications: false,
+  resources: false,
+};
+
+export const navItems = [
+  { key: "home", href: "/", labelKey: "nav.home", inMainNav: true },
+  { key: "products", href: "/products", labelKey: "nav.products", inMainNav: true },
+  { key: "whyUs", href: "/why-us", labelKey: "nav.whyUs", inMainNav: false },
+  { key: "about", href: "/about", labelKey: "nav.about", inMainNav: false },
+  { key: "applications", href: "/applications", labelKey: "nav.applications", inMainNav: false },
+  { key: "resources", href: "/resources", labelKey: "nav.resources", inMainNav: false },
+  { key: "contact", href: "/contact", labelKey: "nav.contact", inMainNav: true },
+] as const;
+
+export function enabledMainNavItems() {
+  return navItems.filter((item) => features[item.key] && item.inMainNav);
+}
+
+export function enabledFooterNavItems() {
+  return navItems.filter((item) => features[item.key]);
+}
+```
+
+主导航始终精简为 Home / Products / Contact 三项,与设计稿一致。Why Us / About / Applications / Resources 启用后只进 Footer 与首页 section,不进顶栏。Privacy / Disclaimer 不进 navItems,只在 Footer Bottom Strip 渲染(见第 9.1 节)。
+
+切换页面只改集中配置,不改页面逻辑。修改配置后仍需要 build 和部署。
+
+## 6. 国际化方案
+
+V0.1 采用路由级双语，而不是 `nameZh` / `summaryZh` + `localStorage` 的字段级切换。
+
+- 支持 locale：`en`、`zh`。
+- `/` 默认 redirect 到 `/en`。
+- 使用 `next-intl` 管理 UI 文案和路由上下文。
+- 每个页面输出 `canonical` 与 `hreflang`。
+- `messages/en.json` 为完整文案，`messages/zh.json` 可逐步补齐。
+- 中文缺失时 fallback 英文，并在中文页显示提示：`中文版正在更新，部分内容暂以英文显示。`
+
+## 7. 产品与分类数据模型
+
+```ts
+export type Locale = "en" | "zh";
+
+export type LocalizedString = {
+  en: string;
+  zh?: string;
+};
+
 export type ProductDocumentType = "COA" | "TDS" | "SDS";
 
 export type ProductSpec = {
-  label: string;
-  value: string;
-};
-
-export type ProductComparisonItem = {
-  dimension: string;
-  typicalAlternative: string;
-  aowattApproach: string;
+  label: LocalizedString;
+  value: LocalizedString;
 };
 
 export type Product = {
   slug: string;
-  name: string;
-  nameZh?: string;
+  name: LocalizedString;
   category: string;
   casNo?: string;
-  summary: string;
-  summaryZh?: string;
-  overview: string;
-  overviewZh?: string;
-  grade?: string;
+  summary: LocalizedString;
+  overview: LocalizedString;
+  grade?: LocalizedString;
   purity?: string;
-  packaging: string[];
-  applications: string[];
+  packaging: LocalizedString[];
+  applications: LocalizedString[];
   documents: ProductDocumentType[];
   specs: ProductSpec[];
-  comparison: ProductComparisonItem[];
   relatedProductSlugs: string[];
   image: string;
   heroImage?: string;
   featured: boolean;
   published: boolean;
+  placeholder?: boolean;
   sortOrder: number;
-  seoTitle?: string;
-  seoDescription?: string;
+  seoTitle?: LocalizedString;
+  seoDescription?: LocalizedString;
 };
-```
 
-分类数据建议独立维护：
-
-```ts
 export type ProductCategory = {
   slug: string;
-  name: string;
-  nameZh?: string;
-  summary: string;
-  summaryZh?: string;
+  name: LocalizedString;
+  summary: LocalizedString;
   image: string;
   sortOrder: number;
+  enabled: boolean;
 };
 ```
 
-## 6. 数据访问层
+分类集中维护在 `src/content/categories.ts`，页面、组件、搜索和 URL 都从同一份分类数据读取。之后分类增删只改内容文件，不改页面逻辑。
 
-不要在页面中直接 `import products` 后手写过滤逻辑。建议通过 `lib/products.ts` 暴露统一方法：
+## 8. 数据访问层
+
+页面不得直接 import `products` 后手写过滤。`lib/products.ts` 暴露统一方法：
 
 ```ts
-getPublishedProducts()
-getFeaturedProducts()
-getProductBySlug(slug)
-getProductsByCategory(categorySlug)
-getRelatedProducts(product)
+getPublishedProducts(locale)
+getFeaturedProducts(locale)
+getProductBySlug(slug, locale)
+getProductsByCategory(categorySlug, locale)
+getRelatedProducts(product, locale)
 getProductStaticParams()
+searchProducts(query, locale)
 ```
 
-一期这些方法读取本地结构化文件。
+V0.1 读取本地结构化文件；V0.3 切到 Supabase 时保持页面调用方式不变。
 
-二期这些方法可以改为读取 Supabase，页面组件尽量不变。
+## 9. 静态资产与公开文件
 
-## 7. 首页产品展示策略
+V0.1 不使用 Supabase Storage。公开资产放在 `public/`：
 
-首页产品不写死，也不运行时查库。
+- 产品主图：`public/products/{slug}/main.jpg`
+- 产品 Hero 图：`public/products/{slug}/hero.jpg`
 
-一期：
+V0.1 不渲染文档下载（COA / TDS / SDS）。`Product.documents` 字段保留，仅作为"产品有哪些类型的文档可索取"的事实数据，前台不展示下载入口。客户需要文档时走 mailto / WhatsApp 人工索取。文档下载（含 `public/docs/` 目录与对应 UI）推迟到 V0.2 视需求评估。
 
-- 从 `getFeaturedProducts()` 获取产品。
-- 只展示 `published: true` 且 `featured: true` 的产品。
-- 按 `sortOrder` 排序。
-- 数量建议控制在 3 到 6 个。
+只放允许公开的文件。涉及客户、供应商、价格、合同、非公开认证的信息不得放入 `public/`。
 
-二期：
+图片使用 Next.js `<Image>`，并提供合理的 `sizes`。缺图时使用统一品牌色占位图。
 
-- 后台维护 `featured` 和 `sortOrder`。
-- 前台继续通过同一个 `getFeaturedProducts()` 获取。
-- 如果产品更新频率不高，仍可静态生成并通过 webhook 触发重新部署。
+### 9.1 Footer 结构
 
-## 8. 国际化设计
+Footer 分两层：
 
-一期建议采用轻量双语方案：
+- **Footer Main**：3 列 — Brand（Logo + Tagline）、Products（分类链接）、Contact（email / phone / WhatsApp / address）。Why Us / About / Applications / Resources 在对应 feature 开启时,以独立列追加在 Brand 与 Products 之间。
+- **Footer Bottom Strip**：横贯页面底部的细带,左侧 `© {year} AOWATT Global Materials`,右侧 `Privacy · Disclaimer` 链接(只在对应 feature 开启时渲染)。
 
-- 英文作为默认语言。
-- 产品数据中保留 `nameZh`、`summaryZh`、`overviewZh` 等中文字段。
-- 通用 UI 文案放在 `lib/i18n.ts`。
-- 语言选择记录在浏览器 `localStorage` 或 URL 参数中。
+法律页(Privacy / Disclaimer)只在 Footer Bottom Strip 出现,不进主导航,也不在 Footer Main 列出。
 
-如果后续需要完整中英文独立 SEO 页面，再扩展为路由级国际化：
+## 10. 占位内容机制
 
-```txt
-/en/products/sodium-carbonate
-/zh/products/sodium-carbonate
-```
+由于首批真实产品、文案、图片素材尚未完全确定，V0.1 允许占位上线，但要可追踪、可替换、不可误导。
 
-当前阶段不建议一开始就做复杂 i18n 路由，以免拖慢一期上线。
+- 占位内容集中在 `src/content/placeholders/`。
+- 占位文案使用 `[PLACEHOLDER]` 前缀。
+- 产品可使用 `placeholder: true` 标记。
+- `pnpm run check:placeholders` 扫描占位内容并输出清单。
+- 不真实的商业数字、资质、国家覆盖、年限、客户案例不得作为正式内容发布。
 
-## 9. 询盘架构
+V0.1 明确不展示无法披露的事实型数字。设计稿中的 `20+ Countries` / `15+ Years` / `100% Customer Focus` 等 Stats 模块整体删除，About 页改用"服务品类范围"或"能力声明"等可诚实陈述的内容替代。`pnpm run check:placeholders` 同时扫描 `Stats` / `Years` / `Countries` 等关键词，防止该模式回潮。
 
-一期联系表单建议使用轻量方案：
+## 11. 联系方式与转化
 
-- Next.js API Route 接收表单。
-- 使用邮件服务发送到公司邮箱。
-- 表单字段包括：姓名、公司、邮箱、电话、目标产品、需求描述。
-- 同时保留 WhatsApp、电话、邮箱直接联系入口。
+V0.1 Contact 页只展示：
 
-二期升级：
+- `mailto:info@aowatt.com.au`
+- `tel:+61451875076`
+- `https://wa.me/61451875076`
+- `11 Bale Cct, Southbank VIC 3006, Australia`
 
-- 询盘写入 Supabase `inquiries` 表。
-- 管理后台查看询盘列表。
-- 支持状态：`new`、`contacted`、`qualified`、`closed`。
-- AI 客服生成的线索也进入同一张询盘表。
+不做表单，不收集用户输入，不保存线索。所有联系点击通过 Vercel Web Analytics 记录自定义事件：
 
-## 10. 二期 Supabase 架构
+| 事件名 | 触发位置 | 属性 |
+| --- | --- | --- |
+| `contact_email_click` | 邮箱链接 | `page`, `product_slug` |
+| `contact_phone_click` | 电话链接 | `page`, `product_slug` |
+| `contact_whatsapp_click` | WhatsApp 链接 | `page`, `product_slug` |
 
-建议二期 Supabase 表结构：
+如果 V0.2 数据显示 mailto 转化不足，再评估轻量表单。届时才引入 API Route、邮件服务、Turnstile、隐私勾选和 honeypot。
 
-| 表名 | 用途 |
-| --- | --- |
-| `products` | 产品主数据 |
-| `categories` | 产品分类 |
-| `product_documents` | SDS / TDS / COA 文件 |
-| `inquiries` | 联系表单和 AI 客服线索 |
-| `chat_sessions` | AI 客服会话 |
-| `chat_messages` | AI 客服消息记录 |
-| `ai_knowledge_chunks` | 产品知识库切片 |
-| `admin_users` | 管理员信息或权限映射 |
+## 12. 搜索、SEO 与监控
 
-文件存储：
+V0.1 必须包含：
 
-- 产品图片放 Supabase Storage 或对象存储。
-- SDS / TDS / COA 文件放私有或受控公开 bucket。
-- 前台只展示允许公开的文件。
+- `app/sitemap.ts`
+- `app/robots.ts`
+- `not-found.tsx`
+- `error.tsx`
+- 统一 `lib/seo.ts`
+- Open Graph metadata
+- canonical URL
+- `hreflang`
+- Fuse.js 客户端产品搜索
+- Sentry 错误监控
 
-## 11. AI 客服架构
+Analytics 分工：
 
-AI 客服建议作为二期独立模块接入。
+| 平台 | 角色 | 内容 |
+| --- | --- | --- |
+| Cloudflare Web Analytics | 被动访问统计 | PV、UV、Top Pages、国家、Referrer、Core Web Vitals |
+| Vercel Web Analytics | 自定义事件 | 产品点击、联系点击、搜索词、语言切换、PDF 下载 |
+| Google Search Console | 搜索表现 | 查询词、CTR、排名、索引状态、sitemap |
 
-前台：
+关键自定义事件：
 
-- `ChatWidget` 显示在网站右下角。
-- 允许用户询问产品、文件、包装、应用、联系方式。
-- 在合适时机收集联系方式和需求。
-
-服务端：
-
-- `app/api/ai-chat/route.ts` 接收聊天消息。
-- 从 Supabase 查询相关产品和 FAQ。
-- 调用 OpenAI API 生成回答。
-- 将会话和消息写入 `chat_sessions`、`chat_messages`。
-- 识别高价值线索后写入 `inquiries`。
-
-安全边界：
-
-- 不承诺实时价格。
-- 不替代 SDS 或法规建议。
-- 不确认危险品运输、合规责任或法律承诺。
-- 遇到不确定、敏感、价格、合规类问题转人工。
-
-## 12. SEO 架构
-
-每个页面应通过统一的 SEO helper 生成 metadata：
-
-- 首页：公司定位和主营品类。
-- 产品列表页：覆盖产品分类和供应能力。
-- 产品详情页：产品名、CAS、应用、包装、文档能力。
-- Contact 页：强调询盘和人工联系。
-
-产品详情页 URL 应长期稳定，避免频繁修改 `slug`。
-
-建议生成：
-
-- `title`
-- `description`
-- `canonical`
-- Open Graph title
-- Open Graph description
-- Open Graph image
+- `product_card_click`
+- `contact_email_click`
+- `contact_phone_click`
+- `contact_whatsapp_click`
+- `search_query`
+- `language_switch`
+- `pdf_download`
 
 ## 13. 部署架构
 
-一期：
+V0.1：
 
 ```txt
-GitHub Repository
-  -> Vercel Build
-  -> Static / Serverless Deployment
-  -> Custom Domain
-  -> Optional Cloudflare DNS / CDN
+Git repository
+  -> Vercel build
+  -> Static deployment
+  -> aowatt.com.au
+  -> Cloudflare DNS / CDN / Web Analytics
+  -> Google Search Console
+  -> Sentry
 ```
 
-二期：
-
-```txt
-Next.js on Vercel
-  -> Supabase Database
-  -> Supabase Storage
-  -> OpenAI API
-  -> Email Service
-```
-
-环境变量建议：
+V0.1 只需要少量公开或第三方配置：
 
 ```txt
 NEXT_PUBLIC_SITE_URL=
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-OPENAI_API_KEY=
-INQUIRY_EMAIL_TO=
-EMAIL_SERVICE_API_KEY=
+NEXT_PUBLIC_CF_BEACON_TOKEN=
+NEXT_PUBLIC_SENTRY_DSN=
 ```
 
-一期只需要配置实际用到的域名和表单服务变量。
+不配置 Supabase、OpenAI、邮件服务、后台账号等变量。
 
-## 14. 开发阶段拆分
+## 14. Roadmap
 
-### Phase 1: Next.js 静态官网
+### V0.1: 静态 MVP（5-7 周）
 
-- 搭建 Next.js + TypeScript + Tailwind。
-- 按现有设计迁移首页和公共布局。
-- 建立产品数据模型和本地产品数据文件。
-- 实现产品列表和产品详情静态生成。
-- 实现联系页和询盘表单。
-- 完成基础 SEO。
-- 部署到 Vercel 并绑定域名。
+- Next.js + TypeScript + Tailwind 项目骨架。
+- `/en`、`/zh` 路由级双语。
+- Home、Products、Product Detail、Contact、Privacy、Disclaimer。
+- Why Us、About、Applications 代码可先写好但默认禁用。
+- 本地产品和分类内容文件。
+- 1-2 个完整示例产品。
+- 页面开关、占位检查、Fuse.js 搜索。
+- Cloudflare Web Analytics、Vercel Web Analytics、Search Console、Sentry。
+- sitemap、robots、404、error、SEO metadata。
 
-### Phase 2: 运营后台
+### V0.2: 内容扩展
 
-- 接入 Supabase。
-- 建立数据库表和文件存储。
-- 增加管理员登录。
-- 增加产品、分类、文件、询盘管理。
-- 将前台数据来源从本地文件迁移到 Supabase。
+- 启用 Why Us、About、Applications。
+- 新增 Resources。
+- 产品扩展到 30-50 个真实产品。
+- 中文内容逐步补齐。
+- 根据 V0.1 数据决定是否引入询盘表单。
+- 增加 FAQ、PDF 下载中心。
 
-### Phase 3: AI 客服
+### V0.3: 后台与数据源升级
 
-- 整理产品知识库和 FAQ。
-- 建立知识库切片。
-- 接入 OpenAI API。
-- 增加聊天组件和聊天 API。
-- 记录会话、消息和线索。
-- 增加人工介入规则。
+- Supabase Database、Storage、Auth。
+- 产品数据迁移到 Supabase。
+- 管理后台：产品、分类、文件、排序、上下架、featured。
+- 如果 V0.2 引入表单，则增加询盘管理。
 
-## 15. 关键架构决策
+### V0.3.x: AI 客服
 
-- 一期产品数据用结构化文件，不写死页面，不运行时查库。
-- 前台页面通过数据访问层获取产品，方便二期替换数据源。
-- 产品详情使用 `slug` 静态生成，保证 SEO 和访问速度。
-- 后台、数据库、AI 客服放到二期，避免一期过度建设。
-- 联系表单和 AI 客服线索最终统一进入 `inquiries`。
-- SDS / TDS / COA 文件从一开始作为产品模型的一部分设计。
+- 产品 FAQ 和知识库切片。
+- OpenAI API 接入。
+- 右下角 ChatWidget。
+- 价格、合规、运输、安全类问题强制转人工。
+
+## 15. 审批矩阵
+
+| 审批域 | 负责人 | 必须确认 |
+| --- | --- | --- |
+| 业务范围 | Founder / Business Owner | V0.1 页面范围、5-7 周上线目标、不做表单 |
+| 品牌与内容 | Marketing / Brand Owner | Logo、品牌色、字体、首页文案、产品占位策略 |
+| 产品信息 | Product / Operations Owner | 示例产品、CAS、规格、包装、公开文件 |
+| 法务合规 | Legal Reviewer | Privacy Policy、Disclaimer、产品声明、不真实数字删除 |
+| 技术架构 | Tech Lead | 技术栈、静态部署、i18n、数据模型、页面开关 |
+| 上线运维 | Site Owner | 域名、Vercel、Cloudflare、Search Console、Sentry、Analytics |
+
+## 16. 风险接受表
+
+| 风险 | 等级 | 处理方式 | Owner | V0.1 门禁 |
+| --- | --- | --- | --- | --- |
+| 设计稿中不真实商业数字上线 | High | 替换为真实数据或删除 | Business Owner | 必须关闭 |
+| 产品 CAS / 规格 / 用途错误 | High | 由业务确认示例产品数据 | Product Owner | 必须确认 |
+| 缺 Privacy / Disclaimer | High | 用模板生成并法务审阅 | Legal Reviewer | 必须完成 |
+| 中文内容不完整 | Medium | fallback 英文并展示提示 | Marketing Owner | 可接受 |
+| 产品列表频繁变化影响 SEO | Medium | 产品 URL 稳定前可 noindex 产品详情 | Tech Lead | 需决策 |
+| Analytics 或 Sentry 未出数据 | Medium | 上线后第 1 天验证 | Site Owner | 必须验证 |
+
+## 17. Go / No-Go 上线门禁
+
+上线前必须全部满足：
+
+- V0.1 页面范围与本文档一致。
+- Privacy、Disclaimer 可访问且 footer 有链接。
+- Contact 页无表单，只展示 email、phone、WhatsApp、address。
+- 上线版本不出现公司年限、国家数、客户数、认证资质等无法披露的数字（含 About 页 Stats Band），相关模块整体删除。
+- `/en`、`/zh` 可访问，`hreflang` 正确。
+- sitemap 不包含禁用页面。
+- 禁用页面直接访问返回 404。
+- `pnpm build` 成功。
+- Lighthouse Performance / SEO / Accessibility 均高于 90。
+- 360px 移动端无横向滚动。
+- Cloudflare Web Analytics、Vercel Web Analytics、Search Console、Sentry 已配置并有验证计划。
+
+## 18. 关键架构决策
+
+- V0.1 是纯静态官网，不做后端服务。
+- 路由级双语从第一天开始实施，避免后续 SEO 返工。
+- 产品和分类必须结构化，不能散落在页面组件里。
+- 页面显隐统一由 `config/features.ts` 控制。
+- 占位内容可用于加速上线，但不允许误导或制造合规风险。
+- 自定义事件使用 Vercel Web Analytics，Cloudflare Web Analytics 只做被动访问统计。
+- Supabase、后台、AI 客服均推迟到 V0.3 或之后。
