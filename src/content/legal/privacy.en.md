@@ -2,7 +2,7 @@
 
 ## 1. Who We Are
 
-AOWATT Global Materials operates this website at aowatt.com.au. This Privacy Policy explains how we handle information collected through the site.
+AOWATT Global Materials operates this website at {{domain}}. This Privacy Policy explains how we handle information collected through the site.
 
 ## 2. What We Collect
 
@@ -34,7 +34,7 @@ Each provider operates under its own privacy policy. We recommend you review the
 
 ## 5. Your Rights
 
-You may contact us at [info@aowatt.com.au](mailto:info@aowatt.com.au) to request information about how we handle data related to your enquiries with us, or to ask us to delete records of past correspondence.
+You may contact us at [{{email}}](mailto:{{email}}) to request information about how we handle data related to your enquiries with us, or to ask us to delete records of past correspondence.
 
 ## 6. Updates
 
@@ -42,4 +42,4 @@ We may update this policy from time to time. The current version is always avail
 
 ## 7. Contact
 
-Questions about this Privacy Policy: [info@aowatt.com.au](mailto:info@aowatt.com.au)
+Questions about this Privacy Policy: [{{email}}](mailto:{{email}})

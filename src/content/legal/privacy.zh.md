@@ -2,7 +2,7 @@
 
 ## 1. 关于我们
 
-AOWATT Global Materials 运营本网站 aowatt.com.au。本隐私政策说明我们如何处理通过本网站收集的信息。
+AOWATT Global Materials 运营本网站 {{domain}}。本隐私政策说明我们如何处理通过本网站收集的信息。
 
 ## 2. 收集范围
 
@@ -34,7 +34,7 @@ AOWATT Global Materials 运营本网站 aowatt.com.au。本隐私政策说明我
 
 ## 5. 您的权利
 
-您可发送邮件至 [info@aowatt.com.au](mailto:info@aowatt.com.au) ，咨询我们如何处理您与我们往来咨询相关的数据，或要求我们删除过往通信记录。
+您可发送邮件至 [{{email}}](mailto:{{email}}) ，咨询我们如何处理您与我们往来咨询相关的数据，或要求我们删除过往通信记录。
 
 ## 6. 更新
 
@@ -42,4 +42,4 @@ AOWATT Global Materials 运营本网站 aowatt.com.au。本隐私政策说明我
 
 ## 7. 联系方式
 
-如对本隐私政策有任何疑问：[info@aowatt.com.au](mailto:info@aowatt.com.au)
+如对本隐私政策有任何疑问：[{{email}}](mailto:{{email}})

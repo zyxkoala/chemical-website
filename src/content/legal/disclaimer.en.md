@@ -22,7 +22,7 @@ To the maximum extent permitted by law, AOWATT Global Materials accepts no liabi
 
 ## 4. Safety Data Sheets
 
-SDS, COA, and TDS documents are available on request. Email [info@aowatt.com.au](mailto:info@aowatt.com.au) with the product name and intended jurisdiction; the manufacturer-issued documents will be sent to you before any shipment is confirmed.
+SDS, COA, and TDS documents are available on request. Email [{{email}}](mailto:{{email}}) with the product name and intended jurisdiction; the manufacturer-issued documents will be sent to you before any shipment is confirmed.
 
 ## 5. Intellectual Property
 
@@ -38,4 +38,4 @@ This Disclaimer is governed by the laws of the State of [PLACEHOLDER jurisdictio
 
 ## 8. Contact
 
-Questions about this Disclaimer: [info@aowatt.com.au](mailto:info@aowatt.com.au)
+Questions about this Disclaimer: [{{email}}](mailto:{{email}})
