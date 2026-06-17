@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AOWATT 官网 · 一期交付汇报 · 2026-06-17</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1B3C;--navy-2:#1a2a52;--gold:#D4A24E;--gold-2:#E6B86A;--ink:#0F1B3C;--muted:#5b6b85;--line:#e3e8f0;--bg:#f7f9fc;--paper:#fff;--green:#2f9e7e;--red:#c95c4a;--amber:#d97706}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a1227;font-family:"Noto Sans SC","Inter",system-ui,sans-serif;color:var(--ink)}
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;display:none;overflow:hidden;background:var(--paper)}
+.slide.active{display:flex;flex-direction:column}
+.slide-inner{flex:1;display:flex;flex-direction:column;padding:56px 88px 72px;position:relative}
+h1,h2,h3,h4{font-family:"Inter","Noto Sans SC",sans-serif;font-weight:700;letter-spacing:-.01em;color:var(--navy)}
+h1{font-size:54px;line-height:1.1}
+h2{font-size:38px;line-height:1.15;margin-bottom:8px}
+h3{font-size:22px;line-height:1.3}
+h4{font-size:17px;line-height:1.4}
+p{line-height:1.65;color:var(--ink);font-size:17px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.subtitle{color:var(--muted);font-size:19px;line-height:1.55;margin-top:14px;max-width:920px}
+.gold{color:var(--gold)}.navy{color:var(--navy)}.muted{color:var(--muted)}
+.divider{width:64px;height:3px;background:var(--gold);border-radius:2px;margin:18px 0 28px}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:100;transition:width .25s ease}
+.pager{position:fixed;top:18px;right:28px;font-family:"Inter",monospace;font-size:13px;color:var(--muted);z-index:100;letter-spacing:.05em}
+.brand{position:fixed;bottom:18px;right:28px;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.3em;color:var(--muted);z-index:100;text-transform:uppercase}
+.help{position:fixed;bottom:18px;left:28px;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.1em;color:#aab3c5;z-index:100}
+.cover{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 60%,#243a6e 100%);color:#fff;justify-content:center;align-items:flex-start}
+.cover .slide-inner{justify-content:center}
+.cover h1{color:#fff;font-size:68px;letter-spacing:-.02em}
+.cover .eyebrow{color:var(--gold);font-size:14px}
+.cover .meta{margin-top:48px;display:flex;gap:48px;color:#cfd6e8;font-size:15px;letter-spacing:.08em}
+.cover .meta b{color:var(--gold);display:block;font-size:13px;letter-spacing:.18em;margin-bottom:4px}
+.cover .ribbon{position:absolute;top:56px;right:88px;border:1px solid rgba(212,162,78,.4);padding:10px 18px;font-size:12px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase}
+.logo-mark{display:inline-flex;align-items:center;gap:14px;margin-bottom:36px}
+.logo-mark .mark{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#a47a2c);display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:900;font-size:22px;font-family:"Inter"}
+.logo-mark .name{font-family:"Inter";font-weight:700;font-size:18px;letter-spacing:.3em;color:#fff}
+.logo-mark .name small{display:block;font-weight:400;font-size:11px;letter-spacing:.4em;color:var(--gold);margin-top:4px}
+.row{display:flex;gap:24px}
+.grid{display:grid;gap:18px}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.card h3{font-size:19px;color:var(--navy);margin-bottom:8px}
+.card p{font-size:14px;color:var(--muted);line-height:1.6}
+.card .icon{width:42px;height:42px;border-radius:10px;background:rgba(212,162,78,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;border:1px solid rgba(212,162,78,.3)}
+.tag{display:inline-block;padding:3px 9px;font-size:11px;font-weight:600;border-radius:4px;letter-spacing:.06em}
+.tag-v1{background:rgba(47,158,126,.12);color:var(--green);border:1px solid rgba(47,158,126,.3)}
+.tag-v2{background:rgba(212,162,78,.12);color:#a47a2c;border:1px solid rgba(212,162,78,.3)}
+.tag-v3{background:rgba(91,107,133,.12);color:var(--muted);border:1px solid rgba(91,107,133,.3)}
+.tag-warn{background:rgba(217,119,6,.12);color:var(--amber);border:1px solid rgba(217,119,6,.3)}
+.kv{display:flex;align-items:baseline;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.kv:last-child{border-bottom:0}
+.kv .k{font-weight:600;color:var(--navy);min-width:130px;font-size:14px}
+.kv .v{color:var(--muted);font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--navy);background:var(--bg);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+td{color:var(--ink)}
+.center{text-align:center}
+.big-num{font-size:60px;font-weight:800;color:var(--gold);font-family:"Inter";line-height:1;letter-spacing:-.02em}
+.big-num small{display:block;font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.1em;margin-top:8px;text-transform:uppercase}
+ul.clean{list-style:none}
+ul.clean li{padding:7px 0 7px 24px;position:relative;font-size:15px;color:var(--ink);line-height:1.55}
+ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:8px;height:8px;background:var(--gold);border-radius:50%}
+ul.check li::before{content:"✓";color:var(--green);background:transparent;font-weight:700;font-size:15px;top:7px}
+ul.cross li::before{content:"×";color:var(--red);background:transparent;font-weight:700;font-size:17px;top:6px}
+.flow{display:flex;align-items:stretch;gap:0;margin-top:22px}
+.flow-step{flex:1;background:var(--bg);border:1px solid var(--line);padding:16px;position:relative;text-align:center}
+.flow-step:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold);background:#fff;width:24px;height:24px;line-height:24px;text-align:center;z-index:2}
+.flow-step .n{font-family:"Inter";font-weight:800;color:var(--gold);font-size:13px;letter-spacing:.15em}
+.flow-step .t{font-weight:600;color:var(--navy);margin-top:6px;font-size:14px}
+.callout{background:var(--bg);border-left:3px solid var(--gold);padding:14px 18px;margin-top:18px;font-size:15px}
+.callout-warn{background:rgba(217,119,6,.06);border-left:3px solid var(--amber)}
+.callout-good{background:rgba(47,158,126,.06);border-left:3px solid var(--green)}
+.pill{display:inline-block;padding:2px 8px;font-size:11px;font-weight:600;border-radius:99px;background:rgba(15,27,60,.06);color:var(--navy);margin-right:6px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.split .col{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.split .col h4{margin-bottom:10px;font-size:16px}
+@media print{body{overflow:visible}.slide{display:flex!important;page-break-after:always;height:100vh}.progress,.pager,.brand,.help{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="pager"><span id="curPage">1</span> / <span id="totalPage">18</span></div>
+<div class="brand">AOWATT · 一期交付汇报</div>
+<div class="help">← → 翻页 · F 全屏 · ESC 退出</div>
+<div class="deck" id="deck">
+
+<!-- 1. 封面 -->
+<section class="slide cover">
+<div class="ribbon">一期 · V0.1 交付</div>
+<div class="slide-inner">
+<div class="logo-mark">
+<div class="mark">A</div>
+<div class="name">AOWATT<small>GLOBAL MATERIALS</small></div>
+</div>
+<div class="eyebrow">一期交付汇报 · Phase 1 Delivery Review</div>
+<h1>官网一期已上线<br>下一步该走向哪里</h1>
+<p style="color:#cfd6e8;font-size:21px;margin-top:24px;max-width:760px;line-height:1.5">本次汇报：一期成果展示、二期 AI 客服规划、三期后端考虑、需要您配合的资料、以及法律合规与服务器的几点建议。</p>
+<div class="meta">
+<div><b>项目</b>AOWATT 官网 V0.1</div>
+<div><b>阶段</b>一期已交付</div>
+<div><b>日期</b>2026 / 06 / 17</div>
+</div>
+</div>
+</section>
+
+<!-- 2. 本次汇报内容 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">议程</div>
+<h2>今天我们一起过这六件事</h2>
+<div class="divider"></div>
+<div class="grid g-3" style="margin-top:32px">
+<div class="card"><div class="icon">①</div><h3>项目背景回顾</h3><p>一期定位、目标客户、为什么这样设计。</p></div>
+<div class="card"><div class="icon">②</div><h3>一期交付成果</h3><p>已上线的页面、功能、数据现状一次看清。</p></div>
+<div class="card"><div class="icon">③</div><h3>二期 AI 客服规划</h3><p>AI 能答什么、不能答什么 — 需要您拍板。</p></div>
+<div class="card"><div class="icon">④</div><h3>三期后端考虑</h3><p>什么时候该做、做什么、不做什么。</p></div>
+<div class="card"><div class="icon">⑤</div><h3>需要您提供的资料</h3><p>产品数据、品牌素材、法律文档清单。</p></div>
+<div class="card"><div class="icon">⑥</div><h3>法律与服务器合规</h3><p>澳洲法规、律师建议、Vercel 商用问题。</p></div>
+</div>
+<p style="margin-top:32px;font-size:17px;color:var(--navy);font-weight:600">汇报中如有问题随时打断，<span class="gold">最后留 10 分钟答疑</span>。</p>
+</div>
+</section>
+
+<!-- 3. 一期定位 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">项目背景</div>
+<h2>一期不追求大而全，先把"线上身份"立住</h2>
+<div class="divider"></div>
+<p class="subtitle">海外采购商第一步是 Google 搜索 → 点进官网 → 评估是否值得发询盘。一期网站要解决的是"被搜到、被信任、被联系"，不做在线下单、不做询盘表单。</p>
+<div class="split" style="margin-top:28px">
+<div class="col"><h4 class="gold">✅ 一期做了什么</h4>
+<ul class="clean check">
+<li>双语展示型官网（英文 + 中文）</li>
+<li>产品库结构化展示，可搜索可分类</li>
+<li>4 种联系方式直达（邮箱 / 电话 / WhatsApp / 地图）</li>
+<li>移动端、平板、电脑全适配</li>
+<li>Google SEO 友好，每页独立标题描述</li>
+</ul>
+</div>
+<div class="col"><h4 style="color:var(--muted)">❌ 一期没做什么</h4>
+<ul class="clean cross">
+<li>在线询盘表单（避免垃圾邮件、避免数据合规风险）</li>
+<li>客户登录账号</li>
+<li>实时库存、在线下单</li>
+<li>后台管理系统（产品由我方维护）</li>
+<li>AI 客服（计划在二期）</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 4. 网站结构总览 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">一期交付 · 网站结构</div>
+<h2>已上线的 6 个页面，双语全覆盖</h2>
+<div class="divider"></div>
+<p class="subtitle">每个页面都有独立的英文版和中文版 URL（如 <code>/en/products</code> 和 <code>/zh/products</code>），让 Google 能同时索引两种语言，扩大搜索曝光。</p>
+<div class="grid g-3" style="margin-top:24px;gap:14px">
+<div class="card"><span class="tag tag-v1">已上线</span><h3 style="margin-top:8px">首页 Home</h3><p>品牌主张、产品分类入口、企业优势、应用领域速览。</p></div>
+<div class="card"><span class="tag tag-v1">已上线</span><h3 style="margin-top:8px">产品列表 Products</h3><p>6 大分类、精选轮播、按名称 / CAS 编号搜索。</p></div>
+<div class="card"><span class="tag tag-v1">已上线</span><h3 style="margin-top:8px">产品详情 Detail</h3><p>规格表、应用场景、包装选项、相关产品推荐。</p></div>
+<div class="card"><span class="tag tag-v1">已上线</span><h3 style="margin-top:8px">联系页 Contact</h3><p>邮箱 / 电话 / WhatsApp / 地图，加 FAQ 引导。</p></div>
+<div class="card"><span class="tag tag-v1">已上线</span><h3 style="margin-top:8px">隐私政策 Privacy</h3><p>页脚链接，合规必备（草稿模板，待律师审核）。</p></div>
+<div class="card"><span class="tag tag-v1">已上线</span><h3 style="margin-top:8px">免责声明 Disclaimer</h3><p>页脚链接，化工行业必备（草稿模板，待律师审核）。</p></div>
+<div class="card" style="opacity:.7;grid-column:span 3"><span class="tag tag-v2">代码就位 · 待启用</span><h3 style="margin-top:8px">Why Us / About / Applications</h3><p>这 3 个页面已开发完成、UI 设计也做好，等公司资料和文案确认后，一个开关即可上线，无需重新开发。</p></div>
+</div>
+</div>
+</section>
+
+<!-- 5. 首页 + 产品列表 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">一期交付 · 核心页面</div>
+<h2>首页与产品列表 — 让客户 5 秒看懂你</h2>
+<div class="divider"></div>
+<div class="split" style="margin-top:18px">
+<div class="col"><h4>🏠 首页 Home</h4>
+<ul class="clean">
+<li><b>主视觉横幅</b>：品牌主张 + 主 CTA 按钮</li>
+<li><b>产品分类预览</b>：6 大分类卡片，点击直达</li>
+<li><b>企业优势 3 条</b>：质量文档 / 出口包装 / 响应式支持</li>
+<li><b>应用领域</b>：行业切入点</li>
+</ul>
+</div>
+<div class="col"><h4>🧪 产品列表 Products</h4>
+<ul class="clean">
+<li><b>实时搜索</b>：按产品名 / CAS 编号 / 分类</li>
+<li><b>分类筛选</b>：6 大分类一键切换</li>
+<li><b>精选产品轮播</b>：手动指定首页推荐</li>
+<li><b>响应式卡片</b>：手机 1 列，平板 2 列，电脑 3 列</li>
+</ul>
+</div>
+</div>
+<div class="callout"><b>技术细节（用大白话）：</b>搜索功能完全在浏览器内运行，不依赖服务器，速度极快且零运营成本。</div>
+</div>
+</section>
+
+<!-- 6. 产品详情页 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">一期交付 · 核心页面</div>
+<h2>产品详情页 — 一页让采购商决定是否发询盘</h2>
+<div class="divider"></div>
+<p class="subtitle">每个产品有一个独立的 URL（如 <code>/en/products/caustic-soda-flakes-99</code>），方便分享、Google 索引、再营销追踪。</p>
+<div class="grid g-2" style="margin-top:20px;gap:16px">
+<div class="card"><h3>📋 产品基本信息</h3><div class="kv"><span class="k">产品名</span><span class="v">中英文双语</span></div><div class="kv"><span class="k">CAS 编号</span><span class="v">国际通用化学品标识</span></div><div class="kv"><span class="k">分类 / 等级</span><span class="v">工业级 / 试剂级 等</span></div><div class="kv"><span class="k">纯度</span><span class="v">如 99%、31%</span></div></div>
+<div class="card"><h3>🔬 技术规格</h3><div class="kv"><span class="k">外观</span><span class="v">颜色、形态</span></div><div class="kv"><span class="k">密度 / 溶解度</span><span class="v">物理参数</span></div><div class="kv"><span class="k">储存条件</span><span class="v">温度 / 通风 / 防潮</span></div><div class="kv"><span class="k">应用场景</span><span class="v">3-5 个典型用途</span></div></div>
+<div class="card"><h3>📦 包装与文档</h3><div class="kv"><span class="k">包装选项</span><span class="v">袋 / 桶 / IBC / 吨袋</span></div><div class="kv"><span class="k">净重</span><span class="v">每包装规格</span></div><div class="kv"><span class="k">可提供文档</span><span class="v">COA / TDS / SDS（标识）</span></div></div>
+<div class="card"><h3>💬 转化设计</h3><div class="kv"><span class="k">询价按钮</span><span class="v">置顶 + 底部双入口</span></div><div class="kv"><span class="k">联系方式</span><span class="v">邮箱 / WhatsApp 直达</span></div><div class="kv"><span class="k">相关产品</span><span class="v">3 个推荐，提升停留时长</span></div></div>
+</div>
+</div>
+</section>
+
+<!-- 7. 联系页 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">一期交付 · 核心页面</div>
+<h2>联系页 — 4 种方式，零摩擦</h2>
+<div class="divider"></div>
+<p class="subtitle">海外 B2B 采购商习惯写正式邮件或 WhatsApp，不喜欢填表单。我们把入口做到极简，每次点击都被记录，便于后续优化。</p>
+<div class="grid g-4" style="margin-top:24px;gap:14px">
+<div class="card center"><div style="font-size:34px;margin-bottom:8px">📧</div><h3>邮箱</h3><p>点击直接打开邮件客户端，主题已预填产品名。</p></div>
+<div class="card center"><div style="font-size:34px;margin-bottom:8px">☎</div><h3>电话</h3><p>手机端一键拨号，紧急询盘直通业务。</p></div>
+<div class="card center"><div style="font-size:34px;margin-bottom:8px">💬</div><h3>WhatsApp</h3><p>海外采购最常用的即时入口，扫码或点击即聊。</p></div>
+<div class="card center"><div style="font-size:34px;margin-bottom:8px">📍</div><h3>地图</h3><p>Google Maps 嵌入，建立"真实存在的公司"信任感。</p></div>
+</div>
+<div class="callout callout-warn"><b>⚠️ 待您确认：</b>当前网站联系方式为占位示例值（example@example.com、+61 400 000 000），上线前请提供真实邮箱、电话、WhatsApp 号码以及澳洲办公地址。</div>
+</div>
+</section>
+
+<!-- 8. 产品数据现状 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">一期交付 · 数据现状</div>
+<h2>当前产品库：2 个真实产品 + 4 个占位待激活</h2>
+<div class="divider"></div>
+<p class="subtitle">为了让网站有"完整产品线"的视觉效果，我们预先放了 6 个产品框架。其中 2 个是您已确认的真实产品，4 个是占位符（隐藏不显示）等您补充资料。</p>
+<table style="margin-top:22px">
+<thead><tr><th style="width:30%">产品</th><th style="width:18%">状态</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><b>片碱 99%</b><br><span class="muted" style="font-size:12px">Caustic Soda Flakes</span></td><td><span class="tag tag-v1">已发布</span></td><td>真实规格、应用、包装均已录入，前台正常展示。</td></tr>
+<tr><td><b>盐酸 31%</b><br><span class="muted" style="font-size:12px">Hydrochloric Acid</span></td><td><span class="tag tag-v1">已发布</span></td><td>真实规格、应用、包装均已录入，前台正常展示。</td></tr>
+<tr><td>次氯酸钠</td><td><span class="tag tag-warn">占位 · 待补</span></td><td>用于消毒 / 水处理。等待您提供具体规格和文档。</td></tr>
+<tr><td>工业溶剂混合物</td><td><span class="tag tag-warn">占位 · 待补</span></td><td>用于工业清洗。等待您确认产品组合和规格。</td></tr>
+<tr><td>柠檬酸</td><td><span class="tag tag-warn">占位 · 待补</span></td><td>用于食品 / 工业清洗。等待您提供等级和包装。</td></tr>
+<tr><td>矿用捕收剂</td><td><span class="tag tag-warn">占位 · 待补</span></td><td>用于矿业选矿。等待您提供具体型号。</td></tr>
+</tbody>
+</table>
+<div class="callout"><b>占位产品的处理方式：</b>当前网站 <b>不会</b> 显示这 4 个产品（前台不可见）。一旦您补齐资料，我方录入即可上线，约 1-2 个工作日。</div>
+</div>
+</section>
+
+<!-- 10. 二期 AI 客服 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">二期规划 · AI 客服</div>
+<h2>AI 客服：能干什么 & 不能干什么</h2>
+<div class="divider"></div>
+<p class="subtitle">建议采用 <b class="gold">保守型</b> 策略：AI 只回答边界清晰的常见问题，所有涉及商业决策的问题（价格、库存、合同条款）一律转人工。这样既能 7×24 服务客户，又不会因 AI 答错引发合同纠纷。</p>
+<div class="split" style="margin-top:18px">
+<div class="col" style="background:rgba(47,158,126,.06);border-color:rgba(47,158,126,.3)"><h4 style="color:var(--green)">✅ AI 可以回答</h4>
+<ul class="clean check">
+<li>"你们卖什么产品？" → 推荐产品列表</li>
+<li>"片碱有什么用途？" → 应用场景介绍</li>
+<li>"产品有什么包装？" → 标准包装规格</li>
+<li>"能提供 SDS 文档吗？" → 可提供，引导留邮箱</li>
+<li>"在哪里？怎么联系？" → 地址 + 联系方式</li>
+<li>"工作时间？" → 澳洲东部时间 9:00-18:00</li>
+</ul>
+</div>
+<div class="col" style="background:rgba(201,92,74,.06);border-color:rgba(201,92,74,.3)"><h4 style="color:var(--red)">❌ AI 必须转人工</h4>
+<ul class="clean cross">
+<li>"片碱多少钱一吨？" → 价格因量、包装、目的地而异</li>
+<li>"现在有多少库存？" → 实时库存需业务确认</li>
+<li>"能定制纯度 99.5% 吗？" → 定制需评估</li>
+<li>"付款方式 / 信用证条款？" → 合同条款须人工</li>
+<li>"什么时候到港？" → 物流需逐单确认</li>
+<li>"和某竞品比哪个好？" → 避免不当宣传</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-warn"><b>风险兜底：</b>所有 AI 回复底部统一加"以业务确认为准"声明 + 后台抽查 AI 对话日志 + 用户可一键转人工。</div>
+</div>
+</section>
+
+<!-- 11. AI 客服需要您拍板 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">二期规划 · 待您确认</div>
+<h2>AI 客服上线前，需要您配合 3 件事</h2>
+<div class="divider"></div>
+<div class="grid g-3" style="margin-top:24px;gap:18px">
+<div class="card"><div class="icon">📚</div><h3>① 知识库素材</h3><p>整理常见客户问题清单（FAQ），由您团队提供"标准答案"。我方训练 AI 只用这些答案作答，超出范围转人工。</p></div>
+<div class="card"><div class="icon">🚦</div><h3>② 转人工触发条件</h3><p>明确"什么情况下必须转人工"。例如：客户提到"价格""定制""紧急"关键词、连续 3 次答非所问、用户主动要求等。</p></div>
+<div class="card"><div class="icon">🕒</div><h3>③ 人工接管时段</h3><p>非工作时间 AI 接收消息后如何处理？是回复"明天 9 点回复"还是"已记录将主动联系"？需要您团队定义。</p></div>
+</div>
+<div style="margin-top:28px;display:flex;gap:14px">
+<div style="flex:1;background:var(--bg);border:1px solid var(--line);padding:16px;border-radius:8px"><b class="navy">📊 预估成本</b><p style="margin-top:6px;font-size:14px;color:var(--muted)">月活 100 个咨询：约 ¥150-300/月（OpenAI / Claude API 费用）。访问量越大边际成本递减。</p></div>
+<div style="flex:1;background:var(--bg);border:1px solid var(--line);padding:16px;border-radius:8px"><b class="navy">⏱ 开发周期</b><p style="margin-top:6px;font-size:14px;color:var(--muted)">FAQ 整理 1-2 周（甲方）+ 系统集成 2-3 周（我方）+ 试运行 2 周。共约 6-8 周。</p></div>
+</div>
+</div>
+</section>
+
+<!-- 12. 三期后端 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">三期规划 · 内部管理后台</div>
+<h2>什么时候该做后端？基于您的需求来判断</h2>
+<div class="divider"></div>
+<p class="subtitle">后端 = 您的内部管理系统，让业务团队自己更新产品、查看询盘统计，不需要每次找开发改代码。<b class="gold">不必现在就做</b>，触发条件成立再启动。</p>
+<div class="split" style="margin-top:18px">
+<div class="col"><h4 class="gold">✅ 我们建议做后端的时机</h4>
+<ul class="clean check">
+<li>产品数量 <b>>20 个</b>，手工维护太耗时</li>
+<li>业务团队 <b>需要自助更新</b>价格 / 库存 / 描述</li>
+<li>需要查看 <b>询盘统计</b>（来源、转化、热门产品）</li>
+<li>需要 <b>多人协作</b>录入产品（销售、市场、采购）</li>
+</ul>
+</div>
+<div class="col"><h4 style="color:var(--muted)">❌ 我们建议暂不做的功能</h4>
+<ul class="clean cross">
+<li>客户在线下单（B2B 化工通常需要线下议价 / 信用证）</li>
+<li>实时库存对外公开（库存敏感，建议询盘后人工告知）</li>
+<li>客户账号系统（增加合规风险，B2B 价值低）</li>
+<li>支付接口（化工大宗交易很少在线支付）</li>
+</ul>
+</div>
+</div>
+<div class="callout"><b>技术选型预案：</b>三期建议用 <b>Supabase</b>（一个开箱即用的数据库 + 后台工具），免费版足够小团队用，付费版起步 $25/月。届时再详细评估。</div>
+</div>
+</section>
+
+<!-- 13. 路线图 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">规划总览</div>
+<h2>三期路线图，循序渐进</h2>
+<div class="divider"></div>
+<div class="flow" style="margin-top:36px">
+<div class="flow-step" style="background:rgba(47,158,126,.08);border-color:rgba(47,158,126,.4)"><div class="n">PHASE 1</div><div class="t" style="color:var(--green);font-size:16px">一期 · 已交付</div><p style="margin-top:8px;font-size:13px;color:var(--muted);text-align:left">✓ 双语展示官网<br>✓ 6 个核心页面<br>✓ 产品库 + 搜索<br>✓ 4 种联系方式<br>✓ SEO + 数据分析</p></div>
+<div class="flow-step" style="background:rgba(212,162,78,.08);border-color:rgba(212,162,78,.4)"><div class="n">PHASE 2</div><div class="t" style="color:#a47a2c;font-size:16px">二期 · 6-8 周</div><p style="margin-top:8px;font-size:13px;color:var(--muted);text-align:left">○ 启用 Why Us / About / Applications<br>○ AI 客服（保守型）<br>○ 占位产品全部上线<br>○ 真实联系方式替换</p></div>
+<div class="flow-step" style="background:rgba(91,107,133,.06);border-color:rgba(91,107,133,.3)"><div class="n">PHASE 3</div><div class="t" style="color:var(--muted);font-size:16px">三期 · 待触发</div><p style="margin-top:8px;font-size:13px;color:var(--muted);text-align:left">○ 内部管理后台<br>○ 询盘统计 Dashboard<br>○ 多人协作录入<br>○ 资源中心（文档下载）</p></div>
+</div>
+<div style="margin-top:36px;display:flex;justify-content:space-around;gap:18px">
+<div class="center"><div class="big-num">6<small>核心页面</small></div></div>
+<div class="center"><div class="big-num">2+4<small>真实 + 占位产品</small></div></div>
+<div class="center"><div class="big-num">2<small>语言</small></div></div>
+<div class="center"><div class="big-num">¥0<small>当前月运营成本</small></div></div>
+</div>
+</div>
+</section>
+
+<!-- 14. 需要您提供 - 产品数据 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">您的行动项 · 资料清单（1/2）</div>
+<h2>产品数据 — 这是激活 4 个占位产品的关键</h2>
+<div class="divider"></div>
+<p class="subtitle">每激活一个产品，需要以下字段。建议按优先级先准备 2-3 个产品的完整资料，我方先上线，再逐个补充。</p>
+<table style="margin-top:20px">
+<thead><tr><th style="width:22%">字段</th><th style="width:22%">示例</th><th>说明 / 重要性</th></tr></thead>
+<tbody>
+<tr><td><b>产品名（中英文）</b></td><td>Caustic Soda Flakes / 片碱</td><td>必填。SEO 关键，直接影响搜索曝光。</td></tr>
+<tr><td><b>CAS 编号</b></td><td>1310-73-2</td><td>必填。国际通用化学品标识，采购商搜索常用。</td></tr>
+<tr><td><b>分类 / 等级 / 纯度</b></td><td>工业级 / 99% min</td><td>必填。决定显示在哪个分类下。</td></tr>
+<tr><td><b>外观与物理参数</b></td><td>白色片状 / 密度 2.13</td><td>建议提供。提升专业感。</td></tr>
+<tr><td><b>应用场景（3-5 条）</b></td><td>造纸、纺织、皂化…</td><td>建议提供。让客户快速识别用途。</td></tr>
+<tr><td><b>包装选项 + 净重</b></td><td>25kg 袋 / 1000kg 吨袋</td><td>必填。直接影响询盘问题。</td></tr>
+<tr><td><b>储存条件</b></td><td>干燥通风、避免接触酸</td><td>建议提供。化工合规要求。</td></tr>
+<tr><td><b>HS Code / UN Number</b></td><td>2815.11.0000 / UN1823</td><td>建议提供。出口报关 / 海运危包用。</td></tr>
+<tr><td><b>COA / TDS / SDS PDF</b></td><td>3 个 PDF 文档</td><td>建议提供。一期暂不开放下载，但页面可标注"按需提供"。</td></tr>
+</tbody>
+</table>
+<div class="callout callout-good"><b>💡 提供方式建议：</b>用 Excel 表格或 Word 文档逐项填写即可，我方负责整理录入。技术文档 PDF 直接发给我们。</div>
+</div>
+</section>
+
+<!-- 15. 需要您提供 - 品牌 + 法律 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">您的行动项 · 资料清单（2/2）</div>
+<h2>品牌素材与法律文档</h2>
+<div class="divider"></div>
+<div class="grid g-2" style="margin-top:22px;gap:18px">
+<div class="card"><h3>🎨 品牌与素材</h3>
+<ul class="clean">
+<li><b>高清 Logo</b>（PNG 或 SVG，确认是否最终版）</li>
+<li><b>工厂 / 仓库 / 产品照片</b>（目前用通用素材，替换为真实图片可大幅提升信任感）</li>
+<li><b>公司简介文案</b>（中英文 200 字左右，用于 About 页面）</li>
+<li><b>团队照片</b>（可选，用于 About 页面）</li>
+<li><b>客户案例 / 资质证书</b>（可选，ISO / ABN 等）</li>
+</ul>
+</div>
+<div class="card"><h3>📞 真实联系方式</h3>
+<ul class="clean">
+<li><b>正式商务邮箱</b>（如 info@yourdomain）</li>
+<li><b>办公电话</b>（澳洲座机 / 国内手机）</li>
+<li><b>WhatsApp 号码</b>（建议专设业务号）</li>
+<li><b>办公地址</b>（用于 Google 地图嵌入）</li>
+<li><b>工作时间</b>（决定 AI 客服与人工的衔接）</li>
+</ul>
+</div>
+<div class="card" style="grid-column:span 2;border-left:4px solid var(--amber)"><h3 style="color:var(--amber)">⚖️ 法律合规文档（最重要）</h3>
+<ul class="clean">
+<li><b>澳洲商业律师对接</b>：审核我方提供的隐私政策与免责声明草稿，按澳洲法规和化工行业要求修订定稿（详见下页）</li>
+<li><b>营业执照 / ABN（澳洲商业号码）</b>：网站底部建议注明 ABN，提升合规可信度</li>
+<li><b>进出口资质证明</b>（如有）：可放在 About 页面增强信任</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 16. 法律 - 隐私 / 免责 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">法律合规（1/3）</div>
+<h2>隐私政策 & 免责声明 — 强烈建议聘请律师</h2>
+<div class="divider"></div>
+<p class="subtitle">网站当前已有两份草稿模板（顶部明确标注 <b>"上线前由法律顾问审核确认"</b>）。化工行业有特殊条款，模板无法替代律师定制。</p>
+<div class="grid g-2" style="margin-top:20px;gap:18px">
+<div class="card"><h3>📄 当前状态</h3>
+<ul class="clean">
+<li><b>隐私政策</b>：草稿模板已就位，覆盖 Cookie / Analytics / 第三方处理方</li>
+<li><b>免责声明</b>：草稿模板已就位，覆盖"信息仅供参考""SDS 强制披露""不承担误用责任"等条款</li>
+<li><b>司法管辖</b>条款仍保留 <code>[PLACEHOLDER]</code> 占位（待律师确认填 Victoria 等州名）</li>
+</ul>
+</div>
+<div class="card" style="background:rgba(217,119,6,.06);border-color:rgba(217,119,6,.3)"><h3 style="color:var(--amber)">⚠️ 为什么必须律师审核</h3>
+<ul class="clean">
+<li>化工产品有 <b>SDS 强制披露</b>义务（澳洲 WHS 法规）</li>
+<li>需明确 <b>不构成应用建议</b>的免责条款（避免连带责任）</li>
+<li>涉及 <b>出口管制</b>的产品需额外声明</li>
+<li>澳洲 <b>消费者法 ACL</b> 对担保条款有特殊要求</li>
+<li>隐私政策需符合 <b>澳洲隐私法 1988 + APP 13 项原则</b></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-warn"><b>建议：</b>聘请澳洲商业律师（最好懂化工行业），费用建议直接咨询律师确认。律师定稿后我方负责把内容更新到网站，移除"草稿模板"提示。</div>
+</div>
+</section>
+
+<!-- 17. 法律 - 澳洲合规 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">法律合规（2/3）</div>
+<h2>澳洲法律法规要点</h2>
+<div class="divider"></div>
+<table style="margin-top:18px">
+<thead><tr><th style="width:22%">法规 / 机构</th><th style="width:30%">关注点</th><th>对网站的影响</th></tr></thead>
+<tbody>
+<tr><td><b>ACCC</b><br><span class="muted" style="font-size:12px">澳大利亚竞争与消费者委员会</span></td><td>禁止误导性宣传（"最大""第一""唯一"等用语需有证据）</td><td>网站文案需保守措辞。我方已在脚本层面禁用虚假统计（如年限、客户数）。</td></tr>
+<tr><td><b>AICIS</b><br><span class="muted" style="font-size:12px">澳大利亚工业化学品引入计划</span></td><td>工业化学品进口 / 制造需注册</td><td>视具体产品而定。建议律师评估每个产品是否需注册。</td></tr>
+<tr><td><b>WHS 法规</b><br><span class="muted" style="font-size:12px">工作健康安全</span></td><td>SDS（安全数据表）必须按需提供</td><td>网站已在产品页标注"可提供 SDS"，律师审核后调整措辞。</td></tr>
+<tr><td><b>澳洲隐私法 1988</b></td><td>个人信息收集 / 存储 / 使用</td><td>当前网站无表单不收集数据，风险低。<b>二期加 AI 客服需重新评估。</b></td></tr>
+<tr><td><b>ABN 商业号码</b></td><td>注册商业实体</td><td>建议网站底部注明 ABN（如已注册），提升可信度。</td></tr>
+<tr><td><b>GDPR / CCPA</b><br><span class="muted" style="font-size:12px">欧盟 / 加州隐私法</span></td><td>面向欧美客户时适用</td><td>当前不收集数据，影响小。Cookie 提示是否需要由律师确认。</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- 18. 法律 - Vercel 商用 -->
+<section class="slide">
+<div class="slide-inner">
+<div class="eyebrow">法律合规（3/3）</div>
+<h2>Vercel 部署 — 商用必须升级</h2>
+<div class="divider"></div>
+<p class="subtitle">网站当前部署在 Vercel 免费版（Hobby 计划）。<b class="gold">Vercel 服务条款明确规定免费版仅限个人非商业项目</b>，公司商业用途必须升级 Pro 计划。</p>
+<div class="split" style="margin-top:18px">
+<div class="col"><h4 style="color:var(--muted)">📦 当前 · Hobby 免费版</h4>
+<ul class="clean">
+<li>流量：<b>100GB / 月</b>（约 5 万次访问）</li>
+<li>构建时间：6000 分钟 / 月</li>
+<li>函数调用：100GB-小时</li>
+<li><b style="color:var(--red)">⚠️ 仅限个人非商业项目</b></li>
+<li>无 SLA，无技术支持</li>
+</ul>
+</div>
+<div class="col" style="background:linear-gradient(135deg,rgba(212,162,78,.08),rgba(212,162,78,.02));border-color:rgba(212,162,78,.4)"><h4 class="gold">⭐ 推荐升级 · Pro 计划</h4>
+<ul class="clean">
+<li>价格：<b>$20 / 月 / 成员</b>（约 ¥150）</li>
+<li>流量：<b>1TB / 月</b>（约 50 万次访问）</li>
+<li>商用授权 ✓</li>
+<li>SLA 保障 + 邮件技术支持</li>
+<li>更高带宽与函数限额</li>
+<li>团队协作（多人管理）</li>
+</ul>
+</div>
+</div>
+<div class="callout"><b>替代方案：</b>如需进一步降本，可考虑 Cloudflare Pages（免费版含商用授权，但功能略少）或自建 VPS（需运维投入）。我方建议先用 Vercel Pro，省心可靠。</div>
+</div>
+</section>
+
+<!-- 19 (final). 下一步 -->
+<section class="slide cover" style="background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 50%,#1f335c 100%)">
+<div class="ribbon" style="border-color:rgba(212,162,78,.6)">下一步</div>
+<div class="slide-inner">
+<div class="eyebrow" style="color:var(--gold)">Action Items</div>
+<h1 style="color:#fff;font-size:54px">下一步行动清单<br>谁做什么、什么时候做</h1>
+<div class="divider" style="background:var(--gold);margin-top:24px"></div>
+<div style="margin-top:18px;display:flex;gap:32px">
+<div style="flex:1">
+<h3 style="color:var(--gold);font-size:17px;letter-spacing:.05em">您（甲方）本周</h3>
+<ul class="clean" style="margin-top:12px">
+<li style="color:#cfd6e8">提供真实联系方式（邮箱 / 电话 / WhatsApp / 地址）</li>
+<li style="color:#cfd6e8">确认 Logo 是否最终版</li>
+<li style="color:#cfd6e8">对接澳洲商业律师，启动法律审核</li>
+<li style="color:#cfd6e8">决定是否升级 Vercel Pro 计划</li>
+</ul>
+</div>
+<div style="flex:1">
+<h3 style="color:var(--gold);font-size:17px;letter-spacing:.05em">您（甲方）2-4 周</h3>
+<ul class="clean" style="margin-top:12px">
+<li style="color:#cfd6e8">整理 4 个占位产品的完整资料</li>
+<li style="color:#cfd6e8">准备公司简介、工厂照片</li>
+<li style="color:#cfd6e8">整理客户常见问题（FAQ）— 为 AI 客服做准备</li>
+<li style="color:#cfd6e8">律师审核完成隐私 / 免责文案</li>
+</ul>
+</div>
+<div style="flex:1">
+<h3 style="color:var(--gold);font-size:17px;letter-spacing:.05em">我方（乙方）</h3>
+<ul class="clean" style="margin-top:12px">
+<li style="color:#cfd6e8">本周：替换真实联系方式上线</li>
+<li style="color:#cfd6e8">本周：协助升级 Vercel Pro</li>
+<li style="color:#cfd6e8">收到产品资料后 1-2 天录入上线</li>
+<li style="color:#cfd6e8">律师定稿后更新法律文档</li>
+<li style="color:#cfd6e8">二期 AI 客服技术方案设计</li>
+</ul>
+</div>
+</div>
+<div style="margin-top:40px;border-top:1px solid rgba(212,162,78,.3);padding-top:22px;display:flex;justify-content:space-between;align-items:flex-end">
+<div>
+<div style="font-family:Inter;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:8px">QUESTIONS & DISCUSSION</div>
+<div style="color:#fff;font-size:24px;font-family:Inter;font-weight:700">谢谢，欢迎提问</div>
+<div style="color:#8a98b8;font-size:13px;margin-top:6px">技术问题、规划疑问、合规咨询都可以聊</div>
+</div>
+<div style="text-align:right">
+<div style="font-family:Inter;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:8px">REPORT DATE</div>
+<div style="color:#fff;font-size:18px;font-family:Inter">2026 / 06 / 17</div>
+<div style="color:#8a98b8;font-size:13px;margin-top:4px">AOWATT Global Materials</div>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<script>
+const slides=document.querySelectorAll('.slide');let i=0;const total=slides.length;document.getElementById('totalPage').textContent=total;
+function show(n){i=Math.max(0,Math.min(total-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));document.getElementById('curPage').textContent=i+1;document.getElementById('progress').style.width=((i+1)/total*100)+'%'}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')show(i+1);else if(e.key==='ArrowLeft'||e.key==='PageUp')show(i-1);else if(e.key==='Home')show(0);else if(e.key==='End')show(total-1);else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}});
+document.addEventListener('click',e=>{if(e.target.closest('a,button'))return;const r=e.clientX/window.innerWidth;show(r>0.5?i+1:i-1)});
+show(0);
+</script>
+</body>
+</html>
