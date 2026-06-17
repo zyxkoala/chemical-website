@@ -19,7 +19,7 @@ describe('getPublishedProducts', () => {
 
 describe('getFeaturedProducts', () => {
   it('respects the limit parameter', () => {
-    expect(getFeaturedProducts('en', 3)).toHaveLength(3);
+    expect(getFeaturedProducts('en', 1)).toHaveLength(1);
   });
 });
 

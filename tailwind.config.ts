@@ -30,7 +30,7 @@ export default {
       maxWidth: { 'page-max': '1440px' },
       spacing: {
         'section-px': '80px',
-        'header-h': '126px',
+        'header-h': '96px',
         'header-px': '78px',
       },
       borderRadius: { card: '7px', button: '4px' },
