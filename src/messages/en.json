@@ -51,15 +51,55 @@
     },
     "categoriesHeading": "Browse by Category",
     "featuredHeading": "Featured Products",
+    "browseLabel": "Browse →",
     "search": {
       "placeholder": "Search by name, CAS number, or category",
       "empty": "No products match. Try a different keyword or contact our team."
+    },
+    "megaMenu": {
+      "hoverHint": "Hover a category →",
+      "comingSoon": "Coming Soon"
+    },
+    "sidebar": {
+      "title": "Categories",
+      "expandButton": "Expand categories"
+    },
+    "categoryPage": {
+      "browseSubcategories": "Browse Subcategories",
+      "viewProducts": "View Products"
+    },
+    "emptyState": {
+      "noProducts": "No products available in this category yet.",
+      "contactUs": "Contact us for custom grades and specifications."
     },
     "inquiryCTA": {
       "title": "Need a product not listed?",
       "copy": "Tell us your specification and target volume — our team will reply with availability and pricing.",
       "button": "Contact Our Team"
     }
+  },
+  "categories": {
+    "raw-materials": "Chemical Raw Materials",
+    "manufactured": "Manufactured Goods",
+    "pe": "Polyethylene (PE)",
+    "pp": "Polypropylene (PP)",
+    "ldpe": "Low-Density Polyethylene (LDPE)",
+    "hdpe": "High-Density Polyethylene (HDPE)",
+    "lldpe": "Linear Low-Density Polyethylene (LLDPE)",
+    "mlldpe": "Metallocene LLDPE (mLLDPE)",
+    "lldpe-c4": "C4 (Butene-based LLDPE)",
+    "lldpe-c6": "C6 (Hexene-based LLDPE)",
+    "mlldpe-c6": "C6 (Hexene-based mLLDPE)",
+    "mlldpe-c8": "C8 (Octene-based mLLDPE)",
+    "pp-homo": "Homopolymer PP",
+    "pp-impact": "Impact Copolymer PP",
+    "pp-random": "Random Copolymer PP",
+    "pp-terpoly": "Terpolymer PP",
+    "pp-hico": "High-Impact Copolymer PP",
+    "pp-modified": "Modified PP",
+    "kitchen": "Kitchen & Household",
+    "cling-film": "Cling Film",
+    "wash-basin": "Wash Basin"
   },
   "productDetail": {
     "breadcrumbHome": "Home",
@@ -68,6 +108,13 @@
     "inquiryHeading": "Request a quotation",
     "inquiryCopy": "Send your target volume, packaging preference, and destination port. We will reply with current pricing and lead time.",
     "relatedHeading": "Related Products"
+  },
+  "productsCategory": {
+    "childrenHeading": "Product lines in this category",
+    "applicationsHeading": "Applications",
+    "applicationsSubtitle": "Typical end-uses where products in this category are deployed.",
+    "relatedHeading": "Related product lines",
+    "relatedSubtitle": "Other portfolios you may want to compare alongside this one."
   },
   "contact": {
     "pageHero": {

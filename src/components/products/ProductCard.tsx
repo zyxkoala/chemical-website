@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
 import { track } from '@/lib/analytics';
+import { getCategoryBySlug } from '@/lib/categories';
+import type { Locale } from '@/types/locale';
 import type { LocalizedProduct } from '@/types/product';
 
 type Props = {
@@ -13,7 +15,11 @@ type Props = {
 
 export function ProductCard({ product, source, variant = 'default' }: Props) {
   const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'en';
+  const locale = (pathname.split('/')[1] || 'en') as Locale;
+  const cat = getCategoryBySlug(product.category, locale);
+  const href = cat
+    ? `/${locale}/products/${cat.path.join('/')}/${product.slug}`
+    : `/${locale}/products`;
 
   const handleClick = () => {
     track('product_card_click', { slug: product.slug, source });
@@ -22,7 +28,7 @@ export function ProductCard({ product, source, variant = 'default' }: Props) {
   if (variant === 'compact') {
     return (
       <Link
-        href={`/${locale}/products/${product.slug}`}
+        href={href}
         onClick={handleClick}
         className="group flex items-center gap-4 border border-border-light rounded-card p-4 hover:border-gold transition-colors"
       >
@@ -41,7 +47,7 @@ export function ProductCard({ product, source, variant = 'default' }: Props) {
 
   return (
     <Link
-      href={`/${locale}/products/${product.slug}`}
+      href={href}
       onClick={handleClick}
       className="group block border border-border-light rounded-card overflow-hidden hover:border-gold transition-colors"
     >

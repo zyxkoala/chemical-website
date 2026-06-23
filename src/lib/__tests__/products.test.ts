@@ -1,76 +1,95 @@
 import { describe, it, expect } from 'vitest';
 import {
   getPublishedProducts, getFeaturedProducts, getProductBySlug,
-  getProductsByCategory, getRelatedProducts, getProductStaticParams,
+  getProductsByCategory, getProductStaticParams, getProductPathStaticParams,
   searchProducts,
 } from '../products';
 
 describe('getPublishedProducts', () => {
-  it('returns all 2 V0.1 products sorted', () => {
+  it('excludes placeholder products', () => {
     const ps = getPublishedProducts('en');
-    expect(ps).toHaveLength(2);
-    expect(ps[0].slug).toBe('caustic-soda-flakes-99');
-  });
-  it('localizes the name when locale is zh', () => {
-    const ps = getPublishedProducts('zh');
-    expect(ps[0].name).toBe('片碱 99%');
+    expect(ps.every(p => !p.placeholder)).toBe(true);
   });
 });
 
 describe('getFeaturedProducts', () => {
   it('respects the limit parameter', () => {
-    expect(getFeaturedProducts('en', 1)).toHaveLength(1);
+    expect(getFeaturedProducts('en', 1).length).toBeLessThanOrEqual(1);
+  });
+  it('only returns non-placeholder featured products', () => {
+    expect(getFeaturedProducts('en').every(p => p.featured && !p.placeholder)).toBe(true);
   });
 });
 
 describe('getProductBySlug', () => {
-  it('returns the product when it exists', () => {
-    expect(getProductBySlug('caustic-soda-flakes-99', 'en')?.slug).toBe('caustic-soda-flakes-99');
+  it('returns null for placeholder slug', () => {
+    // Placeholder products are excluded from published lookups
+    expect(getProductBySlug('ldpe-sample', 'en')).toBeNull();
   });
   it('returns null when slug unknown', () => {
     expect(getProductBySlug('does-not-exist', 'en')).toBeNull();
   });
-});
-
-describe('getProductsByCategory', () => {
-  it('filters by category slug', () => {
-    const ps = getProductsByCategory('industrial-chemicals', 'en');
-    expect(ps.every(p => p.category === 'industrial-chemicals')).toBe(true);
-    expect(ps.length).toBeGreaterThanOrEqual(2);
+  it('returns published LLDPE C6 grade across locales', () => {
+    const en = getProductBySlug('f231s', 'en');
+    const zh = getProductBySlug('f231s', 'zh');
+    expect(en?.category).toBe('lldpe-c6');
+    expect(en?.published).toBe(true);
+    expect(en?.placeholder).toBe(false);
+    expect(zh?.name).toContain('F231S');
+    expect(en?.specs.some(s => s.label === 'Density')).toBe(true);
   });
 });
 
-describe('getRelatedProducts', () => {
-  it('returns up to limit related products', () => {
-    const p = getProductBySlug('caustic-soda-flakes-99', 'en')!;
-    const related = getRelatedProducts(p, 'en', 3);
-    expect(related.length).toBeLessThanOrEqual(3);
-    expect(related.every(r => r.slug !== p.slug)).toBe(true);
+describe('getProductsByCategory', () => {
+  it('includes placeholder products in leaf category lists', () => {
+    const ps = getProductsByCategory('ldpe', 'en');
+    expect(ps.length).toBeGreaterThan(0);
+    expect(ps.every(p => p.category === 'ldpe')).toBe(true);
+  });
+  it('exposes both published butene grades in lldpe-c4', () => {
+    const slugs = getProductsByCategory('lldpe-c4', 'en').map(p => p.slug);
+    expect(slugs).toEqual(expect.arrayContaining(['egf-34', 'egf-35b']));
   });
 });
 
 describe('getProductStaticParams', () => {
-  it('returns locale × slug for all published products', () => {
+  it('excludes placeholder products from detail-page generation', () => {
     const params = getProductStaticParams();
-    expect(params).toHaveLength(4); // 2 products × 2 locales
-    expect(params).toContainEqual({ locale: 'en', slug: 'caustic-soda-flakes-99' });
-    expect(params).toContainEqual({ locale: 'zh', slug: 'caustic-soda-flakes-99' });
+    expect(params.every(p => !p.slug.endsWith('-sample'))).toBe(true);
+  });
+  it('includes the three published LLDPE grades', () => {
+    const slugs = getProductStaticParams().map(p => p.slug);
+    expect(slugs).toEqual(expect.arrayContaining(['f231s', 'egf-34', 'egf-35b']));
+  });
+});
+
+describe('getProductPathStaticParams', () => {
+  it('includes all enabled category list paths for each locale', () => {
+    const params = getProductPathStaticParams();
+    // 21 enabled categories × 2 locales = 42 (plus any non-placeholder product detail paths)
+    expect(params.length).toBeGreaterThan(40);
+    expect(params).toContainEqual({ locale: 'en', path: ['raw-materials', 'pe', 'lldpe', 'lldpe-c4'] });
+    expect(params).toContainEqual({ locale: 'zh', path: ['manufactured', 'kitchen', 'cling-film'] });
+  });
+  it('includes detail-page paths for the published LLDPE grades', () => {
+    const params = getProductPathStaticParams();
+    expect(params).toContainEqual({
+      locale: 'en',
+      path: ['raw-materials', 'pe', 'lldpe', 'lldpe-c6', 'f231s'],
+    });
+    expect(params).toContainEqual({
+      locale: 'zh',
+      path: ['raw-materials', 'pe', 'lldpe', 'lldpe-c4', 'egf-34'],
+    });
   });
 });
 
 describe('searchProducts', () => {
-  it('matches by name', () => {
-    const r = searchProducts('caustic', 'en');
-    expect(r.some(p => p.slug === 'caustic-soda-flakes-99')).toBe(true);
+  it('finds the F231S grade by slug', () => {
+    const hits = searchProducts('F231S', 'en');
+    expect(hits.some(p => p.slug === 'f231s')).toBe(true);
   });
-  it('matches by CAS number', () => {
-    const r = searchProducts('1310-73-2', 'en');
-    expect(r.some(p => p.slug === 'caustic-soda-flakes-99')).toBe(true);
-  });
-  it('returns empty for no matches', () => {
+  it('returns empty for nonsense queries', () => {
     expect(searchProducts('xyz-no-such-thing', 'en')).toEqual([]);
-  });
-  it('returns full list for empty query', () => {
-    expect(searchProducts('', 'en')).toHaveLength(2);
   });
 });

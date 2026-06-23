@@ -2,14 +2,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { TrackedLink } from '@/components/analytics/TrackedLink';
-import { getEnabledCategories } from '@/lib/categories';
+import { getChildCategories } from '@/lib/categories';
 import { enabledFooterNavItems } from '@/config/features';
 import { site } from '@/content/site';
 import type { Locale } from '@/types/locale';
 
 export function Footer({ locale }: { locale: Locale }) {
   const t = useTranslations('footer');
-  const categories = getEnabledCategories(locale);
+  // Show top-level branches (Raw Materials / Manufactured) in the footer.
+  const categories = getChildCategories(null, locale);
   const navItems = enabledFooterNavItems();
   const currentYear = new Date().getFullYear();
 
@@ -36,7 +37,7 @@ export function Footer({ locale }: { locale: Locale }) {
               {categories.map(cat => (
                 <li key={cat.slug}>
                   <Link
-                    href={`/${locale}/products?category=${cat.slug}`}
+                    href={`/${locale}/products/${cat.path.join('/')}`}
                     className="text-footer-link text-gray-light hover:text-gold transition-colors"
                   >
                     {cat.name}

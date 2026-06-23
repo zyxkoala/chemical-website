@@ -53,5 +53,9 @@ export function localizeCategory(c: ProductCategory, locale: Locale): LocalizedC
     image: c.image,
     sortOrder: c.sortOrder,
     enabled: c.enabled,
+    path: c.path,
+    parentSlug: c.parentSlug,
+    level: c.level,
+    isLeaf: c.isLeaf,
   };
 }

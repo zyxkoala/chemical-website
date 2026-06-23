@@ -18,7 +18,13 @@ export type PlaceholderVariant =
   | 'category-water'
   | 'category-agricultural'
   | 'category-mining'
+  | 'category-raw-materials'
+  | 'category-pe'
+  | 'category-pp'
+  | 'category-manufactured'
+  | 'category-kitchen'
   | 'product-default'
+  | 'product-lldpe-bag'
   | 'application-mining'
   | 'application-agriculture'
   | 'application-manufacturing'
@@ -58,6 +64,10 @@ export type ProductCategory = {
   image: PlaceholderVariant;
   sortOrder: number;
   enabled: boolean;
+  path: string[];
+  parentSlug: string | null;
+  level: number;
+  isLeaf: boolean;
 };
 
 export type LocalizedProduct = {
@@ -91,6 +101,10 @@ export type LocalizedCategory = {
   image: PlaceholderVariant;
   sortOrder: number;
   enabled: boolean;
+  path: string[];
+  parentSlug: string | null;
+  level: number;
+  isLeaf: boolean;
 };
 
 export type { Locale };

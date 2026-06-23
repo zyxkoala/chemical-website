@@ -1,10 +1,10 @@
 import { useTranslations } from 'next-intl';
-import { getEnabledCategories } from '@/lib/categories';
+import { getChildCategories } from '@/lib/categories';
 import type { Locale } from '@/types/locale';
 
 export function CategoriesWeServeBand({ locale }: { locale: Locale }) {
   const t = useTranslations('about');
-  const categories = getEnabledCategories(locale);
+  const categories = getChildCategories(null, locale);
 
   return (
     <section className="py-12 bg-white">

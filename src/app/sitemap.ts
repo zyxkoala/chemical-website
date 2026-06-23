@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next';
 import { features, navItems } from '@/config/features';
-import { getProductStaticParams } from '@/lib/products';
+import { getProductPathStaticParams } from '@/lib/products';
 
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aowatt.com.au';
-  const lastMod = new Date('2026-06-15');
+  const lastMod = new Date('2026-06-21');
 
   const routes: MetadataRoute.Sitemap = [];
 
@@ -45,17 +45,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  const productParams = getProductStaticParams();
-  for (const { locale, slug } of productParams) {
+  // Category list and product detail pages emitted by the [...path] catch-all
+  const productParams = getProductPathStaticParams();
+  for (const { locale, path } of productParams) {
+    const sub = path.join('/');
     routes.push({
-      url: `${base}/${locale}/products/${slug}`,
+      url: `${base}/${locale}/products/${sub}`,
       lastModified: lastMod,
       changeFrequency: 'monthly',
       priority: 0.7,
       alternates: {
         languages: {
-          en: `${base}/en/products/${slug}`,
-          zh: `${base}/zh/products/${slug}`,
+          en: `${base}/en/products/${sub}`,
+          zh: `${base}/zh/products/${sub}`,
         },
       },
     });

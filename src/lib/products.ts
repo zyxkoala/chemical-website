@@ -2,10 +2,23 @@ import Fuse from 'fuse.js';
 import { products } from '@/content/products';
 import { localizeProduct } from './i18n';
 import { LOCALES } from '@/types/locale';
+import { categories } from '@/content/categories';
 import type { Locale, LocalizedProduct } from '@/types/product';
 
+// All visible products: published OR placeholder. Placeholders show as disabled cards
+// in leaf category lists, but are excluded from detail-page generation and search.
+function visible(): typeof products {
+  return products
+    .filter(p => p.published || p.placeholder)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+}
+
+// Real, published, non-placeholder products. Used for featured sections,
+// detail-page generation, and search.
 function published(): typeof products {
-  return products.filter(p => p.published).sort((a, b) => a.sortOrder - b.sortOrder);
+  return products
+    .filter(p => p.published && !p.placeholder)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
 }
 
 export function getPublishedProducts(locale: Locale): LocalizedProduct[] {
@@ -25,7 +38,7 @@ export function getProductBySlug(slug: string, locale: Locale): LocalizedProduct
 }
 
 export function getProductsByCategory(categorySlug: string, locale: Locale): LocalizedProduct[] {
-  return published()
+  return visible()
     .filter(p => p.category === categorySlug)
     .map(p => localizeProduct(p, locale));
 }
@@ -51,6 +64,23 @@ export function getRelatedProducts(
 
 export function getProductStaticParams(): { locale: Locale; slug: string }[] {
   return published().flatMap(p => LOCALES.map(locale => ({ locale, slug: p.slug })));
+}
+
+// Path-based static params for the new [...path] catch-all route.
+// Includes all category list paths + non-placeholder published product detail paths.
+export function getProductPathStaticParams(): { locale: Locale; path: string[] }[] {
+  const params: { locale: Locale; path: string[] }[] = [];
+  for (const locale of LOCALES) {
+    for (const cat of categories) {
+      if (!cat.enabled) continue;
+      params.push({ locale, path: [...cat.path] });
+    }
+    for (const product of published()) {
+      const leaf = categories.find(c => c.slug === product.category && c.enabled);
+      if (leaf) params.push({ locale, path: [...leaf.path, product.slug] });
+    }
+  }
+  return params;
 }
 
 export function searchProducts(query: string, locale: Locale): LocalizedProduct[] {

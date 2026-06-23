@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { getCategoryBySlug } from '@/lib/categories';
 import type { LocalizedProduct } from '@/types/product';
 import type { Locale } from '@/types/locale';
 
@@ -20,19 +21,25 @@ export function RelatedProductsSection({ locale, related }: Props) {
       <div className="max-w-page-max mx-auto px-section-px">
         <SectionHeading>{t('relatedHeading')}</SectionHeading>
         <div className="grid md:grid-cols-3 gap-8">
-          {related.map(p => (
-            <div key={p.slug} className="border border-border-light rounded-card p-6 hover:border-gold transition-colors">
-              <h3 className="text-card-title text-navy-deep mb-3">{p.name}</h3>
-              <p className="text-body text-gray-body mb-4 line-clamp-2">{p.summary}</p>
-              <Link
-                href={`/${locale}/products/${p.slug}`}
-                className="inline-flex items-center gap-2 text-body text-gold font-semibold hover:underline"
-              >
-                {tButton('viewDetail')}
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          ))}
+          {related.map(p => {
+            const cat = getCategoryBySlug(p.category, locale);
+            const href = cat
+              ? `/${locale}/products/${cat.path.join('/')}/${p.slug}`
+              : `/${locale}/products`;
+            return (
+              <div key={p.slug} className="border border-border-light rounded-card p-6 hover:border-gold transition-colors">
+                <h3 className="text-card-title text-navy-deep mb-3">{p.name}</h3>
+                <p className="text-body text-gray-body mb-4 line-clamp-2">{p.summary}</p>
+                <Link
+                  href={href}
+                  className="inline-flex items-center gap-2 text-body text-gold font-semibold hover:underline"
+                >
+                  {tButton('viewDetail')}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

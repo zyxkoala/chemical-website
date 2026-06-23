@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { PlaceholderVariant } from '@/types/product';
 
 type Props = {
@@ -8,6 +9,20 @@ type Props = {
 
 export function PlaceholderVisual({ variant, className = '', tone }: Props) {
   const inferredTone = tone ?? getTone(variant);
+
+  if (variant === 'product-lldpe-bag') {
+    return (
+      <div className={`${className} relative overflow-hidden rounded-card aspect-[4/3]`}>
+        <Image
+          src="/images/products/lldpe-bag.jpg"
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 600px"
+          className="object-cover"
+        />
+      </div>
+    );
+  }
 
   if (variant === 'hero-plant') {
     return (

@@ -31,15 +31,55 @@
     },
     "categoriesHeading": "按分类浏览",
     "featuredHeading": "精选产品",
+    "browseLabel": "进入浏览 →",
     "search": {
       "placeholder": "按名称、CAS 编号或分类搜索",
       "empty": "未找到匹配产品。请尝试其他关键词或联系我们的团队。"
+    },
+    "megaMenu": {
+      "hoverHint": "悬停分类 →",
+      "comingSoon": "即将上线"
+    },
+    "sidebar": {
+      "title": "分类",
+      "expandButton": "展开分类"
+    },
+    "categoryPage": {
+      "browseSubcategories": "浏览子分类",
+      "viewProducts": "查看产品"
+    },
+    "emptyState": {
+      "noProducts": "该分类暂无可供产品。",
+      "contactUs": "如需定制牌号与规格，请与我们联系。"
     },
     "inquiryCTA": {
       "title": "未列出的产品？",
       "copy": "告诉我们您的规格与目标采购量，我们的团队将回复可用性与价格。",
       "button": "联系我们"
     }
+  },
+  "categories": {
+    "raw-materials": "化工原料",
+    "manufactured": "制品",
+    "pe": "聚乙烯 (PE)",
+    "pp": "聚丙烯 (PP)",
+    "ldpe": "低密度聚乙烯 (LDPE)",
+    "hdpe": "高密度聚乙烯 (HDPE)",
+    "lldpe": "线性低密度聚乙烯 (LLDPE)",
+    "mlldpe": "茂金属线性低密度聚乙烯 (MLLDPE)",
+    "lldpe-c4": "C4（丁烯共聚 LLDPE）",
+    "lldpe-c6": "C6（己烯共聚 LLDPE）",
+    "mlldpe-c6": "C6（己烯共聚 MLLDPE）",
+    "mlldpe-c8": "C8（辛烯共聚 MLLDPE）",
+    "pp-homo": "均聚 PP",
+    "pp-impact": "嵌段共聚 PP",
+    "pp-random": "无规共聚 PP",
+    "pp-terpoly": "三元共聚 PP",
+    "pp-hico": "高抗冲共聚 PP",
+    "pp-modified": "改性专用 PP",
+    "kitchen": "厨房与生活用品",
+    "cling-film": "保鲜膜",
+    "wash-basin": "脸盆"
   },
   "productDetail": {
     "breadcrumbHome": "首页",
@@ -48,6 +88,13 @@
     "inquiryHeading": "请求报价",
     "inquiryCopy": "请提供目标采购量、包装偏好与目的港，我们将回复当前价格与交期。",
     "relatedHeading": "相关产品"
+  },
+  "productsCategory": {
+    "childrenHeading": "本分类下的产品线",
+    "applicationsHeading": "应用场景",
+    "applicationsSubtitle": "本分类产品的典型下游应用方向。",
+    "relatedHeading": "相关产品线",
+    "relatedSubtitle": "您可能也想参考的其他产品线。"
   },
   "contact": {
     "pageHero": {
