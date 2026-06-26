@@ -1,5 +1,3 @@
-> Draft template — to be reviewed and confirmed by legal counsel before launch.
-
 ## 1. Information Only
 
 The product information, specifications, technical data, and application examples on this website are provided for **informational purposes only**. They are typical values published by manufacturers and may vary between batches. Nothing on this website constitutes a warranty, representation, or guarantee, whether express or implied.
@@ -22,7 +20,7 @@ To the maximum extent permitted by law, AOWATT Global Materials accepts no liabi
 
 ## 4. Safety Data Sheets
 
-SDS, COA, and TDS documents are available on request. Email [{{email}}](mailto:{{email}}) with the product name and intended jurisdiction; the manufacturer-issued documents will be sent to you before any shipment is confirmed.
+SDS, COA, and TDS documents are available on request. Email [info@aowatt.com.au](mailto:info@aowatt.com.au) with the product name and intended jurisdiction; the manufacturer-issued documents will be sent to you before any shipment is confirmed.
 
 ## 5. Intellectual Property
 
@@ -34,8 +32,8 @@ This website may contain links to third-party websites. We do not control and ar
 
 ## 7. Jurisdiction
 
-This Disclaimer is governed by the laws of the State of [PLACEHOLDER jurisdiction], Australia.
+This Disclaimer is governed by the laws of the State of Victoria, Australia.
 
 ## 8. Contact
 
-Questions about this Disclaimer: [{{email}}](mailto:{{email}})
+Questions about this Disclaimer: [info@aowatt.com.au](mailto:info@aowatt.com.au)

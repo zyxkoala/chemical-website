@@ -1,8 +1,6 @@
-> 草稿模板 — 上线前由法律顾问审核确认。
-
 ## 1. 关于我们
 
-AOWATT Global Materials 运营本网站 {{domain}}。本隐私政策说明我们如何处理通过本网站收集的信息。
+AOWATT Global Materials 运营本网站 aowatt.com.au。本隐私政策说明我们如何处理通过本网站收集的信息。
 
 ## 2. 收集范围
 
@@ -12,7 +10,6 @@ AOWATT Global Materials 运营本网站 {{domain}}。本隐私政策说明我们
 
 - **Cloudflare** — 用于 DNS、CDN 与汇总访问分析（无 cookie）。
 - **Vercel Web Analytics** — 用于汇总页面访问与自定义事件分析（无 cookie）。
-- **Sentry** — 用于错误报告。当您的浏览器发生错误时，Sentry 会接收错误信息、堆栈与基本环境数据（浏览器、操作系统）。
 
 我们不出售、共享或转让上述数据用于广告。
 
@@ -28,13 +25,12 @@ AOWATT Global Materials 运营本网站 {{domain}}。本隐私政策说明我们
 |---|---|---|
 | Cloudflare | DNS、CDN、流量分析 | IP 地址、请求元数据 |
 | Vercel | 主机托管、网站分析 | IP 地址、页面路径、事件名 |
-| Sentry | 错误报告 | 浏览器、操作系统、错误堆栈 |
 
 各服务商按其自身的隐私政策运营，建议您直接查阅。
 
 ## 5. 您的权利
 
-您可发送邮件至 [{{email}}](mailto:{{email}}) ，咨询我们如何处理您与我们往来咨询相关的数据，或要求我们删除过往通信记录。
+您可发送邮件至 [info@aowatt.com.au](mailto:info@aowatt.com.au)，咨询我们如何处理您与我们往来咨询相关的数据，或要求我们删除过往通信记录。
 
 ## 6. 更新
 
@@ -42,4 +38,4 @@ AOWATT Global Materials 运营本网站 {{domain}}。本隐私政策说明我们
 
 ## 7. 联系方式
 
-如对本隐私政策有任何疑问：[{{email}}](mailto:{{email}})
+如对本隐私政策有任何疑问：[info@aowatt.com.au](mailto:info@aowatt.com.au)

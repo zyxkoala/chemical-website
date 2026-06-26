@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "homeTitle": "AOWATT Global Materials — 全球工业化学品供应商",
+    "homeDescription": "可靠的化学品供应，透明文档，响应式出口支持。"
+  },
   "nav": { "home": "首页", "products": "产品", "whyUs": "我们的优势", "about": "关于我们", "applications": "应用", "contact": "联系" },
   "common": { "zhFallbackBanner": "中文版正在更新，部分内容暂以英文显示。" },
   "button": {
@@ -34,7 +38,8 @@
     "browseLabel": "进入浏览 →",
     "search": {
       "placeholder": "按名称、CAS 编号或分类搜索",
-      "empty": "未找到匹配产品。请尝试其他关键词或联系我们的团队。"
+      "empty": "未找到匹配产品。请尝试其他关键词或联系我们的团队。",
+      "resultsHeading": "搜索结果"
     },
     "megaMenu": {
       "hoverHint": "悬停分类 →",
@@ -138,16 +143,16 @@
     "values": { "qualityTitle": "[PLACEHOLDER ZH] Quality", "qualityCopy": "[PLACEHOLDER ZH] ...", "reliabilityTitle": "[PLACEHOLDER ZH] Reliability", "reliabilityCopy": "[PLACEHOLDER ZH] ...", "integrityTitle": "[PLACEHOLDER ZH] Integrity", "integrityCopy": "[PLACEHOLDER ZH] ..." }
   },
   "applications": {
-    "pageHero": { "eyebrow": "[PLACEHOLDER ZH] Industries", "title": "[PLACEHOLDER ZH] Industry Applications", "subtitle": "[PLACEHOLDER ZH] Six sectors we currently supply." },
+    "pageHero": { "eyebrow": "行业应用", "title": "行业应用", "subtitle": "我们目前服务的六大行业领域。" },
     "items": {
-      "miningTitle": "[PLACEHOLDER ZH] Mining", "miningCopy": "[PLACEHOLDER ZH] ...",
-      "agricultureTitle": "[PLACEHOLDER ZH] Agriculture", "agricultureCopy": "[PLACEHOLDER ZH] ...",
-      "manufacturingTitle": "[PLACEHOLDER ZH] Manufacturing", "manufacturingCopy": "[PLACEHOLDER ZH] ...",
-      "waterTitle": "[PLACEHOLDER ZH] Water Treatment", "waterCopy": "[PLACEHOLDER ZH] ...",
-      "coatingsTitle": "[PLACEHOLDER ZH] Coatings & Adhesives", "coatingsCopy": "[PLACEHOLDER ZH] ...",
-      "logisticsTitle": "[PLACEHOLDER ZH] Logistics & Packaging", "logisticsCopy": "[PLACEHOLDER ZH] ..."
+      "miningTitle": "矿业", "miningCopy": "用于矿物开采与选矿的试剂和工艺化学品。",
+      "agricultureTitle": "农业", "agricultureCopy": "用于作物营养、土壤处理和采后处理的投入品。",
+      "manufacturingTitle": "制造业", "manufacturingCopy": "用于工业生产的散装酸、碱及工艺化学品。",
+      "waterTitle": "水处理", "waterCopy": "用于市政和工业水处理系统的化学品。",
+      "coatingsTitle": "涂料与粘合剂", "coatingsCopy": "用于配方和表面处理应用的树脂、分散剂和成膜助剂。",
+      "logisticsTitle": "物流与包装", "logisticsCopy": "用于重型包装、拉伸膜和防护涂层的聚合物基材。"
     },
-    "cta": { "title": "[PLACEHOLDER ZH] Don't see your industry?", "copy": "[PLACEHOLDER ZH] ...", "button": "[PLACEHOLDER ZH] Contact Our Team" }
+    "cta": { "title": "未找到您的行业？", "copy": "告诉我们您正在采购的产品，我们将确认可用性。", "button": "联系我们的团队" }
   },
   "legal": { "privacyTitle": "隐私政策", "disclaimerTitle": "免责声明" },
   "footer": {

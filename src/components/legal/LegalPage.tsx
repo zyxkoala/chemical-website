@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { marked } from 'marked';
+import sanitizeHtml from 'sanitize-html';
 import { PageHero } from '@/components/ui/PageHero';
 import { site } from '@/content/site';
 import type { Locale } from '@/types/locale';
@@ -31,7 +32,10 @@ function renderTokens(source: string): string {
 export function LegalPage({ locale, title, docName }: Props) {
   const filePath = path.join(process.cwd(), 'src', 'content', 'legal', `${docName}.${locale}.md`);
   const raw = fs.readFileSync(filePath, 'utf8');
-  const html = marked.parse(renderTokens(raw), { async: false }) as string;
+  const html = sanitizeHtml(marked.parse(renderTokens(raw), { async: false }) as string, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+    allowedAttributes: { a: ['href', 'target', 'rel'], ...sanitizeHtml.defaults.allowedAttributes },
+  });
 
   return (
     <>

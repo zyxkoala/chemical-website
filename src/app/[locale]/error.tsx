@@ -1,19 +1,13 @@
 'use client';
-import { useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import * as Sentry from '@sentry/nextjs';
 import { PageHero } from '@/components/ui/PageHero';
 import { Button } from '@/components/ui/Button';
 import type { Locale } from '@/types/locale';
 
-export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+export default function Error({ reset }: { error: Error; reset: () => void }) {
   const tErrors = useTranslations('errors');
   const tButton = useTranslations('button');
   const locale = useLocale() as Locale;
-
-  useEffect(() => {
-    Sentry.captureException(error);
-  }, [error]);
 
   return (
     <div>

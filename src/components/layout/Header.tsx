@@ -100,7 +100,7 @@ export function Header({ locale }: { locale: Locale }) {
                   aria-expanded={isProducts && isDesktop ? megaOpen : undefined}
                   className={`text-nav h-full px-1 flex items-center gap-1 transition-colors hover:text-white relative ${isActive ? 'text-white' : 'text-gray-light'}`}
                 >
-                  {t(item.labelKey as any)}
+                  {t(item.labelKey)}
                   {isProducts && (
                     <span aria-hidden="true" className="hidden lg:inline text-[10px]">▾</span>
                   )}

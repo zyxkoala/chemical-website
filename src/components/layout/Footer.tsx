@@ -82,7 +82,15 @@ export function Footer({ locale }: { locale: Locale }) {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-gold mt-1">📍</span>
-                <span className="text-footer-link text-gray-light">{site.address}</span>
+                <TrackedLink
+                  href={site.mapUrl}
+                  page="footer"
+                  className="text-footer-link text-gray-light hover:text-gold transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {site.address}
+                </TrackedLink>
               </li>
             </ul>
           </div>

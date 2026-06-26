@@ -6,7 +6,7 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aowatt.com.au';
-  const lastMod = new Date('2026-06-21');
+  const lastMod = new Date();
 
   const routes: MetadataRoute.Sitemap = [];
 

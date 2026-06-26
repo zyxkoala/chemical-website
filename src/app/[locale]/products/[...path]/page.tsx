@@ -172,8 +172,26 @@ export default async function ProductPathPage({
         t,
       );
       const related = getRelatedProducts(product, loc, 3);
+      const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aowatt.com.au';
+      const productSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        description: product.summary,
+        url: `${base}/${loc}/products/${path.join('/')}`,
+        offers: {
+          '@type': 'Offer',
+          availability: 'https://schema.org/InStock',
+          priceCurrency: 'AUD',
+          seller: { '@type': 'Organization', name: 'AOWATT Global Materials' },
+        },
+      };
       return (
         <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+          />
           <PageHero
             locale={loc}
             eyebrow={parent.name}
@@ -182,12 +200,12 @@ export default async function ProductPathPage({
           />
           <Breadcrumb locale={loc} crumbs={crumbs} />
           <ProductIntro product={product} />
-          <section className="pb-20 bg-white">
-            <div className="max-w-page-max mx-auto px-section-px grid lg:grid-cols-2 gap-8">
+          <section className="pb-12 bg-white">
+            <div className="max-w-page-max mx-auto px-section-px">
               <SpecsPanel product={product} />
-              <InquiryPanel locale={loc} />
             </div>
           </section>
+          <InquiryPanel locale={loc} />
           <RelatedProductsSection locale={loc} related={related} />
         </>
       );

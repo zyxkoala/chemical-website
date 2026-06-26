@@ -19,7 +19,7 @@ export const features: Record<PageKey, boolean> = {
 export type NavItem = {
   key: PageKey;
   href: string;
-  labelKey: string;
+  labelKey: 'nav.home' | 'nav.products' | 'nav.whyUs' | 'nav.about' | 'nav.applications' | 'nav.contact';
   inMainNav: boolean;
 };
 

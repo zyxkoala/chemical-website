@@ -6,12 +6,14 @@ import type { ReactNode } from 'react';
 type Props = {
   href: string;
   children: ReactNode;
-  page: string; // current page path for analytics
+  page: string;
   productSlug?: string;
   className?: string;
+  target?: string;
+  rel?: string;
 };
 
-export function TrackedLink({ href, children, page, productSlug, className = '' }: Props) {
+export function TrackedLink({ href, children, page, productSlug, className = '', target, rel }: Props) {
   const handleClick = () => {
     const eventName = href.startsWith('mailto:') ? 'contact_email_click'
       : href.startsWith('tel:') ? 'contact_phone_click'
@@ -24,7 +26,7 @@ export function TrackedLink({ href, children, page, productSlug, className = '' 
   };
 
   return (
-    <Link href={href} className={className} onClick={handleClick}>
+    <Link href={href} className={className} onClick={handleClick} target={target} rel={rel}>
       {children}
     </Link>
   );

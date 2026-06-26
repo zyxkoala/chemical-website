@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "homeTitle": "AOWATT Global Materials — Chemical Supplier for Global Industries",
+    "homeDescription": "Reliable chemical supply with transparent documentation and responsive export support."
+  },
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -54,7 +58,8 @@
     "browseLabel": "Browse →",
     "search": {
       "placeholder": "Search by name, CAS number, or category",
-      "empty": "No products match. Try a different keyword or contact our team."
+      "empty": "No products match. Try a different keyword or contact our team.",
+      "resultsHeading": "Search Results"
     },
     "megaMenu": {
       "hoverHint": "Hover a category →",

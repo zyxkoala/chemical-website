@@ -51,7 +51,7 @@ All text uses **Inter** font family.
 |-------|-------|-------|
 | `page-max` | 1440px | Max content width |
 | `section-px` | 80px | Horizontal section padding (desktop) |
-| `header-h` | 126px | Header height (consistent across all pages) |
+| `header-h` | 96px | Header height (consistent across all pages) |
 | `header-px` | 78px | Header horizontal padding |
 | `footer-pt` | 56px | Footer top padding |
 | `footer-pb` | 48px | Footer bottom padding |
@@ -79,7 +79,7 @@ All text uses **Inter** font family.
 - Only Header and Footer have fixed heights.
 
 ### Header (MUST be identical on all pages)
-- Height: 126px, bg: navy (#010912)
+- Height: 96px, bg: navy (#010912)
 - Logo left (288×116), divider (1px × 64px), nav items (Home / Products / Contact), spacer, Language Switch right
 - Active nav item: gold underline (3px tall) below text
 - Horizontal padding: 78px
