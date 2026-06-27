@@ -83,3 +83,13 @@ export function buildCategoryTree(locale: Locale): CategoryTreeNode[] {
 export function getAllCategoryPaths(): string[][] {
   return categories.filter(c => c.enabled).map(c => [...c.path]);
 }
+
+// Returns a map of leaf category slug → full path array.
+// Used to build product detail hrefs in browse views.
+export function getLeafCategoryPathMap(): Record<string, string[]> {
+  const map: Record<string, string[]> = {};
+  for (const c of categories) {
+    if (c.enabled && c.isLeaf) map[c.slug] = [...c.path];
+  }
+  return map;
+}

@@ -3,10 +3,8 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageHero } from '@/components/ui/PageHero';
 import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
-import { ProductsPageClient } from '@/components/products/ProductsPageClient';
 import { InquiryCTABand } from '@/components/products/InquiryCTABand';
 import { getChildCategories } from '@/lib/categories';
-import { getPublishedProducts } from '@/lib/products';
 import { buildMetadata } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
 
@@ -28,7 +26,6 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   const t = await getTranslations('products');
   const roots = getChildCategories(null, loc);
-  const allProducts = getPublishedProducts(loc);
 
   return (
     <>
@@ -38,15 +35,6 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         title={t('pageHero.title')}
         subtitle={t('pageHero.subtitle')}
         backgroundImage="/images/products-hero.jpg"
-      />
-
-      <ProductsPageClient
-        products={allProducts}
-        locale={loc}
-        searchPlaceholder={t('search.placeholder')}
-        searchEmpty={t('search.empty')}
-        searchResultsHeading={t('search.resultsHeading')}
-        featuredHeading={t('featuredHeading')}
       />
 
       <section className="py-20 bg-white">

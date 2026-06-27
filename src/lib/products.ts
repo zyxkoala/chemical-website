@@ -5,6 +5,15 @@ import { LOCALES } from '@/types/locale';
 import { categories } from '@/content/categories';
 import type { Locale, LocalizedProduct } from '@/types/product';
 
+// Collect all leaf category slugs under a given category slug (inclusive if leaf).
+function leafSlugsUnder(slug: string): string[] {
+  const cat = categories.find(c => c.slug === slug && c.enabled);
+  if (!cat) return [];
+  if (cat.isLeaf) return [slug];
+  const children = categories.filter(c => c.enabled && c.parentSlug === slug);
+  return children.flatMap(c => leafSlugsUnder(c.slug));
+}
+
 // All visible products: published OR placeholder. Placeholders show as disabled cards
 // in leaf category lists, but are excluded from detail-page generation and search.
 function visible(): typeof products {
@@ -40,6 +49,14 @@ export function getProductBySlug(slug: string, locale: Locale): LocalizedProduct
 export function getProductsByCategory(categorySlug: string, locale: Locale): LocalizedProduct[] {
   return visible()
     .filter(p => p.category === categorySlug)
+    .map(p => localizeProduct(p, locale));
+}
+
+// Returns all visible products under a category and all its descendant leaf categories.
+export function getProductsUnderCategory(categorySlug: string, locale: Locale): LocalizedProduct[] {
+  const leafSlugs = new Set(leafSlugsUnder(categorySlug));
+  return visible()
+    .filter(p => leafSlugs.has(p.category))
     .map(p => localizeProduct(p, locale));
 }
 

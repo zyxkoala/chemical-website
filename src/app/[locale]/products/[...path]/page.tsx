@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageHero } from '@/components/ui/PageHero';
@@ -9,24 +8,21 @@ import { SpecsPanel } from '@/components/product-detail/SpecsPanel';
 import { InquiryPanel } from '@/components/product-detail/InquiryPanel';
 import { RelatedProductsSection } from '@/components/product-detail/RelatedProductsSection';
 import { InquiryCTABand } from '@/components/products/InquiryCTABand';
-import { CategorySidebar } from '@/components/products/CategorySidebar';
-import { IntermediateCategoryView } from '@/components/products/IntermediateCategoryView';
+import { CategoryBrowsePage } from '@/components/products/CategoryBrowsePage';
 import {
   getProductBySlug,
-  getProductsByCategory,
+  getProductsUnderCategory,
   getRelatedProducts,
   getProductPathStaticParams,
 } from '@/lib/products';
 import {
   getCategoryByPath,
   getCategoryAncestors,
-  getChildCategories,
-  getSiblingCategories,
   buildCategoryTree,
+  getLeafCategoryPathMap,
 } from '@/lib/categories';
 import { buildMetadata } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
-import type { LocalizedCategory, LocalizedProduct } from '@/types/product';
 
 type RouteParams = { locale: string; path: string[] };
 
@@ -99,6 +95,7 @@ export default async function ProductPathPage({
   const t = await getTranslations('productDetail');
   const tCat = await getTranslations('products');
   const tree = buildCategoryTree(loc);
+  const categoryPathMap = getLeafCategoryPathMap();
 
   // ─── Branch 1: Category list page ───────────────────────────────────────
   const category = getCategoryByPath(path, loc);
@@ -110,7 +107,7 @@ export default async function ProductPathPage({
       t,
     );
 
-    const sidebarTitle = tCat('sidebar.title');
+    const products = getProductsUnderCategory(category.slug, loc);
 
     return (
       <>
@@ -121,34 +118,19 @@ export default async function ProductPathPage({
           subtitle={category.summary}
         />
         <Breadcrumb locale={loc} crumbs={crumbs} />
-        <section className="py-12 lg:py-16 bg-white">
-          <div className="max-w-page-max mx-auto px-section-px flex gap-12">
-            <CategorySidebar
-              tree={tree}
-              locale={loc}
-              activePath={category.path}
-              title={sidebarTitle}
-            />
-            <div className="flex-1 min-w-0">
-              {category.isLeaf ? (
-                <LeafCategoryContent
-                  parent={category}
-                  products={getProductsByCategory(category.slug, loc)}
-                  locale={loc}
-                  emptyMessage={tCat('emptyState.noProducts')}
-                  comingSoonLabel={tCat('megaMenu.comingSoon')}
-                />
-              ) : (
-                <IntermediateCategoryView
-                  category={category}
-                  childCategories={getChildCategories(category.slug, loc)}
-                  siblings={getSiblingCategories(category.slug, loc)}
-                  locale={loc}
-                />
-              )}
-            </div>
-          </div>
-        </section>
+        <CategoryBrowsePage
+          tree={tree}
+          activeCategory={category}
+          products={products}
+          categoryPathMap={categoryPathMap}
+          locale={loc}
+          searchPlaceholder={tCat('search.placeholder')}
+          searchEmpty={tCat('search.empty')}
+          searchResultsHeading={tCat('search.resultsHeading')}
+          comingSoonLabel={tCat('megaMenu.comingSoon')}
+          emptyMessage={tCat('emptyState.noProducts')}
+          sidebarTitle={tCat('sidebar.title')}
+        />
         <InquiryCTABand locale={loc} />
       </>
     );
@@ -215,81 +197,3 @@ export default async function ProductPathPage({
   notFound();
 }
 
-function LeafCategoryContent({
-  parent,
-  products,
-  locale,
-  emptyMessage,
-  comingSoonLabel,
-}: {
-  parent: LocalizedCategory;
-  products: LocalizedProduct[];
-  locale: Locale;
-  emptyMessage: string;
-  comingSoonLabel: string;
-}) {
-  if (products.length === 0) {
-    return (
-      <p className="text-body text-gray-body text-center py-12">{emptyMessage}</p>
-    );
-  }
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {products.map(p => (
-        <ProductCardWithDisabled
-          key={p.slug}
-          parent={parent}
-          product={p}
-          locale={locale}
-          comingSoonLabel={comingSoonLabel}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ProductCardWithDisabled({
-  parent,
-  product,
-  locale,
-  comingSoonLabel,
-}: {
-  parent: LocalizedCategory;
-  product: LocalizedProduct;
-  locale: Locale;
-  comingSoonLabel: string;
-}) {
-  // Placeholder products show as disabled cards (not yet linkable).
-  if (product.placeholder) {
-    return (
-      <div
-        aria-disabled="true"
-        className="relative border border-border-light rounded-card overflow-hidden opacity-60 cursor-not-allowed"
-      >
-        <div className="p-6">
-          <h3 className="text-card-title text-navy-deep mb-2">{product.name}</h3>
-          <p className="text-body text-gray-body line-clamp-2 mb-4">{product.summary}</p>
-          <span className="inline-block text-[13px] font-semibold text-gold bg-[#FDF6E7] px-3 py-1 rounded">
-            {comingSoonLabel}
-          </span>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <Link
-      href={`/${locale}/products/${parent.path.join('/')}/${product.slug}`}
-      className="group block border border-border-light rounded-card overflow-hidden hover:border-gold transition-colors"
-    >
-      <div className="p-6">
-        <h3 className="text-card-title text-navy-deep mb-2 group-hover:text-gold transition-colors">
-          {product.name}
-        </h3>
-        <p className="text-body text-gray-body line-clamp-2">{product.summary}</p>
-      </div>
-    </Link>
-  );
-}
-
-// (Removed: safeTitle fallback — all i18n keys now exist in en.json/zh.json.)
