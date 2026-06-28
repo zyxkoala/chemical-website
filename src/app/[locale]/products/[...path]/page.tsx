@@ -239,7 +239,7 @@ export default async function ProductPathPage({
             </div>
           </section>
           <ProductApplicationsSection product={product} />
-          <InquiryPanel locale={loc} />
+          <InquiryPanel locale={loc} productName={product.name} productUrl={productUrl} />
           <RelatedProductsSection locale={loc} related={related} />
         </>
       );
