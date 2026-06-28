@@ -14,6 +14,10 @@ type Props = {
 };
 
 export function TrackedLink({ href, children, page, productSlug, className = '', target, rel }: Props) {
+  const isHttpExternal = href.startsWith('http');
+  const safeTarget = target ?? (isHttpExternal ? '_blank' : undefined);
+  const safeRel = rel ?? (isHttpExternal ? 'noopener noreferrer' : undefined);
+
   const handleClick = () => {
     const eventName = href.startsWith('mailto:') ? 'contact_email_click'
       : href.startsWith('tel:') ? 'contact_phone_click'
@@ -26,7 +30,7 @@ export function TrackedLink({ href, children, page, productSlug, className = '',
   };
 
   return (
-    <Link href={href} className={className} onClick={handleClick} target={target} rel={rel}>
+    <Link href={href} className={className} onClick={handleClick} target={safeTarget} rel={safeRel}>
       {children}
     </Link>
   );

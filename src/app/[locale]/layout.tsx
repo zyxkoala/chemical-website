@@ -8,6 +8,7 @@ import { CloudflareBeacon } from '@/components/analytics/CloudflareBeacon';
 import { LOCALES } from '@/types/locale';
 import { site } from '@/content/site';
 import { absoluteUrl, getSiteUrl } from '@/lib/seo';
+import { serializeJsonLd } from '@/lib/json-ld';
 import type { Locale } from '@/types/locale';
 
 export function generateStaticParams() {
@@ -69,7 +70,7 @@ export default async function LocaleLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([organizationSchema, websiteSchema]),
+          __html: serializeJsonLd([organizationSchema, websiteSchema]),
         }}
       />
       <Header locale={locale as Locale} />

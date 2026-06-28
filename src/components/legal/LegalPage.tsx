@@ -35,6 +35,20 @@ export function LegalPage({ locale, title, docName }: Props) {
   const html = sanitizeHtml(marked.parse(renderTokens(raw), { async: false }) as string, {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
     allowedAttributes: { a: ['href', 'target', 'rel'], ...sanitizeHtml.defaults.allowedAttributes },
+    allowedSchemes: ['http', 'https', 'mailto', 'tel'],
+    transformTags: {
+      a: (_tagName, attribs) => {
+        const href = attribs.href ?? '';
+        const isExternal = href.startsWith('http');
+        return {
+          tagName: 'a',
+          attribs: {
+            ...attribs,
+            ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+          },
+        };
+      },
+    },
   });
 
   return (

@@ -23,6 +23,7 @@ import {
   getLeafCategoryPathMap,
 } from '@/lib/categories';
 import { absoluteUrl, buildMetadata, localizedUrl } from '@/lib/seo';
+import { serializeJsonLd } from '@/lib/json-ld';
 import { site } from '@/content/site';
 import type { Locale } from '@/types/locale';
 
@@ -221,7 +222,7 @@ export default async function ProductPathPage({
         <>
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+            dangerouslySetInnerHTML={{ __html: serializeJsonLd(productSchema) }}
           />
           <PageHero
             locale={loc}
