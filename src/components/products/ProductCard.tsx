@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
@@ -32,7 +33,19 @@ export function ProductCard({ product, source, variant = 'default' }: Props) {
         onClick={handleClick}
         className="group flex items-center gap-4 border border-border-light rounded-card p-4 hover:border-gold transition-colors"
       >
-        <PlaceholderVisual variant={product.image} className="w-20 h-20 flex-shrink-0" />
+        {product.heroImage ? (
+          <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden rounded-card bg-gray-light/30">
+            <Image
+              src={product.heroImage}
+              alt={product.name}
+              fill
+              sizes="80px"
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <PlaceholderVisual variant={product.image} className="w-20 h-20 flex-shrink-0" />
+        )}
         <div className="flex-1 min-w-0">
           <h3 className="text-[16px] font-semibold text-navy-deep mb-1 group-hover:text-gold transition-colors truncate">
             {product.name}
@@ -51,7 +64,19 @@ export function ProductCard({ product, source, variant = 'default' }: Props) {
       onClick={handleClick}
       className="group block border border-border-light rounded-card overflow-hidden hover:border-gold transition-colors"
     >
-      <PlaceholderVisual variant={product.image} className="w-full h-48" />
+      {product.heroImage ? (
+        <div className="relative w-full h-48 overflow-hidden bg-gray-light/30">
+          <Image
+            src={product.heroImage}
+            alt={product.name}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </div>
+      ) : (
+        <PlaceholderVisual variant={product.image} className="w-full h-48" />
+      )}
       <div className="p-6">
         <h3 className="text-card-title text-navy-deep mb-2 group-hover:text-gold transition-colors">
           {product.name}
