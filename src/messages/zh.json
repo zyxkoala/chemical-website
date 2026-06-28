@@ -153,19 +153,19 @@
     }
   },
   "whyUs": {
-    "pageHero": { "eyebrow": "[PLACEHOLDER ZH] Why work with us", "title": "[PLACEHOLDER ZH] Why Work With Us", "subtitle": "[PLACEHOLDER ZH] Three commitments that shape every shipment." },
-    "advantagesHeading": "[PLACEHOLDER ZH] Core Advantages",
-    "processHeading": "[PLACEHOLDER ZH] Cooperation Process",
-    "process": { "step1": "[PLACEHOLDER ZH] Inquiry", "step2": "[PLACEHOLDER ZH] Requirement Review", "step3": "[PLACEHOLDER ZH] Document Confirmation", "step4": "[PLACEHOLDER ZH] Packaging & Logistics", "step5": "[PLACEHOLDER ZH] After-sales Support" },
-    "supportCTA": { "title": "[PLACEHOLDER ZH] Need B2B sourcing support?", "copy": "[PLACEHOLDER ZH] Send us your specification...", "button": "[PLACEHOLDER ZH] Contact Our Team" }
+    "pageHero": { "eyebrow": "为何选择我们", "title": "稳定、透明、面向出口的材料供应支持", "subtitle": "从规格确认到文件准备与物流协同，我们围绕国际买家的采购流程提供响应式支持。" },
+    "advantagesHeading": "核心优势",
+    "processHeading": "合作流程",
+    "process": { "step1": "询盘沟通", "step2": "需求与规格确认", "step3": "文件与样品确认", "step4": "包装与物流安排", "step5": "发货后支持" },
+    "supportCTA": { "title": "需要 B2B 采购支持？", "copy": "请发送目标牌号、规格、采购量与目的港，我们将确认当前可供情况。", "button": "联系我们" }
   },
   "about": {
-    "pageHero": { "eyebrow": "[PLACEHOLDER ZH] About AOWATT", "title": "[PLACEHOLDER ZH] About AOWATT", "subtitle": "[PLACEHOLDER ZH] Connecting materials..." },
-    "overviewHeading": "[PLACEHOLDER ZH] Company Overview",
-    "overviewBody": "[PLACEHOLDER ZH] AOWATT Global Materials supplies...",
-    "categoriesBandHeading": "[PLACEHOLDER ZH] Categories We Serve",
-    "valuesHeading": "[PLACEHOLDER ZH] Our Values",
-    "values": { "qualityTitle": "[PLACEHOLDER ZH] Quality", "qualityCopy": "[PLACEHOLDER ZH] ...", "reliabilityTitle": "[PLACEHOLDER ZH] Reliability", "reliabilityCopy": "[PLACEHOLDER ZH] ...", "integrityTitle": "[PLACEHOLDER ZH] Integrity", "integrityCopy": "[PLACEHOLDER ZH] ..." }
+    "pageHero": { "eyebrow": "关于 AOWATT", "title": "AOWATT Global Materials", "subtitle": "连接全球买家与可靠材料供应，重视质量文件、沟通效率与长期合作。" },
+    "overviewHeading": "公司概览",
+    "overviewBody": "AOWATT Global Materials 为国际买家提供聚烯烃树脂及相关材料的采购支持。我们关注真实可供货源、清晰规格文件与面向出口流程的沟通协同。",
+    "categoriesBandHeading": "服务品类",
+    "valuesHeading": "我们的价值观",
+    "values": { "qualityTitle": "品质", "qualityCopy": "以制造商文件、规格核验和批次资料支撑采购决策。", "reliabilityTitle": "可靠", "reliabilityCopy": "围绕买家的目标数量、包装、目的港和交期提供清晰反馈。", "integrityTitle": "诚信", "integrityCopy": "如实说明产品状态、文件可用性与供应边界，避免过度承诺。" }
   },
   "applications": {
     "pageHero": { "eyebrow": "行业应用", "title": "行业应用", "subtitle": "我们目前服务的六大行业领域。" },
