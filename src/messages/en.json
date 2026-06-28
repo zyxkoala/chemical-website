@@ -1,7 +1,7 @@
 {
   "meta": {
-    "homeTitle": "AOWATT Global Materials — Chemical Supplier for Global Industries",
-    "homeDescription": "Reliable chemical supply with transparent documentation and responsive export support."
+    "homeTitle": "AOWATT Global Materials — PE and PP Resin Export Supply",
+    "homeDescription": "Polyolefin resin supply with verified documentation and responsive export support."
   },
   "nav": {
     "home": "Home",
@@ -28,8 +28,8 @@
   },
   "home": {
     "hero": {
-      "title": "Reliable Chemical Supply for Global Industries",
-      "subtitle": "AOWATT Global Materials connects buyers worldwide with verified chemical products, transparent documentation, and responsive export support."
+      "title": "PE and PP Resin Supply for Global Buyers",
+      "subtitle": "AOWATT Global Materials connects buyers with verified polyolefin resin grades, clear technical documentation, and responsive export support."
     },
     "categories": {
       "heading": "Product Categories"
@@ -51,7 +51,7 @@
     "pageHero": {
       "eyebrow": "Catalog",
       "title": "Products",
-      "subtitle": "Browse our chemical product range. Contact us for current pricing, full documentation, and packaging options."
+      "subtitle": "Browse PE, PP, and related polyolefin product lines. Contact us for current availability, documentation, and packaging options."
     },
     "categoriesHeading": "Browse by Category",
     "featuredHeading": "Featured Products",
@@ -74,7 +74,7 @@
       "viewProducts": "View Products"
     },
     "emptyState": {
-      "noProducts": "No products available in this category yet.",
+      "noProducts": "No listed grades in this category yet.",
       "contactUs": "Contact us for custom grades and specifications."
     },
     "inquiryCTA": {
@@ -231,12 +231,12 @@
       "subtitle": "Six sectors we currently supply."
     },
     "items": {
-      "miningTitle": "Mining",
-      "miningCopy": "Reagents and process chemicals for mineral extraction and beneficiation.",
-      "agricultureTitle": "Agriculture",
-      "agricultureCopy": "Inputs for crop nutrition, soil treatment, and post-harvest handling.",
-      "manufacturingTitle": "Manufacturing",
-      "manufacturingCopy": "Bulk acids, alkalis, and process chemicals for industrial production.",
+      "miningTitle": "Greenhouse & mulch film",
+      "miningCopy": "LLDPE grades for agricultural films that need tear strength, puncture resistance, and stable field performance.",
+      "agricultureTitle": "Stretch & pallet wrap",
+      "agricultureCopy": "Hexene LLDPE options for logistics films requiring uniform shrinkage and reliable puncture resistance.",
+      "manufacturingTitle": "Food & merchandise bags",
+      "manufacturingCopy": "Butene LLDPE grades for blown-film bag lines, retail packaging, and everyday flexible packaging.",
       "waterTitle": "Water Treatment",
       "waterCopy": "Disinfectants, coagulants, and pH adjusters for municipal and industrial water systems.",
       "coatingsTitle": "Coatings & Adhesives",
