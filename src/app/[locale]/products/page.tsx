@@ -2,9 +2,12 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageHero } from '@/components/ui/PageHero';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CategoryVisual } from '@/components/products/CategoryVisual';
 import { InquiryCTABand } from '@/components/products/InquiryCTABand';
+import { ProductsPageClient } from '@/components/products/ProductsPageClient';
 import { getChildCategories } from '@/lib/categories';
+import { getPublishedProducts } from '@/lib/products';
 import { buildMetadata } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
 
@@ -35,6 +38,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   const t = await getTranslations('products');
   const roots = getChildCategories(null, loc);
+  const products = getPublishedProducts(loc);
 
   return (
     <>
@@ -46,8 +50,18 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         backgroundImage="/images/products-hero.jpg"
       />
 
-      <section className="py-20 bg-white">
+      <ProductsPageClient
+        products={products}
+        locale={loc}
+        searchPlaceholder={t('search.placeholder')}
+        searchEmpty={t('search.empty')}
+        searchResultsHeading={t('search.resultsHeading')}
+        featuredHeading={t('featuredHeading')}
+      />
+
+      <section className="py-20 bg-white border-t border-border-light">
         <div className="max-w-page-max mx-auto px-section-px">
+          <SectionHeading>{t('categoriesHeading')}</SectionHeading>
           <div className="grid md:grid-cols-2 gap-8">
             {roots.map(root => (
               <Link
