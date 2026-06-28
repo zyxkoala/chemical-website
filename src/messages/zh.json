@@ -1,7 +1,7 @@
 {
   "meta": {
-    "homeTitle": "AOWATT Global Materials — PE 与 PP 树脂出口供应",
-    "homeDescription": "聚烯烃树脂供应，透明技术文档，响应式出口支持。"
+    "homeTitle": "AOWATT Global Materials — 端到端塑料供应链解决方案",
+    "homeDescription": "从合成树脂采购到下游制造与分销。"
   },
   "nav": { "home": "首页", "products": "产品", "whyUs": "我们的优势", "about": "关于我们", "applications": "应用", "contact": "联系" },
   "common": { "zhFallbackBanner": "中文版正在更新，部分内容暂以英文显示。" },
@@ -12,8 +12,8 @@
   },
   "home": {
     "hero": {
-      "title": "面向全球买家的 PE 与 PP 树脂供应",
-      "subtitle": "AOWATT Global Materials 连接全球买家与经过核验的聚烯烃树脂牌号，提供清晰技术文档与响应式出口支持。"
+      "title": "提供端到端塑料供应链解决方案",
+      "subtitle": "从合成树脂采购到下游制造与分销。"
     },
     "categories": { "heading": "产品分类" },
     "whyUs": {
