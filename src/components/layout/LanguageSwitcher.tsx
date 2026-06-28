@@ -3,7 +3,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { track } from '@/lib/analytics';
 import type { Locale } from '@/types/locale';
 
-export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
+export function LanguageSwitcher({
+  currentLocale,
+  className = '',
+}: {
+  currentLocale: Locale;
+  className?: string;
+}) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -15,7 +21,7 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
   };
 
   return (
-    <div className="flex items-center gap-2 text-nav">
+    <div className={`flex items-center gap-2 text-nav ${className}`}>
       <button
         onClick={() => switchLocale('en')}
         className={`transition-colors ${currentLocale === 'en' ? 'text-white font-semibold' : 'text-gray-light hover:text-white'}`}

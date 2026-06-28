@@ -27,6 +27,7 @@ export function Header({ locale }: { locale: Locale }) {
   const tree = buildCategoryTree(locale);
 
   const [megaOpen, setMegaOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -37,10 +38,16 @@ export function Header({ locale }: { locale: Locale }) {
     const onChange = (e: MediaQueryListEvent) => {
       setIsDesktop(e.matches);
       if (!e.matches) setMegaOpen(false);
+      if (e.matches) setMobileOpen(false);
     };
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
   }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setMegaOpen(false);
+  }, [pathname]);
 
   const scheduleOpen = () => {
     if (!isDesktop) return;
@@ -75,13 +82,13 @@ export function Header({ locale }: { locale: Locale }) {
             width={720}
             height={470}
             priority
-            className="h-[70px] sm:h-[72px] md:h-[76px] w-auto object-contain"
+            className="h-[62px] sm:h-[68px] lg:h-[76px] w-auto object-contain"
           />
         </Link>
 
-        <div className="hidden md:block w-px h-10 bg-white/20 mx-6" />
+        <div className="hidden lg:block w-px h-10 bg-white/20 mx-6" />
 
-        <nav className="flex-1 flex items-center h-full gap-3 sm:gap-5 md:gap-7 ml-2 md:ml-0">
+        <nav className="hidden lg:flex flex-1 items-center h-full gap-7 ml-0">
           {navItems.map(item => {
             const isActive = item.href === '/'
               ? currentPath === '/'
@@ -108,8 +115,76 @@ export function Header({ locale }: { locale: Locale }) {
           })}
         </nav>
 
-        <LanguageSwitcher currentLocale={locale} />
+        <LanguageSwitcher currentLocale={locale} className="hidden lg:flex" />
+
+        <button
+          type="button"
+          aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMobileOpen(open => !open)}
+          className="ml-auto inline-flex h-11 w-11 items-center justify-center rounded-button border border-white/20 text-white transition-colors hover:border-gold hover:text-gold lg:hidden"
+        >
+          <span className="sr-only">{mobileOpen ? 'Close navigation' : 'Open navigation'}</span>
+          <span aria-hidden="true" className="flex flex-col gap-[5px]">
+            <span className={`h-[2px] w-5 bg-current transition-transform ${mobileOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
+            <span className={`h-[2px] w-5 bg-current transition-opacity ${mobileOpen ? 'opacity-0' : 'opacity-100'}`} />
+            <span className={`h-[2px] w-5 bg-current transition-transform ${mobileOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
+          </span>
+        </button>
       </div>
+
+      {mobileOpen && (
+        <div
+          id="mobile-navigation"
+          className="absolute left-0 right-0 top-full border-t border-white/10 bg-navy text-white shadow-[0_18px_36px_rgba(1,9,18,0.24)] lg:hidden"
+        >
+          <div className="max-w-page-max mx-auto px-section-px py-5">
+            <nav aria-label="Mobile navigation" className="flex flex-col">
+              {navItems.map(item => {
+                const isActive = item.href === '/'
+                  ? currentPath === '/'
+                  : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+                return (
+                  <Link
+                    key={item.key}
+                    href={`/${locale}${item.href}`}
+                    onClick={() => setMobileOpen(false)}
+                    className={`border-b border-white/10 py-4 text-[18px] font-semibold transition-colors ${isActive ? 'text-white' : 'text-gray-light hover:text-white'}`}
+                  >
+                    {t(item.labelKey)}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="mt-5">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-gold">
+                {t('nav.products')}
+              </p>
+              <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {tree.map(item => (
+                  <Link
+                    key={item.slug}
+                    href={`/${locale}/products/${item.path.join('/')}`}
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded-card border border-white/10 px-4 py-3 text-[15px] font-semibold text-gray-light transition-colors hover:border-gold hover:text-white"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
+              <span className="text-[13px] font-semibold uppercase tracking-[0.12em] text-gold">
+                {locale === 'en' ? 'Language' : '语言'}
+              </span>
+              <LanguageSwitcher currentLocale={locale} />
+            </div>
+          </div>
+        </div>
+      )}
 
       {megaOpen && isDesktop && (
         <div onMouseEnter={cancelClose} onMouseLeave={scheduleClose}>
