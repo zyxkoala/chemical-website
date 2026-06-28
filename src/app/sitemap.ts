@@ -6,8 +6,6 @@ import { localizedUrl } from '@/lib/seo';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastMod = new Date();
-
   const routes: MetadataRoute.Sitemap = [];
 
   const enabledPages = navItems.filter(i => features[i.key]);
@@ -15,16 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of ['en', 'zh'] as const) {
       routes.push({
         url: localizedUrl(locale, item.href),
-        lastModified: lastMod,
-        changeFrequency: 'monthly',
-        priority: item.href === '/' ? 1.0 : 0.8,
-        alternates: {
-          languages: {
-            en: localizedUrl('en', item.href),
-            zh: localizedUrl('zh', item.href),
-            'x-default': localizedUrl('en', item.href),
-          },
-        },
       });
     }
   }
@@ -33,16 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of ['en', 'zh'] as const) {
       routes.push({
         url: localizedUrl(locale, path),
-        lastModified: lastMod,
-        changeFrequency: 'yearly',
-        priority: 0.3,
-        alternates: {
-          languages: {
-            en: localizedUrl('en', path),
-            zh: localizedUrl('zh', path),
-            'x-default': localizedUrl('en', path),
-          },
-        },
       });
     }
   }
@@ -54,16 +32,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const routePath = `/products/${sub}`;
     routes.push({
       url: localizedUrl(locale, routePath),
-      lastModified: lastMod,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-      alternates: {
-        languages: {
-          en: localizedUrl('en', routePath),
-          zh: localizedUrl('zh', routePath),
-          'x-default': localizedUrl('en', routePath),
-        },
-      },
     });
   }
 
