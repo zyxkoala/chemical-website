@@ -28,14 +28,24 @@ The third parties named in §2 process limited data on our behalf:
 
 Each provider operates under its own privacy policy. We recommend you review them directly.
 
-## 5. Your Rights
+## 5. International Processing
+
+Because we work with international buyers and use global infrastructure providers, technical data and direct enquiry records may be processed or stored outside your country of residence, including in Australia, the United States, and other jurisdictions where our service providers operate.
+
+We use this information only for website operation, security, analytics, and responding to your business enquiry.
+
+## 6. Your Rights
 
 You may contact us at [info@aowatt.com.au](mailto:info@aowatt.com.au) to request information about how we handle data related to your enquiries with us, or to ask us to delete records of past correspondence.
 
-## 6. Updates
+## 7. No Sensitive Information
+
+Please do not send passwords, payment card details, personal identity documents, or other sensitive personal information through email, WhatsApp, or any website link unless we specifically request it through an agreed secure process.
+
+## 8. Updates
 
 We may update this policy from time to time. The current version is always available at this URL.
 
-## 7. Contact
+## 9. Contact
 
 Questions about this Privacy Policy: [info@aowatt.com.au](mailto:info@aowatt.com.au)

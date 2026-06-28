@@ -107,6 +107,10 @@ export function Footer({ locale }: { locale: Locale }) {
               {t('privacyLink')}
             </Link>
             <span>·</span>
+            <Link href={`/${locale}/terms`} className="hover:text-gold transition-colors">
+              {t('termsLink')}
+            </Link>
+            <span>·</span>
             <Link href={`/${locale}/disclaimer`} className="hover:text-gold transition-colors">
               {t('disclaimerLink')}
             </Link>

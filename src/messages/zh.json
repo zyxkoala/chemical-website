@@ -179,12 +179,13 @@
     },
     "cta": { "title": "未找到您的行业？", "copy": "告诉我们您正在采购的产品，我们将确认可用性。", "button": "联系我们的团队" }
   },
-  "legal": { "privacyTitle": "隐私政策", "disclaimerTitle": "免责声明" },
+  "legal": { "privacyTitle": "隐私政策", "termsTitle": "使用条款", "disclaimerTitle": "免责声明" },
   "footer": {
     "productsHeading": "产品",
     "contactHeading": "联系",
     "copyright": "© {year} AOWATT Global Materials",
     "privacyLink": "隐私政策",
+    "termsLink": "使用条款",
     "disclaimerLink": "免责声明"
   },
   "errors": {

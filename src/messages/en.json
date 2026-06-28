@@ -252,6 +252,7 @@
   },
   "legal": {
     "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms of Use",
     "disclaimerTitle": "Disclaimer"
   },
   "footer": {
@@ -259,6 +260,7 @@
     "contactHeading": "Contact",
     "copyright": "© {year} AOWATT Global Materials",
     "privacyLink": "Privacy",
+    "termsLink": "Terms",
     "disclaimerLink": "Disclaimer"
   },
   "errors": {

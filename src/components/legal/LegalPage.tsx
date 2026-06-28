@@ -9,7 +9,7 @@ import type { Locale } from '@/types/locale';
 type Props = {
   locale: Locale;
   title: string;
-  docName: 'privacy' | 'disclaimer';
+  docName: 'privacy' | 'disclaimer' | 'terms';
 };
 
 const tokens: Record<string, string> = {

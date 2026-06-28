@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  for (const path of ['/privacy', '/disclaimer'] as const) {
+  for (const path of ['/privacy', '/terms', '/disclaimer'] as const) {
     for (const locale of ['en', 'zh'] as const) {
       routes.push({
         url: localizedUrl(locale, path),
