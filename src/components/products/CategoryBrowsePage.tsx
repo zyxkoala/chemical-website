@@ -59,7 +59,7 @@ export function CategoryBrowsePage({
     return fuse.search(q).map(r => r.item);
   }, [query, fuse]);
 
-  const displayProducts = searchResults ?? products;
+  const displayProducts = searchResults ?? searchableProducts;
 
   return (
     <section className="py-12 lg:py-16 bg-white">
