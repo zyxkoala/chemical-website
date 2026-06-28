@@ -10,7 +10,21 @@ import type { Locale } from '@/types/locale';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta' });
-  return buildMetadata({ title: t('homeTitle'), description: t('homeDescription'), path: '/', locale: locale as Locale });
+  return buildMetadata({
+    title: t('homeTitle'),
+    description: t('homeDescription'),
+    path: '/',
+    locale: locale as Locale,
+    ogImage: '/images/hero-chemical-plant.jpg',
+    keywords: [
+      'AOWATT',
+      'AOWATT Global Materials',
+      'chemical supplier',
+      'polymer raw materials',
+      'LLDPE',
+      'industrial chemicals',
+    ],
+  });
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {

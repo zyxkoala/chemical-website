@@ -101,9 +101,6 @@ export function Header({ locale }: { locale: Locale }) {
                   className={`text-nav h-full px-1 flex items-center gap-1 transition-colors hover:text-white relative ${isActive ? 'text-white' : 'text-gray-light'}`}
                 >
                   {t(item.labelKey)}
-                  {isProducts && (
-                    <span aria-hidden="true" className="hidden lg:inline text-[10px]">▾</span>
-                  )}
                   {isActive && <span className="absolute bottom-0 left-1 right-1 h-[3px] bg-gold" />}
                 </Link>
               </div>

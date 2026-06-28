@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageHero } from '@/components/ui/PageHero';
-import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
+import { CategoryVisual } from '@/components/products/CategoryVisual';
 import { InquiryCTABand } from '@/components/products/InquiryCTABand';
 import { getChildCategories } from '@/lib/categories';
 import { buildMetadata } from '@/lib/seo';
@@ -16,6 +16,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: t('subtitle'),
     path: '/products',
     locale: locale as Locale,
+    ogImage: '/images/products-hero.jpg',
+    keywords: [
+      'AOWATT products',
+      'LLDPE EGF-34',
+      'LLDPE EGF-35B',
+      'LLDPE F231S',
+      'polyethylene raw materials',
+      'polymer supplier',
+    ],
   });
 }
 
@@ -46,7 +55,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 href={`/${loc}/products/${root.path.join('/')}`}
                 className="group block border border-border-light rounded-card overflow-hidden hover:border-gold transition-colors"
               >
-                <PlaceholderVisual variant={root.image} className="w-full h-64" />
+                <CategoryVisual
+                  variant={root.image}
+                  categorySlug={root.slug}
+                  className="w-full h-64"
+                />
                 <div className="p-8">
                   <h2 className="text-card-title text-navy-deep mb-3 group-hover:text-gold transition-colors">
                     {root.name}

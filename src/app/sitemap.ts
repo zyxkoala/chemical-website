@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { features, navItems } from '@/config/features';
 import { getProductPathStaticParams } from '@/lib/products';
+import { localizedUrl } from '@/lib/seo';
 
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aowatt.com.au';
   const lastMod = new Date();
 
   const routes: MetadataRoute.Sitemap = [];
@@ -14,14 +14,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const item of enabledPages) {
     for (const locale of ['en', 'zh'] as const) {
       routes.push({
-        url: `${base}/${locale}${item.href === '/' ? '' : item.href}`,
+        url: localizedUrl(locale, item.href),
         lastModified: lastMod,
         changeFrequency: 'monthly',
         priority: item.href === '/' ? 1.0 : 0.8,
         alternates: {
           languages: {
-            en: `${base}/en${item.href === '/' ? '' : item.href}`,
-            zh: `${base}/zh${item.href === '/' ? '' : item.href}`,
+            en: localizedUrl('en', item.href),
+            zh: localizedUrl('zh', item.href),
+            'x-default': localizedUrl('en', item.href),
           },
         },
       });
@@ -31,14 +32,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const path of ['/privacy', '/disclaimer'] as const) {
     for (const locale of ['en', 'zh'] as const) {
       routes.push({
-        url: `${base}/${locale}${path}`,
+        url: localizedUrl(locale, path),
         lastModified: lastMod,
         changeFrequency: 'yearly',
         priority: 0.3,
         alternates: {
           languages: {
-            en: `${base}/en${path}`,
-            zh: `${base}/zh${path}`,
+            en: localizedUrl('en', path),
+            zh: localizedUrl('zh', path),
+            'x-default': localizedUrl('en', path),
           },
         },
       });
@@ -49,15 +51,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const productParams = getProductPathStaticParams();
   for (const { locale, path } of productParams) {
     const sub = path.join('/');
+    const routePath = `/products/${sub}`;
     routes.push({
-      url: `${base}/${locale}/products/${sub}`,
+      url: localizedUrl(locale, routePath),
       lastModified: lastMod,
       changeFrequency: 'monthly',
       priority: 0.7,
       alternates: {
         languages: {
-          en: `${base}/en/products/${sub}`,
-          zh: `${base}/zh/products/${sub}`,
+          en: localizedUrl('en', routePath),
+          zh: localizedUrl('zh', routePath),
+          'x-default': localizedUrl('en', routePath),
         },
       },
     });

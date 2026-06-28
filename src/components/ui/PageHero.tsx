@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Button } from './Button';
 import { PlaceholderVisual } from './PlaceholderVisual';
@@ -12,6 +13,8 @@ type Props = {
   ctaLabel?: string;
   ctaHref?: string;
   visualVariant?: PlaceholderVariant;
+  visualImage?: string;
+  visualAlt?: string;
   backgroundImage?: string;
 };
 
@@ -23,6 +26,8 @@ export function PageHero({
   ctaLabel,
   ctaHref,
   visualVariant = 'page-hero',
+  visualImage,
+  visualAlt = '',
   backgroundImage,
 }: Props) {
   const tButton = useTranslations('button');
@@ -75,7 +80,20 @@ export function PageHero({
           </Button>
         </div>
         <div className="flex justify-center lg:justify-end">
-          <PlaceholderVisual variant={visualVariant} className="w-full max-w-[600px] h-auto" />
+          {visualImage ? (
+            <div className="relative h-[320px] w-full max-w-[600px] overflow-hidden rounded-card bg-navy/60 md:h-[360px]">
+              <Image
+                src={visualImage}
+                alt={visualAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 600px"
+                className="object-cover"
+                priority
+              />
+            </div>
+          ) : (
+            <PlaceholderVisual variant={visualVariant} className="w-full max-w-[600px] h-auto" />
+          )}
         </div>
       </div>
     </section>

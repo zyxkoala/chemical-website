@@ -112,7 +112,32 @@
     "specsHeading": "Specifications",
     "inquiryHeading": "Request a quotation",
     "inquiryCopy": "Send your target volume, packaging preference, and destination port. We will reply with current pricing and lead time.",
-    "relatedHeading": "Related Products"
+    "relatedHeading": "Related Products",
+    "applications": {
+      "eyebrow": "Downstream fit",
+      "heading": "Applications",
+      "subtitle": "Common application scenarios, with product options tailored to your processing and packaging needs.",
+      "labels": {
+        "peFilm": "Film production",
+        "stretchWrap": "Logistics packaging",
+        "highStrengthPackaging": "Protective packaging",
+        "greenhouseFilm": "Agriculture",
+        "merchandiseBags": "Retail packaging",
+        "foodBags": "Food packaging",
+        "mulchFilm": "Agriculture",
+        "fallback": "Application"
+      },
+      "copies": {
+        "peFilm": "{product} supports PE film lines that require balanced clarity, strength, and stable extrusion.",
+        "stretchWrap": "{product} is suited to stretch and pallet wrap where puncture resistance and uniform shrink matter.",
+        "highStrengthPackaging": "{product} helps packaging films carry heavier loads while keeping good sealing performance.",
+        "greenhouseFilm": "{product} can be used in agricultural film where tear strength and field durability are important.",
+        "merchandiseBags": "{product} fits bag film production for retail and merchandise packaging applications.",
+        "foodBags": "{product} supports food bag film applications that need dependable processing and package integrity.",
+        "mulchFilm": "{product} can serve mulch film applications that require practical toughness for field handling.",
+        "fallback": "{product} can be evaluated for {application} based on target film structure and processing conditions."
+      }
+    }
   },
   "productsCategory": {
     "childrenHeading": "Product lines in this category",

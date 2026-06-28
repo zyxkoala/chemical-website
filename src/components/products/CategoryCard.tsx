@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
+import { CategoryVisual } from './CategoryVisual';
 import type { LocalizedCategory } from '@/types/product';
 import type { Locale } from '@/types/locale';
 
@@ -14,7 +14,12 @@ export function CategoryCard({ category, locale }: Props) {
       href={`/${locale}/products/${category.path.join('/')}`}
       className="group block border border-border-light rounded-card overflow-hidden hover:border-gold transition-colors"
     >
-      <PlaceholderVisual variant={category.image} className="w-full h-40" />
+      <CategoryVisual
+        variant={category.image}
+        categorySlug={category.slug}
+        className="w-full h-40"
+        sizes="(max-width: 768px) 100vw, 33vw"
+      />
       <div className="p-6">
         <h3 className="text-card-title text-navy-deep mb-2 group-hover:text-gold transition-colors">
           {category.name}

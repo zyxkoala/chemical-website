@@ -7,6 +7,7 @@ import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
 import { CloudflareBeacon } from '@/components/analytics/CloudflareBeacon';
 import { LOCALES } from '@/types/locale';
 import { site } from '@/content/site';
+import { absoluteUrl, getSiteUrl } from '@/lib/seo';
 import type { Locale } from '@/types/locale';
 
 export function generateStaticParams() {
@@ -17,8 +18,8 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: site.name,
-  url: `https://${site.domain}`,
-  logo: `https://${site.domain}/logos/aowatt-logo-cropped.png`,
+  url: getSiteUrl(),
+  logo: absoluteUrl('/logos/aowatt-logo-cropped.png'),
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: site.phone,
@@ -33,6 +34,20 @@ const organizationSchema = {
     addressRegion: 'VIC',
     postalCode: '3006',
     addressCountry: 'AU',
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  alternateName: 'AOWATT',
+  url: getSiteUrl(),
+  inLanguage: ['en-AU', 'zh-CN'],
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    url: getSiteUrl(),
   },
 };
 
@@ -53,7 +68,9 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([organizationSchema, websiteSchema]),
+        }}
       />
       <Header locale={locale as Locale} />
       <main className="min-h-screen">{children}</main>

@@ -48,7 +48,7 @@ export type Product = {
   specs: ProductSpec[];
   relatedProductSlugs: string[];
   image: PlaceholderVariant;
-  heroImage?: PlaceholderVariant;
+  heroImage?: string;
   featured: boolean;
   published: boolean;
   placeholder?: boolean;
@@ -85,7 +85,7 @@ export type LocalizedProduct = {
   specs: { label: string; value: string }[];
   relatedProductSlugs: string[];
   image: PlaceholderVariant;
-  heroImage?: PlaceholderVariant;
+  heroImage?: string;
   featured: boolean;
   published: boolean;
   placeholder?: boolean;

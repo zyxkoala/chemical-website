@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { CategoryVisual } from '@/components/products/CategoryVisual';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
 import { getChildCategories } from '@/lib/categories';
 import type { Locale } from '@/types/locale';
 
@@ -20,7 +20,12 @@ export function ProductCategoriesSection({ locale }: { locale: Locale }) {
               href={`/${locale}/products/${cat.path.join('/')}`}
               className="group border border-border-light rounded-card p-6 hover:border-gold transition-colors"
             >
-              <PlaceholderVisual variant={cat.image} className="w-full h-48 mb-4 rounded" />
+              <CategoryVisual
+                variant={cat.image}
+                categorySlug={cat.slug}
+                className="w-full h-48 mb-4 rounded"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               <h3 className="text-card-title text-navy-deep mb-2 group-hover:text-gold transition-colors">
                 {cat.name}
               </h3>

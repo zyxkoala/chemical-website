@@ -92,7 +92,32 @@
     "specsHeading": "规格",
     "inquiryHeading": "请求报价",
     "inquiryCopy": "请提供目标采购量、包装偏好与目的港，我们将回复当前价格与交期。",
-    "relatedHeading": "相关产品"
+    "relatedHeading": "相关产品",
+    "applications": {
+      "eyebrow": "下游适配",
+      "heading": "应用场景",
+      "subtitle": "了解常见应用场景，并根据您的加工与包装需求匹配合适产品。",
+      "labels": {
+        "peFilm": "薄膜生产",
+        "stretchWrap": "物流包装",
+        "highStrengthPackaging": "防护包装",
+        "greenhouseFilm": "农业",
+        "merchandiseBags": "零售包装",
+        "foodBags": "食品包装",
+        "mulchFilm": "农业",
+        "fallback": "应用方向"
+      },
+      "copies": {
+        "peFilm": "{product} 适用于对透明度、强度与稳定挤出表现有要求的 PE 膜生产线。",
+        "stretchWrap": "{product} 适合用于缠绕膜与托盘包装膜，重点支持抗穿刺和均匀收缩表现。",
+        "highStrengthPackaging": "{product} 可帮助包装膜承载更高强度需求，同时保持良好的热封性能。",
+        "greenhouseFilm": "{product} 可用于重视撕裂强度与田间耐用性的农业薄膜场景。",
+        "merchandiseBags": "{product} 适用于商品袋膜生产，服务零售与日用包装场景。",
+        "foodBags": "{product} 可支持食品袋膜应用，满足稳定加工与包装完整性的需求。",
+        "mulchFilm": "{product} 可服务地膜应用，满足田间铺设与搬运所需的实用韧性。",
+        "fallback": "{product} 可结合目标膜结构与加工条件，评估用于 {application} 的适配性。"
+      }
+    }
   },
   "productsCategory": {
     "childrenHeading": "本分类下的产品线",
