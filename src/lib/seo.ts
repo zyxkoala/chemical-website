@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { Locale } from '@/types/product';
 import { site } from '@/content/site';
 
-export const DEFAULT_SITE_URL = `https://${site.domain}`;
+export const DEFAULT_SITE_URL = 'https://chemical-website-theta.vercel.app';
 
 export function getSiteUrl(): string {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL).replace(/\/+$/, '');
