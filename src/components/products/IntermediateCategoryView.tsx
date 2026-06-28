@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { CategoryCardGrid } from './CategoryCardGrid';
-import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
 import { getApplicationsForCategory } from '@/content/applications';
+import { getApplicationImage } from '@/lib/application-images';
 import type { LocalizedCategory } from '@/types/product';
 import type { Locale } from '@/types/locale';
 
@@ -41,7 +42,15 @@ export function IntermediateCategoryView({ category, childCategories, siblings, 
                   key={a.slug}
                   className="border border-border-light rounded-card overflow-hidden bg-white"
                 >
-                  <PlaceholderVisual variant={a.image} className="w-full h-40" />
+                  <div className="relative w-full h-40 overflow-hidden bg-gray-light/30">
+                    <Image
+                      src={getApplicationImage(a.image)}
+                      alt={name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="p-6">
                     <h3 className="text-card-title text-navy-deep mb-2">{name}</h3>
                     <p className="text-body text-gray-body line-clamp-3">{summary}</p>

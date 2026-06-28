@@ -42,8 +42,8 @@ export default async function ApplicationsPage({ params }: { params: Promise<{ l
   const tItems = await getTranslations('applications.items');
 
   const items: Item[] = [
-    { variant: 'application-mining', titleKey: 'miningTitle', copyKey: 'miningCopy' },
-    { variant: 'application-agriculture', titleKey: 'agricultureTitle', copyKey: 'agricultureCopy' },
+    { variant: 'application-agriculture', titleKey: 'miningTitle', copyKey: 'miningCopy' },
+    { variant: 'application-logistics', titleKey: 'agricultureTitle', copyKey: 'agricultureCopy' },
     { variant: 'application-manufacturing', titleKey: 'manufacturingTitle', copyKey: 'manufacturingCopy' },
     { variant: 'application-water', titleKey: 'waterTitle', copyKey: 'waterCopy' },
     { variant: 'application-coatings', titleKey: 'coatingsTitle', copyKey: 'coatingsCopy' },

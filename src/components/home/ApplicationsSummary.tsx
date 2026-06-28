@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
+import { getApplicationImage } from '@/lib/application-images';
 import type { PlaceholderVariant } from '@/types/product';
 
 type AppItem = {
@@ -13,8 +14,8 @@ export function ApplicationsSummary() {
   const t = useTranslations('home.applications');
   const tItems = useTranslations('applications.items');
   const apps: AppItem[] = [
-    { variant: 'application-mining', titleKey: 'miningTitle', copyKey: 'miningCopy' },
-    { variant: 'application-agriculture', titleKey: 'agricultureTitle', copyKey: 'agricultureCopy' },
+    { variant: 'application-agriculture', titleKey: 'miningTitle', copyKey: 'miningCopy' },
+    { variant: 'application-logistics', titleKey: 'agricultureTitle', copyKey: 'agricultureCopy' },
     { variant: 'application-manufacturing', titleKey: 'manufacturingTitle', copyKey: 'manufacturingCopy' },
   ];
 
@@ -25,7 +26,15 @@ export function ApplicationsSummary() {
         <div className="grid md:grid-cols-3 gap-8">
           {apps.map((app, i) => (
             <div key={i} className="border border-border-light rounded-card overflow-hidden">
-              <PlaceholderVisual variant={app.variant} className="w-full h-40" />
+              <div className="relative w-full h-40 overflow-hidden bg-gray-light/30">
+                <Image
+                  src={getApplicationImage(app.variant)}
+                  alt={tItems(app.titleKey)}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
               <div className="p-6">
                 <h3 className="text-card-title text-navy-deep mb-2">{tItems(app.titleKey)}</h3>
                 <p className="text-body text-gray-body">{tItems(app.copyKey)}</p>
