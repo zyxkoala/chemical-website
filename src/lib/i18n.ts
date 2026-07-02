@@ -1,4 +1,4 @@
-import type {
+﻿import type {
   Locale, LocalizedString, Product, ProductCategory,
   LocalizedProduct, LocalizedCategory,
 } from '@/types/product';
@@ -32,6 +32,7 @@ export function localizeProduct(p: Product, locale: Locale): LocalizedProduct {
     specs: p.specs.map(s => ({
       label: pickLocalized(s.label, locale),
       value: pickLocalized(s.value, locale),
+      methodStandard: s.methodStandard ? pickLocalized(s.methodStandard, locale) : undefined,
     })),
     relatedProductSlugs: p.relatedProductSlugs,
     image: p.image,
@@ -59,3 +60,5 @@ export function localizeCategory(c: ProductCategory, locale: Locale): LocalizedC
     isLeaf: c.isLeaf,
   };
 }
+
+

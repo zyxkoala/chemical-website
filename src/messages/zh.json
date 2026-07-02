@@ -1,4 +1,4 @@
-{
+﻿{
   "meta": {
     "homeTitle": "AOWATT Global Materials — 端到端塑料供应链解决方案",
     "homeDescription": "从合成树脂采购到下游制造与分销。"
@@ -90,6 +90,7 @@
     "breadcrumbHome": "首页",
     "breadcrumbProducts": "产品",
     "specsHeading": "规格",
+    "specTable": { "standard": "标准", "value": "具体数值", "methodStandard": "测量标准" },
     "inquiryHeading": "请求报价",
     "inquiryCopy": "请提供目标采购量、包装偏好与目的港，我们将回复当前价格与交期。",
     "relatedHeading": "相关产品",
@@ -195,3 +196,4 @@
     "errorCopy": "发生意外错误。请重新加载页面，或与我们联系。"
   }
 }
+

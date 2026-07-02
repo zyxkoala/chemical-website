@@ -1,4 +1,4 @@
-import type { Locale } from './locale';
+﻿import type { Locale } from './locale';
 
 export type LocalizedString = { en: string; zh?: string };
 
@@ -7,6 +7,7 @@ export type ProductDocumentType = 'COA' | 'TDS' | 'SDS';
 export type ProductSpec = {
   label: LocalizedString;
   value: LocalizedString;
+  methodStandard?: LocalizedString;
 };
 
 export type PlaceholderVariant =
@@ -82,7 +83,7 @@ export type LocalizedProduct = {
   packaging: string[];
   applications: string[];
   documents: ProductDocumentType[];
-  specs: { label: string; value: string }[];
+  specs: { label: string; value: string; methodStandard?: string }[];
   relatedProductSlugs: string[];
   image: PlaceholderVariant;
   heroImage?: string;
@@ -108,3 +109,4 @@ export type LocalizedCategory = {
 };
 
 export type { Locale };
+

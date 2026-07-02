@@ -1,4 +1,4 @@
-{
+﻿{
   "meta": {
     "homeTitle": "AOWATT Global Materials — End-to-End Plastic Supply Chain Solutions",
     "homeDescription": "From synthetic resin sourcing to downstream manufacturing and distribution."
@@ -110,6 +110,7 @@
     "breadcrumbHome": "Home",
     "breadcrumbProducts": "Products",
     "specsHeading": "Specifications",
+    "specTable": { "standard": "Specification", "value": "Value", "methodStandard": "Test standard" },
     "inquiryHeading": "Request a quotation",
     "inquiryCopy": "Send your target volume, packaging preference, and destination port. We will reply with current pricing and lead time.",
     "relatedHeading": "Related Products",
@@ -270,3 +271,4 @@
     "errorCopy": "An unexpected error occurred. Try reloading the page or contact us if it persists."
   }
 }
+

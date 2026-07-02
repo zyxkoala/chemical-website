@@ -1,3 +1,4 @@
+﻿import Image from 'next/image';
 import { PlaceholderVisual } from '@/components/ui/PlaceholderVisual';
 import type { LocalizedProduct } from '@/types/product';
 
@@ -13,9 +14,23 @@ export function ProductIntro({ product }: { product: LocalizedProduct }) {
           <p className="text-body text-gray-body leading-relaxed">{product.overview}</p>
         </div>
         <div className="flex justify-center lg:justify-end">
-          <PlaceholderVisual variant={product.image} className="w-full max-w-[580px] h-auto" />
+          {product.heroImage ? (
+            <div className="relative w-full max-w-[580px] aspect-[4/3] overflow-hidden rounded-card border border-border-light bg-gray-light/30">
+              <Image
+                src={product.heroImage}
+                alt={product.name}
+                fill
+                sizes="(max-width: 1024px) 100vw, 580px"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <PlaceholderVisual variant={product.image} className="w-full max-w-[580px] h-auto" />
+          )}
         </div>
       </div>
     </section>
   );
 }
+
+

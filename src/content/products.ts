@@ -1,4 +1,4 @@
-import type { Product } from '@/types/product';
+﻿import type { Product } from '@/types/product';
 
 const placeholderSummary = {
   en: 'Sample placeholder grade — full specifications to be confirmed.',
@@ -51,7 +51,73 @@ function placeholder(
 
 export const products: Product[] = [
   // ─── PE leaf categories ───────────────────────────────────────────────────
-  placeholder('ldpe-sample', { en: 'Sample LDPE Grade', zh: 'LDPE 示例牌号' }, 'ldpe', 1),
+  {
+    slug: 'ldpe-951-00',
+    name: { en: 'LDPE 951-000', zh: 'LDPE 951-000' },
+    category: 'ldpe',
+    summary: {
+      en: 'Technical parameters for LDPE 951-000.',
+      zh: 'LDPE 951-000 技术参数。',
+    },
+    overview: {
+      en: 'LDPE 951-000 technical parameters are listed below as provided.',
+      zh: 'LDPE 951-000 技术参数如下，按提供资料列出。',
+    },
+    packaging: [],
+    applications: [],
+    documents: ['TDS'],
+    specs: [
+      {
+        label: { en: 'Product standard', zh: '产品标准' },
+        value: { en: 'Q/SH 3175.3-2019', zh: 'Q/SH 3175.3-2019' },
+      },
+      {
+        label: { en: 'Pellet appearance', zh: '颗粒外观' },
+        value: { en: '<=10 个/kg', zh: '<=10 个/kg' },
+        methodStandard: { en: 'SH/T 1541.1-2019', zh: 'SH/T 1541.1-2019' },
+      },
+      {
+        label: { en: 'Tensile yield strength', zh: '拉伸屈服强度' },
+        value: { en: '>=8.0 MPa', zh: '>=8.0 MPa' },
+        methodStandard: { en: 'ASTM D638-2022', zh: 'ASTM D638-2022' },
+      },
+      {
+        label: { en: 'Density (23℃)', zh: '密度（23℃）' },
+        value: { en: '918.5-921.5 kg/m3', zh: '918.5-921.5 kg/m3' },
+        methodStandard: { en: 'GB/T 1033.2-2010', zh: 'GB/T 1033.2-2010' },
+      },
+      {
+        label: { en: 'Haze (23℃)', zh: '雾度（23℃）' },
+        value: { en: '<=9.0 percent', zh: '<=9.0 percent' },
+        methodStandard: { en: 'GB/T 2410-2008', zh: 'GB/T 2410-2008' },
+      },
+      {
+        label: { en: 'Melt mass-flow rate', zh: '熔体质量流动速率' },
+        value: { en: '1.84-2.50 g/10min', zh: '1.84-2.50 g/10min' },
+        methodStandard: { en: 'GB/T 3682.1-2018', zh: 'GB/T 3682.1-2018' },
+      },
+      {
+        label: { en: 'Elongation at break', zh: '断裂伸长率' },
+        value: { en: '>=400 percent', zh: '>=400 percent' },
+        methodStandard: { en: 'ASTM D638-2022', zh: 'ASTM D638-2022' },
+      },
+    ],
+    relatedProductSlugs: [],
+    image: 'product-default',
+    heroImage: '/images/products/lldpe-bag.jpg',
+    featured: true,
+    published: true,
+    placeholder: false,
+    sortOrder: 1,
+    seoTitle: {
+      en: 'LDPE 951-000 — Technical Parameters | AOWATT',
+      zh: 'LDPE 951-000 — 技术参数 | AOWATT',
+    },
+    seoDescription: {
+      en: 'LDPE 951-000 technical parameters.',
+      zh: 'LDPE 951-000 技术参数。',
+    },
+  },
   placeholder('hdpe-sample', { en: 'Sample HDPE Grade', zh: 'HDPE 示例牌号' }, 'hdpe', 2),
 
   // ─── LLDPE C4 (butene-1 comonomer) — published grades ─────────────────────
@@ -377,3 +443,6 @@ export const products: Product[] = [
     14,
   ),
 ];
+
+
+

@@ -13,6 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of ['en', 'zh'] as const) {
       routes.push({
         url: localizedUrl(locale, item.href),
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
       });
     }
   }
@@ -21,6 +24,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of ['en', 'zh'] as const) {
       routes.push({
         url: localizedUrl(locale, path),
+        lastModified: new Date(),
+        changeFrequency: 'yearly',
+        priority: 0.3,
       });
     }
   }
@@ -32,6 +38,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const routePath = `/products/${sub}`;
     routes.push({
       url: localizedUrl(locale, routePath),
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
     });
   }
 
