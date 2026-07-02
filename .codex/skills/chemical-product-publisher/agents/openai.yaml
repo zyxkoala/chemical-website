@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chemical Product Publisher"
+  short_description: "Add chemical products to the website from supplied source files."
+  default_prompt: "Add a new product to the chemical-website project from the provided product source, preserving parameters exactly and verifying the rendered page."
