@@ -4,7 +4,7 @@ import { getFeaturedProducts } from '@/lib/products';
 import type { Locale } from '@/types/locale';
 
 export function FeaturedProductsSection({ locale, heading }: { locale: Locale; heading: string }) {
-  const products = getFeaturedProducts(locale, 6);
+  const products = getFeaturedProducts(locale, 12);
 
   return (
     <section className="py-20 bg-white">

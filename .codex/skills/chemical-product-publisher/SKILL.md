@@ -1,6 +1,6 @@
 ﻿---
 name: chemical-product-publisher
-description: Add new chemical/polymer products to the chemical-website project from supplied product images, OCR text files, parameter text files, or technical documents. Use when the user asks to extract product data, add a product under the correct products category, create or update product detail data, preserve technical parameter tables exactly, choose the correct product image pattern, and verify the local rendered product page.
+description: Add new chemical/polymer products to the chemical-website project from supplied product images, multimodal image text extractions, parameter text files, or technical documents. Use when the user asks to extract product data, add a product under the correct products category, create or update product detail data, preserve technical parameter tables exactly, choose the correct product image pattern, and verify the local rendered product page.
 ---
 
 # Chemical Product Publisher
@@ -11,12 +11,23 @@ Use this skill to add a new product to the `chemical-website` project. Work from
 
 - Treat the supplied product file, image, or text extraction as the source of truth.
 - Do not invent, infer, normalize, add, or delete parameter values.
-- If OCR is used, verify ambiguous values against the image before writing product data.
+- Read product images directly with a multimodal model for image text extraction.
+- Do not write or run Python OCR scripts for product image recognition.
+- After extracting product image text, perform a second multimodal pass against the source image and compare every extracted header, row, unit, limit/result value, method standard, product standard, date, batch number, and conclusion before using the data.
+- Only keep values that are visible in the supplied source image or source text; do not carry over old stub wording as extracted image data unless it is also visible in the source being extracted.
+- Verify ambiguous values against the source image before writing product data.
 - Preserve units, min/max values, method standards, and product standards exactly as supplied.
+- Preserve source table semantics, not just the numbers:
+  - If a COA row has `质量指标 / Limits` = `报告`, display it as a reported limit/quality-indicator state and keep the separate detection result clear.
+  - If a TDS row uses `典型值 / Typical value`, keep that wording in the displayed value so buyers do not read it as a guaranteed limit.
 - Put the product under the most specific matching leaf category in `src/content/categories.ts`.
 - Follow existing product patterns in `src/content/products.ts`.
 - Use the site's shared product main image pattern unless the user explicitly asks otherwise.
-  - For polymer product detail hero/main images, prefer `/images/products/lldpe-bag.jpg` when matching existing product style.
+  - Product listing, search-result, related-product, and featured-product card images should use the generated product design image from `heroImage` when available.
+  - Product detail body images are product real-object images, not product design/marketing hero images.
+  - For polymer product detail body/main images, default to the shared sack image via `image: 'product-lldpe-bag'`, which renders `/images/products/lldpe-bag.jpg`.
+  - Only replace the sack image when the user additionally provides a real product photo or explicitly asks for another product body image.
+  - Product design/marketing images may be used as `heroImage` for the top page hero, but must not be reused as the product real-object/body image by default.
   - Do not use scanned parameter-sheet images as the product main image unless explicitly requested.
 - Keep unrelated user or repository changes intact.
 
@@ -24,8 +35,11 @@ Use this skill to add a new product to the `chemical-website` project. Work from
 
 1. Inspect inputs.
 
-- Read the user-provided product text file or OCR result.
-- Inspect the product image only to confirm unclear OCR values.
+- Read the user-provided product text file, multimodal extraction result, or technical document.
+- For `new-products/*.png`, inspect the image directly with a multimodal model and extract the visible text and tables from the image.
+- Do not create Python OCR helpers or run Python OCR tooling for image recognition.
+- Re-inspect the product image after writing the extraction and compare the saved product file against the image row by row. Fix omissions, column shifts, unit changes, copied stub text, and any normalized or invented values immediately.
+- If a value cannot be confidently read, mark it as unclear instead of guessing.
 - Read nearby existing products in `src/content/products.ts` to match structure and tone.
 - Read `src/types/product.ts`, `src/lib/i18n.ts`, and the relevant product detail components if the required parameter structure differs from current rendering.
 
@@ -54,6 +68,7 @@ Use this skill to add a new product to the `chemical-website` project. Work from
 - If parameters are simple key/value specs, use normal `specs` rows:
   - `label`
   - `value`
+- For temporary product data sheets or TDS tables with `典型值 / Typical value`, include `Typical value:` / `典型值：` in the value field.
 - If the source has a table with method/test standards, represent each row with:
   - `label`: analysis item or standard name
   - `value`: concrete value including unit, min/max/range
@@ -70,6 +85,7 @@ Example:
 ```
 
 - Do not collapse table rows into long prose like `计量单位：...；最大值：...；方法标准：...`.
+- For COA rows with both `质量指标 / Limits` and `检测结果 / Results`, keep both in the value field as `Limit: ...; Result: ...` / `指标：...；结果：...`; the renderer can format `报告` rows for readability.
 - Keep method/test standards in a separate third column when present.
 
 5. Update rendering only if needed.
@@ -89,6 +105,8 @@ Example:
 6. Product images.
 
 - Use existing shared product visuals unless the user explicitly provides a product marketing/photo image.
+- Set generated product design images as `heroImage`; these are used by the top page hero and product cards such as featured products, search results, and related products.
+- Treat the product detail body image as a real-object product image. For polymer products, set `image: 'product-lldpe-bag'` by default and keep generated product-design images in `heroImage` only.
 - Do not use scanned parameter sheets as product main images.
 - If a new image must be used by the website, place it under `public/images/products/`.
 - Do not leave unused copied scan images in `public`.
