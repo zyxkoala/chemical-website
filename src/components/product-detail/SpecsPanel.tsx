@@ -57,6 +57,10 @@ function formatSpecValue(value: string) {
   const zhMatch = value.match(/^指标：(.+)；结果：(.+)$/);
   if (zhMatch) {
     const [, limit, result] = zhMatch;
+    if (!limit || !result) {
+      return value;
+    }
+
     if (limit === '报告') {
       return `检测结果：${result}（质量指标：报告）`;
     }
@@ -67,6 +71,10 @@ function formatSpecValue(value: string) {
   const enMatch = value.match(/^Limit: (.+); Result: (.+)$/);
   if (enMatch) {
     const [, limit, result] = enMatch;
+    if (!limit || !result) {
+      return value;
+    }
+
     if (limit.toLowerCase() === 'report' || limit === '报告') {
       return `Result: ${result} (Limit: report)`;
     }
