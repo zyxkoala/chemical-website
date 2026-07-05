@@ -89,6 +89,25 @@ describe('searchProducts', () => {
     const hits = searchProducts('F231S', 'en');
     expect(hits.some(p => p.slug === 'f231s')).toBe(true);
   });
+  it('strictly matches LLDPE as a category token', () => {
+    const hits = searchProducts('lldpe', 'en');
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits.every(p => /\blldpe\b/i.test(`${p.name} ${p.category} ${p.summary}`))).toBe(true);
+    expect(hits.some(p => /\bldpe\b/i.test(p.name) && !/\blldpe\b/i.test(p.name))).toBe(false);
+  });
+  it('treats LLDPE category prefixes as strict category searches', () => {
+    const hits = searchProducts('lldp', 'en');
+    expect(hits.map(p => p.name)).toEqual(
+      expect.arrayContaining(['LLDPE EGF-34', 'LLDPE EGF-35B', 'LLDPE F231S']),
+    );
+    expect(hits.some(p => /\bldpe\b/i.test(p.name) && !/\blldpe\b/i.test(p.name))).toBe(false);
+  });
+  it('strictly matches LDPE without returning LLDPE grades', () => {
+    const hits = searchProducts('ldpe', 'en');
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits.every(p => /\bldpe\b/i.test(`${p.name} ${p.category} ${p.summary}`))).toBe(true);
+    expect(hits.some(p => /\blldpe\b/i.test(p.name))).toBe(false);
+  });
   it('returns empty for nonsense queries', () => {
     expect(searchProducts('xyz-no-such-thing', 'en')).toEqual([]);
   });

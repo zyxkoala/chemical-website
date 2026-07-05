@@ -1,7 +1,7 @@
 'use client';
 import { useState, useMemo } from 'react';
-import Fuse from 'fuse.js';
 import { ProductCard } from './ProductCard';
+import { searchLocalizedProducts } from '@/lib/product-search';
 import type { LocalizedProduct } from '@/types/product';
 
 type Props = {
@@ -15,21 +15,11 @@ type Props = {
 export function ProductSearchSection({ products, placeholder, emptyMessage, resultsHeading, onActiveChange }: Props) {
   const [query, setQuery] = useState('');
 
-  const fuse = useMemo(
-    () =>
-      new Fuse(products, {
-        keys: ['name', 'casNo', 'category', 'summary'],
-        threshold: 0.35,
-        ignoreLocation: true,
-      }),
-    [products],
-  );
-
   const results = useMemo(() => {
     const q = query.trim();
     if (q.length === 0) return null;
-    return fuse.search(q).map(r => r.item);
-  }, [query, fuse]);
+    return searchLocalizedProducts(products, q);
+  }, [query, products]);
 
   const handleChange = (value: string) => {
     setQuery(value);

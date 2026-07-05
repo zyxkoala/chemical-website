@@ -1,6 +1,6 @@
-import Fuse from 'fuse.js';
 import { products } from '@/content/products';
 import { localizeProduct } from './i18n';
+import { searchLocalizedProducts } from './product-search';
 import { LOCALES } from '@/types/locale';
 import { categories } from '@/content/categories';
 import type { Locale, LocalizedProduct } from '@/types/product';
@@ -102,13 +102,5 @@ export function getProductPathStaticParams(): { locale: Locale; path: string[] }
 
 export function searchProducts(query: string, locale: Locale): LocalizedProduct[] {
   const all = getPublishedProducts(locale);
-  const q = query.trim();
-  if (q.length === 0) return all;
-
-  const fuse = new Fuse(all, {
-    keys: ['name', 'casNo', 'category', 'summary'],
-    threshold: 0.35,
-    ignoreLocation: true,
-  });
-  return fuse.search(q).map(r => r.item);
+  return searchLocalizedProducts(all, query);
 }

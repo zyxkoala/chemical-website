@@ -1,8 +1,8 @@
 'use client';
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import Fuse from 'fuse.js';
 import { CategorySidebar } from './CategorySidebar';
+import { searchLocalizedProducts } from '@/lib/product-search';
 import type { CategoryTreeNode } from '@/lib/categories';
 import type { Locale } from '@/types/locale';
 import type { LocalizedCategory, LocalizedProduct } from '@/types/product';
@@ -43,21 +43,11 @@ export function CategoryBrowsePage({
     [products],
   );
 
-  const fuse = useMemo(
-    () =>
-      new Fuse(searchableProducts, {
-        keys: ['name', 'casNo', 'category', 'summary'],
-        threshold: 0.35,
-        ignoreLocation: true,
-      }),
-    [searchableProducts],
-  );
-
   const searchResults = useMemo(() => {
     const q = query.trim();
     if (q.length === 0) return null;
-    return fuse.search(q).map(r => r.item);
-  }, [query, fuse]);
+    return searchLocalizedProducts(searchableProducts, q);
+  }, [query, searchableProducts]);
 
   const displayProducts = searchResults ?? searchableProducts;
 
