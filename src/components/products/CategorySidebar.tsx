@@ -82,23 +82,34 @@ function TreeNode({ node, locale, activeSet, activeLeaf, depth }: NodeProps) {
 
   return (
     <li>
-      <button
-        type="button"
-        onClick={() => setOpen(o => !o)}
-        aria-expanded={open}
+      <div
         className={[
-          'flex items-center justify-between w-full py-2 pr-3 text-[15px] font-semibold transition-colors border-l-[3px]',
+          'flex items-center justify-between w-full py-2 pr-3 text-[15px] transition-colors border-l-[3px]',
           isOnActivePath
-            ? 'bg-[#F7F9FC] border-gold text-navy-deep'
+            ? 'bg-[#F7F9FC] border-gold text-navy-deep font-semibold'
             : 'border-transparent text-navy-deep hover:text-gold hover:bg-[#F7F9FC]',
         ].join(' ')}
         style={indent}
       >
-        <span>{node.name}</span>
-        <span aria-hidden="true" className="text-gray-body text-[12px]">
-          {open ? '▾' : '▸'}
-        </span>
-      </button>
+        <Link
+          href={`/${locale}/products/${node.path.join('/')}`}
+          aria-current={isActiveLeaf ? 'page' : undefined}
+          className="min-w-0 flex-1 text-left leading-snug"
+        >
+          {node.name}
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen(o => !o)}
+          aria-expanded={open}
+          aria-label={`${open ? 'Collapse' : 'Expand'} ${node.name}`}
+          className="ml-2 flex h-6 w-6 flex-shrink-0 items-center justify-center text-gray-body transition-colors hover:text-gold"
+        >
+          <span aria-hidden="true" className="text-[12px]">
+            {open ? '▾' : '▸'}
+          </span>
+        </button>
+      </div>
       {open && (
         <ul className="space-y-1">
           {node.children.map(child => (

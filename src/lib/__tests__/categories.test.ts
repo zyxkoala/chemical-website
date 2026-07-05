@@ -87,5 +87,7 @@ describe('buildCategoryTree', () => {
     expect(pe?.children.map(c => c.slug)).toEqual(['ldpe', 'hdpe', 'lldpe', 'mlldpe']);
     const lldpe = pe?.children.find(c => c.slug === 'lldpe');
     expect(lldpe?.children.map(c => c.slug)).toEqual(['lldpe-c4', 'lldpe-c6']);
+    const mlldpe = pe?.children.find(c => c.slug === 'mlldpe');
+    expect(mlldpe?.children.map(c => c.slug)).toEqual(['mlldpe-c6', 'mlldpe-c8']);
   });
 });
