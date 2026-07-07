@@ -3,7 +3,7 @@ export const site = {
   domain: 'aowatt.com.au',
   tagline: {
     en: 'Connecting materials worldwide with quality, reliability and integrity',
-    zh: '以品质、可靠和诚信连接全球材料供应',
+    zh: '不止于原材料。我们交付毫不妥协的品质与切实可见的价值。',
   },
   email: 'info@aowatt.com.au',
   emailSales: 'vanessa.li@aowatt.com.au',

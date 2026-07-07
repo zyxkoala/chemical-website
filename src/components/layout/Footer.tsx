@@ -26,9 +26,16 @@ export function Footer({ locale }: { locale: Locale }) {
               height={470}
               className="mb-4 w-[260px] md:w-[320px] h-auto object-contain"
             />
-            <p className="text-[15px] text-gray-light leading-6">
-              {locale === 'en' ? site.tagline.en : site.tagline.zh}
-            </p>
+            {locale === 'en' ? (
+              <p className="text-[15px] text-gray-light leading-6">
+                <span className="block font-semibold">Beyond Raw Materials</span>
+                <span className="block">We deliver uncompromising quality and measurable value.</span>
+              </p>
+            ) : (
+              <p className="text-[15px] text-gray-light leading-6">
+                {site.tagline.zh}
+              </p>
+            )}
           </div>
 
           <div>
