@@ -33,7 +33,8 @@ export function Footer({ locale }: { locale: Locale }) {
               </p>
             ) : (
               <p className="text-[15px] text-gray-light leading-6">
-                {site.tagline.zh}
+                <span className="block font-semibold">不止于原材料。</span>
+                <span className="block">我们交付毫不妥协的品质与切实可见的价值。</span>
               </p>
             )}
           </div>
