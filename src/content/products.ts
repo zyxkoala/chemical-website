@@ -25,8 +25,72 @@ const placeholderApplications = [{ en: 'Application TBC', zh: '应用待定' }];
 
 type ProductSpecTableCellOptions = Omit<ProductSpecTableCell, 'value'>;
 
+const excelEnglishText: Record<string, string> = {
+  '性能': 'Property',
+  '质量指标': 'Specification',
+  '检测结果': 'Test result',
+  '单位': 'Unit',
+  '测试方法': 'Test method',
+  '最小值': 'Minimum',
+  '最大值': 'Maximum',
+  '熔融指数（190℃/21.6kg）': 'Melt index (190℃/21.6 kg)',
+  '密度': 'Density',
+  '拉伸屈服强度（纵向）': 'Tensile yield strength (MD)',
+  '拉伸屈服强度（横向）': 'Tensile yield strength (TD)',
+  '拉伸断裂强度（纵向）': 'Tensile break strength (MD)',
+  '拉伸断裂强度（横向）': 'Tensile break strength (TD)',
+  '断裂伸长率（纵向/横向）': 'Elongation at break (MD/TD)',
+  '落镖冲击测试': 'Dart impact test',
+  '黑粒': 'Black pellets',
+  '色粒和黑斑粒': 'Colored pellets and black speck pellets',
+  '拖尾粒': 'Tailing pellets',
+  '蛇皮粒': 'Snakeskin pellets',
+  '絮状物': 'Flocculent matter',
+  '大粒和小粒': 'Large and small pellets',
+  '熔体质量流动速率': 'Melt mass-flow rate',
+  '密度（23℃）': 'Density (23℃)',
+  '拉伸断裂应力': 'Tensile stress at break',
+  '拉伸断裂标称应变': 'Nominal tensile strain at break',
+  '雾度': 'Haze',
+  '鱼眼（0.3~2.0 mm）': 'Fisheyes (0.3-2.0 mm)',
+  '鱼眼（0.3~2 mm）': 'Fisheyes (0.3-2 mm)',
+  '条纹（≥1 cm）': 'Streaks (>=1 cm)',
+  '条纹（≥1cm）': 'Streaks (>=1 cm)',
+  '色粒': 'Colored pellets',
+  '拉伸屈服强度': 'Tensile yield strength',
+  '断裂伸长率': 'Elongation at break',
+  '蛇皮粒和拖尾粒': 'Snakeskin and tailing pellets',
+  '黑斑粒和色粒': 'Black speck pellets and colored pellets',
+  '熔体质量流动速率（190℃/2.16kg）': 'Melt mass-flow rate (190℃/2.16 kg)',
+  '拉伸屈服应力': 'Tensile yield stress',
+  '鱼眼（0.8 mm）': 'Fisheyes (0.8 mm)',
+  '鱼眼（0.4 mm）': 'Fisheyes (0.4 mm)',
+  '开口性': 'Opening performance',
+  '弯曲模量': 'Flexural modulus',
+  '简支梁缺口冲击强度（23℃）': 'Charpy notched impact strength (23℃)',
+  '简支梁缺口冲击强度（-20℃）': 'Charpy notched impact strength (-20℃)',
+  '负荷变形温度（Tf0.45）': 'Deflection temperature under load (Tf0.45)',
+  '洛氏硬度（R标尺）': 'Rockwell hardness (R scale)',
+  '总收缩率（STp平行）': 'Total shrinkage (STp parallel)',
+  '总收缩率（STn垂直）': 'Total shrinkage (STn perpendicular)',
+  '灰分（质量分数）': 'Ash content (mass fraction)',
+  '落镖冲击破损质量': 'Dart impact failure mass',
+  '报告': 'Report',
+  '个/kg': 'pcs/kg',
+  '备注：无开口剂，含爽滑剂含量低于500': 'Note: no anti-block agent; slip agent content below 500',
+  '备注：无开口剂，无爽滑剂': 'Note: no anti-block agent, no slip agent',
+  '备注：开口剂含量3000，爽滑剂含量1000': 'Note: anti-block agent content 3000; slip agent content 1000',
+};
+
+function excelText(value: string) {
+  return {
+    en: excelEnglishText[value] ?? value.replaceAll('＞', '>').replaceAll('个/', 'pcs/'),
+    zh: value,
+  };
+}
+
 function excelCell(value: string, options: ProductSpecTableCellOptions = {}): ProductSpecTableCell {
-  return { value: { en: value, zh: value }, ...options };
+  return { value: excelText(value), ...options };
 }
 
 function excelRow(...cells: Array<string | ProductSpecTableCell>): ProductSpecTableCell[] {
@@ -40,7 +104,7 @@ function excelSpecTable(
 ): ProductSpecTable {
   return {
     title: { en: title, zh: title },
-    columns: columns.map(column => ({ en: column, zh: column })),
+    columns: columns.map(column => excelText(column)),
     rows,
   };
 }
