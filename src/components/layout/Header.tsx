@@ -77,7 +77,7 @@ export function Header({ locale }: { locale: Locale }) {
       <div className="max-w-page-max mx-auto px-6 md:px-header-px h-full flex items-center">
         <Link href={`/${locale}`} className="flex-shrink-0 flex items-center h-full">
           <Image
-            src="/logos/aowatt-logo-cropped.png"
+            src="/logos/aowatt-logo-transparent.png"
             alt="AOWATT Global Materials"
             width={720}
             height={470}

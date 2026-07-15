@@ -20,7 +20,7 @@ export function Footer({ locale }: { locale: Locale }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <Image
-              src="/logos/aowatt-logo-cropped.png"
+              src="/logos/aowatt-logo-transparent.png"
               alt={site.name}
               width={720}
               height={470}

@@ -20,7 +20,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: site.name,
   url: getSiteUrl(),
-  logo: absoluteUrl('/logos/aowatt-logo-cropped.png'),
+  logo: absoluteUrl('/logos/aowatt-logo-transparent.png'),
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: site.phone,
