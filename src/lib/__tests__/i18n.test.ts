@@ -63,6 +63,10 @@ describe('localizeCategory', () => {
       image: 'category-industrial',
       sortOrder: 1,
       enabled: true,
+      path: ['x'],
+      parentSlug: null,
+      level: 0,
+      isLeaf: true,
     };
     const out = localizeCategory(cat, 'zh');
     expect(out.name).toBe('X中');

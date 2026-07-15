@@ -4,11 +4,52 @@ import type { LocalizedProduct } from '@/types/product';
 export function SpecsPanel({ product }: { product: LocalizedProduct }) {
   const t = useTranslations('productDetail');
   const hasMethodStandard = product.specs.some(spec => spec.methodStandard);
+  const specTable = product.specTable;
 
   return (
     <div className="bg-white border border-border-light rounded-card p-8">
       <h2 className="text-card-title text-navy-deep mb-6">{t('specsHeading')}</h2>
-      {hasMethodStandard ? (
+      {specTable ? (
+        <div className="overflow-x-auto">
+          {specTable.title ? (
+            <p className="mb-4 text-body font-semibold text-navy-deep">{specTable.title}</p>
+          ) : null}
+          <table className="w-full min-w-[680px] border-collapse text-left">
+            <thead>
+              <tr>
+                {specTable.columns.map((column, i) => (
+                  <th
+                    key={i}
+                    className="border border-border-light bg-gray-light/20 px-4 py-3 text-body font-semibold text-gray-body"
+                  >
+                    {column}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {specTable.rows.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {row.map((cell, cellIndex) => {
+                    if (cell.skip) return null;
+
+                    return (
+                      <td
+                        key={cellIndex}
+                        rowSpan={cell.rowSpan}
+                        colSpan={cell.colSpan}
+                        className="border border-border-light px-4 py-3 align-middle text-body text-navy-deep"
+                      >
+                        {cell.value}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : hasMethodStandard ? (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>

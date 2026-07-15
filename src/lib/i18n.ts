@@ -34,6 +34,16 @@ export function localizeProduct(p: Product, locale: Locale): LocalizedProduct {
       value: pickLocalized(s.value, locale),
       methodStandard: s.methodStandard ? pickLocalized(s.methodStandard, locale) : undefined,
     })),
+    specTable: p.specTable ? {
+      title: p.specTable.title ? pickLocalized(p.specTable.title, locale) : undefined,
+      columns: p.specTable.columns.map(column => pickLocalized(column, locale)),
+      rows: p.specTable.rows.map(row => row.map(cell => ({
+        value: pickLocalized(cell.value, locale),
+        rowSpan: cell.rowSpan,
+        colSpan: cell.colSpan,
+        skip: cell.skip,
+      }))),
+    } : undefined,
     relatedProductSlugs: p.relatedProductSlugs,
     image: p.image,
     heroImage: p.heroImage,
@@ -60,5 +70,4 @@ export function localizeCategory(c: ProductCategory, locale: Locale): LocalizedC
     isLeaf: c.isLeaf,
   };
 }
-
 

@@ -10,6 +10,19 @@ export type ProductSpec = {
   methodStandard?: LocalizedString;
 };
 
+export type ProductSpecTableCell = {
+  value: LocalizedString;
+  rowSpan?: number;
+  colSpan?: number;
+  skip?: boolean;
+};
+
+export type ProductSpecTable = {
+  title?: LocalizedString;
+  columns: LocalizedString[];
+  rows: ProductSpecTableCell[][];
+};
+
 export type PlaceholderVariant =
   | 'hero-plant'
   | 'page-hero'
@@ -47,6 +60,7 @@ export type Product = {
   applications: LocalizedString[];
   documents: ProductDocumentType[];
   specs: ProductSpec[];
+  specTable?: ProductSpecTable;
   relatedProductSlugs: string[];
   image: PlaceholderVariant;
   heroImage?: string;
@@ -84,6 +98,16 @@ export type LocalizedProduct = {
   applications: string[];
   documents: ProductDocumentType[];
   specs: { label: string; value: string; methodStandard?: string }[];
+  specTable?: {
+    title?: string;
+    columns: string[];
+    rows: {
+      value: string;
+      rowSpan?: number;
+      colSpan?: number;
+      skip?: boolean;
+    }[][];
+  };
   relatedProductSlugs: string[];
   image: PlaceholderVariant;
   heroImage?: string;
@@ -109,4 +133,3 @@ export type LocalizedCategory = {
 };
 
 export type { Locale };
-

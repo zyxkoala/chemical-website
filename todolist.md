@@ -36,7 +36,7 @@
   - Name: `LDPE 2520D`
   - Category: `ldpe`
 - `new-products/HDPE J50-10N5000`
-  - Source images: `new-products/HDPE J50-10N5000.png`, `new-products/HDPE J50-10N5000其他信息.png`
+  - Source images: `new-products/HDPE J50-10N5000.png`, `new-products/hdpe-j50-10n5000-other-info.png`
   - Name: `HDPE J50-10N5000`
   - Category: `hdpe`
 - `new-products/PP EP5076X`
